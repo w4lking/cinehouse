@@ -1,0 +1,73 @@
+.movie-management-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.movie-management-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-group textarea {
+  height: 100px;
+  resize: vertical;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.button-group button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.button-group button[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.button-group button[type="button"] {
+  background-color: #f44336;
+  color: white;
+}
+
+.button-group button[type="button"]:last-child {
+  background-color: #008CBA;
+}
+
+.button-group button:hover {
+  opacity: 0.8;
+}
+
+.movie-management-page {
+  background-color: #461111; 
+}

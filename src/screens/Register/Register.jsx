@@ -10,6 +10,7 @@ const Register = () => {
   const [password, setPassword] = useState('');
 
   useEffect(() => {
+    document.title = 'Registro'; // hook para alterar titulo da aba
     // Adiciona a classe ao body quando o componente é montado
     document.body.classList.add('register-page');
 

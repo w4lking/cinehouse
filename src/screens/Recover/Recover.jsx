@@ -5,6 +5,7 @@ const Recover = () => {
   const [email, setEmail] = useState('');
 
   useEffect(() => {
+    document.title = 'Recuperar Acesso'; // hook para alterar titulo da aba
     // Adiciona a classe ao body quando o componente é montado
     document.body.classList.add('recover-page');
 

@@ -9,6 +9,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    document.title = 'Login'; // hook para alterar titulo da aba
     document.body.classList.add('login-page');
 
     return () => {
