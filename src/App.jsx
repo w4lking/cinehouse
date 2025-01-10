@@ -6,6 +6,7 @@ import Register from './screens/Register/Register';
 import Navigation from './screens/Navigation/navigation';
 import UserSettings from './screens/UserSettings/UserSettings';
 import MovieManagement from './screens/MovieManagement/MovieManagement';
+import Admin from './screens/ADM/Adimin';
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/userSettings" element={<UserSettings />} />
         <Route path="/movieManagement" element={<MovieManagement />} />
+        <Route path="/adm" element={<Admin />} />
         <Route path="/" element={<Login />} />
       </Routes>
     </Router>
