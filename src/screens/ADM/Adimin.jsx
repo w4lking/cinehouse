@@ -22,7 +22,7 @@ const Admin = () => {
         <div className="card-body">
           <img src={pranchetaPng} alt="Ícone de Gerenciar Usuários" className="card-image" />
           <button>Relatório de finanças</button>
-          <button>Relatório de vendas</button>
+          <button>Relatório de vendas/alugéis</button>
         </div>
       </div>
 
