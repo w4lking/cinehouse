@@ -1,8 +1,9 @@
 import React from "react";
 import "./Relatorio.css";
+import AreaChart from "./charts/AreaChart";
 
 function Relatorio() {
-  
+  // Exemplo de dados
   const filmesMaisVendidos = [
     { nome: "Avatar", quantidade: 150 },
     { nome: "Vingadores: Ultimato", quantidade: 200 },
@@ -16,6 +17,7 @@ function Relatorio() {
     { nome: "Homem de Ferro 3", quantidade: 90 },
   ];
 
+  //Exemplo de dados
   const filmesMaisAlugados = [
     { nome: "Toy Story", quantidade: 300 },
     { nome: "Harry Potter e a Pedra Filosofal", quantidade: 250 },
@@ -70,6 +72,23 @@ function Relatorio() {
               ))}
             </tbody>
           </table>
+        </div>
+      </div>
+
+      {/* Segunda seção com os cards */}
+      <div className="dashboard-cards">
+        <h2 className="section-title">Gráficos e Painéis</h2>
+        <div className="cards-container">
+          <div className="card">
+            <h3>Area Chart</h3>
+            <AreaChart />
+          </div>
+          <div className="card">
+            <h3>Bar Chart</h3>
+          </div>
+          <div className="card">
+            <h3>Line Chart</h3>
+          </div>
         </div>
       </div>
     </div>

@@ -1,6 +1,7 @@
 body {
   font-family: Arial, sans-serif;
   margin: 0;
+  height: 100%;
   padding: 0;
   background-color: #f9f9f9;
 }
@@ -66,4 +67,44 @@ body {
   background-color: #f9f9f9;
 }
 
+.dashboard-cards {
+  margin-top: 50px; /* Espaçamento entre a primeira e segunda seção */
+  flex-direction: column;
+  padding: 20px;
+  background-color: #030303; /* Fundo escuro */
+  border-radius: 8px;
+}
 
+.section-title {
+  color: #fff;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.cards-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.card {
+  height: max-content;
+  flex: 1;
+  padding: 20px;
+  background-color: #1e1e1e; /* Cor dos cards */
+  border-radius: 8px;
+  text-align: center;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.05); /* Efeito de zoom no hover */
+}
+
+.card h3 {
+  margin: 0;
+  font-size: 1.5rem;
+}
