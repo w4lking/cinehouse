@@ -30,11 +30,39 @@ function App() {
         "https://th.bing.com/th/id/OIP.n-lW5hhF0w9CCmLzfl6aRAHaK-?w=156&h=180&c=7&r=0&o=5&pid=1.7",
     },
     {
+      title: "Batman: Begins",
+      year: 2005,
+      genre: "Drama",
+      image:
+        "https://i.pinimg.com/736x/f1/6d/c7/f16dc7425db7f806dcab7c89db262ff7.jpg",
+    },
+    {
       title: "Batman: O Cavaleiro das Trevas",
       year: 2008,
       genre: "Drama",
       image:
         "https://th.bing.com/th/id/OIP.pRTdnrHNZ4m7PgthgCuk7gHaLH?rs=1&pid=ImgDetMain",
+    },
+    {
+      title: "Batman: O Cavaleiro das Ressurge",
+      year: 2012,
+      genre: "Drama",
+      image:
+        "https://th.bing.com/th/id/OIP.kSwFiORSXMmuk_Mk9Uh8XwHaLH?rs=1&pid=ImgDetMain",
+    },
+    {
+      title: "The Batman",
+      year: 2022,
+      genre: "Ação",
+      image:
+        "https://static1.moviewebimages.com/wordpress/wp-content/uploads/article-content/QK8b7gIF0cz8Ku73DNzItMeW5hyEW5.jpg",
+    },
+    {
+      title: "Joker",
+      year: 2019,
+      genre: "Drama",
+      image:
+        "https://upload.wikimedia.org/wikipedia/pt/6/63/Joker_%282019%29.jpg",
     },
     {
       title: "Breaking Bad",
@@ -61,6 +89,12 @@ function App() {
       year: 2010,
       genre: "Crime",
       image: "https://artworks.thetvdb.com/banners/posters/176941-19.jpg",
+    },
+    {
+      title: "O poderoso Chefão",
+      year: 1972,
+      genre: "Drama",
+      image: "https://www.themoviedb.org/t/p/original/oJagOzBu9Rdd9BrciseCm3U3MCU.jpg",
     },
     {
       title: "Pisque duas vezes",
@@ -108,6 +142,8 @@ function App() {
           <li>Home</li>
           <li>Perfil</li>
           <li>Filmes</li>
+          <li>Gerenciar Relatórios</li>
+          <li>Sair</li>
         </ul>
       </aside>
       <main className="content">
