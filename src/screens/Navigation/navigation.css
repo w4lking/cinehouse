@@ -1,34 +1,93 @@
-/* Configuração geral */
+/* Geral */
 body {
   margin: 0;
-  padding: 0;
   font-family: Arial, sans-serif;
-  overflow-x: hidden; /* Impede o scroll horizontal */
+  overflow-x: hidden;
 }
 
-/* Sidebar */
+.app {
+  position: relative;
+}
+
+.main-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #2c3e50;
+  color: white;
+  padding: 10px 20px;
+}
+
+.menu-container {
+  display: flex;
+  align-items: center;
+  margin-right: auto;
+}
+
+.menu-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.logo {
+  margin: 0 auto;
+  text-align: center;
+  font-size: 24px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-links input.search-bar {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.nav-links a:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.search-bar {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+}
+
 .sidebar {
   position: fixed;
   top: 0;
-  left: -250px; /* Escondido inicialmente */
+  left: -250px;
   width: 250px;
   height: 100%;
   background-color: #2c3e50;
   color: white;
   padding: 20px;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
   transition: left 0.3s;
-  z-index: 1000;
+  z-index: 999;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  border-radius: 0 10px 10px 0;
 }
 
 .sidebar.open {
-  left: 0; /* Mostra o menu */
-}
-
-.sidebar h2 {
-  margin: 0 0 20px;
-  font-size: 24px;
-  text-align: center;
+  left: 0;
 }
 
 .sidebar ul {
@@ -37,65 +96,31 @@ body {
 }
 
 .sidebar ul li {
-  margin: 10px 0;
-  cursor: pointer;
-  text-align: center;
-}
-
-/* Botão o menu */
-.menu-button {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  background-color: #2c3e50;
-  color: white;
-  border: none;
-  padding: 10px 15px;
+  margin: 15px 0;
+  padding: 10px;
   border-radius: 5px;
-  cursor: pointer;
-  z-index: 1001;
-  font-size: 16px;
-}
-
-/* cinehouse fixo cabeçalho */
-.header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: #34495e;
-  color: white;
-  padding: 20px;
   text-align: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  z-index: 999;
+  background-color: #34495e;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-.header h1 {
-  margin: 0;
+.sidebar ul li:hover {
+  background-color: #1abc9c;
 }
 
-/* Área principald */
-.content {
-  margin-top: 70px; 
-  padding: 20px;
-}
 
 .movies-grid {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
+  margin-top: 80px; /* Para compensar o header fixo */
 }
 
-/* Estilo dos filmes */
 .movie-container {
   width: 200px;
   height: 300px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
   background-color: #ecf0f1;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
