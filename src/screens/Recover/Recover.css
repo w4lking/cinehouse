@@ -60,3 +60,13 @@ button {
 button:hover {
   background-color: #666A86;
 }
+
+.go-back-button {
+  margin-top: 10px; /* Adiciona espaçamento acima do botão "Voltar" */
+  background-color: #ccc; /* Cor de fundo inicial */
+  color: #333; /* Cor do texto */
+}
+
+.go-back-button:hover {
+  background-color: #999; /* Cor de fundo ao passar o mouse */
+}

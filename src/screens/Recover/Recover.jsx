@@ -20,6 +20,11 @@ const Recover = () => {
     // Lógica de recuperação de conta aqui
   };
 
+  const handleGoBack = () => {
+    // Lógica para voltar à página anterior, vai pegar a URL anterior e redirecionar para ela
+    window.history.back();
+  };
+
   return (
     <div className="recovery-container">
       <h2>Recuperar Conta</h2>
@@ -37,6 +42,7 @@ const Recover = () => {
         </div>
         <button type="submit">Recuperar conta</button>
       </form>
+      <button onClick={handleGoBack}>Voltar</button> {/* Adiciona o botão "Voltar" */}
     </div>
   );
 };
