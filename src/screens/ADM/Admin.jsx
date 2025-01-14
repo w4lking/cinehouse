@@ -11,7 +11,7 @@ const Admin = () => {
         <div className="card-header">Gerenciar usuários</div>
         <div className="card-body">
           <img src={userIconPng} alt="Ícone de Gerenciar Usuários" className="card-image" />
-          <button>Criar usuário</button>
+          <button>Adicionar usuário</button>
           <button>Editar usuário</button>
           <button>Buscar usuário</button>
         </div>
@@ -23,6 +23,7 @@ const Admin = () => {
           <img src={pranchetaPng} alt="Ícone de Gerenciar Usuários" className="card-image" />
           <button>Relatório de finanças</button>
           <button>Relatório de vendas/alugéis</button>
+          <button>Relatório de devoluções</button>
         </div>
       </div>
 
@@ -30,7 +31,7 @@ const Admin = () => {
         <div className="card-header">Editar Filmes</div>
         <div className="card-body">
           <img src={movieIconPng} alt="Ícone de Gerenciar Usuários" className="card-image" />
-          <button>Criar filmes</button>
+          <button>Adicionar filmes</button>
           <button>Editar filme</button>
           <button>Buscar Filme</button>
         </div>

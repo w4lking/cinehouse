@@ -6,7 +6,7 @@ import Register from './screens/Register/Register';
 import Navigation from './screens/Navigation/navigation';
 import UserSettings from './screens/UserSettings/UserSettings';
 import MovieManagement from './screens/MovieManagement/MovieManagement';
-import Admin from './screens/ADM/Adimin';
+import Admin from './screens/ADM/Admin';
 import Relatorio from './screens/Relatorios/AluguelEVenda/Relatorio';
 
 const App = () => {
