@@ -25,6 +25,11 @@ const Register = () => {
     // Lógica para enviar os dados do formulário para o backend
   };
 
+  const handleGoBack = () => {
+    // Lógica para voltar à página anterior, vai pegar a URL anterior e redirecionar para ela
+    window.history.back();
+  };
+
   return (
     <div className="register-container">
       <h2>Criar Conta</h2>
@@ -91,6 +96,7 @@ const Register = () => {
         </div>
         <button type="submit">Registrar</button>
       </form>
+      <button onClick={handleGoBack}>Voltar</button> {/* Adiciona o botão "Voltar" */}
     </div>
   );
 };
