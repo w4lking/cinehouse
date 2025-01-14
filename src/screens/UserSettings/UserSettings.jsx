@@ -10,7 +10,7 @@ const UserSettings = ({ userName }) => {
   const [city, setCity] = useState('');
 
   useEffect(() => {
-    document.title = 'Editar Configuracoes'; // hook para alterar titulo da aba
+    document.title = 'Editar perfil'; // hook para alterar titulo da aba
     document.body.classList.add('user-settings-page');
     return () => {
       document.body.classList.remove('user-settings-page');
@@ -22,6 +22,7 @@ const UserSettings = ({ userName }) => {
   };
 
   const handleGoBack = () => {
+    window.history.back(); // Lógica para voltar à página anterior, vai pegar a URL anterior e redirecionar para ela
   };
 
   const handleDeleteAccount = () => {

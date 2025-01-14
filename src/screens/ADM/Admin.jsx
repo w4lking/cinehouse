@@ -5,6 +5,7 @@ import userIconPng from "./imagens/userIcon.png";
 import movieIconPng from "./imagens/movieIcon.png";
 
 const Admin = () => {
+  document.title = 'Administrativo CineHouse'; // hook para alterar titulo da aba
   return (
     <div className="container">
       <div className="card">

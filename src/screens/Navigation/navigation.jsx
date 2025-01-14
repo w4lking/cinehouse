@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import "./navigation.css";
 
 function App() {
+  document.title = 'Bem-Vindo'; // hook para alterar titulo da aba
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
-
+  
   const movies = [
     {
       title: "A Guerra dos Tronos",
