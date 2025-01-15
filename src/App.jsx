@@ -8,6 +8,7 @@ import UserSettings from './screens/UserSettings/UserSettings';
 import MovieManagement from './screens/MovieManagement/MovieManagement';
 import Admin from './screens/ADM/Admin';
 import Relatorio from './screens/Relatorios/AluguelEVenda/Relatorio';
+import HistPedidos from './screens/HistPedidos/histPedidos';
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="/movieManagement" element={<MovieManagement />} />
         <Route path="/adm" element={<Admin />} />
         <Route path="/relatorio/alugueisEVendas" element={<Relatorio />} />
+        <Route path="/histPedidos" element={<HistPedidos />} />
         <Route path="/" element={<Login />} />
       </Routes>
     </Router>
