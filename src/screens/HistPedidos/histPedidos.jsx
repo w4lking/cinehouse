@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './histPedidos.css';
 
 const HistCompras = () => {
   const [entries, setEntries] = useState([]);
 
   useEffect(() => {
+    const navigate = useNavigate();
     document.title = 'Historico de Pedidos'; // hook para alterar titulo da aba
     const fetchData = async () => {
       const data = [

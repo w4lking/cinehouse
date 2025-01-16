@@ -9,6 +9,7 @@ import MovieManagement from './screens/MovieManagement/MovieManagement';
 import Admin from './screens/ADM/Admin';
 import Relatorio from './screens/Relatorios/AluguelEVenda/Relatorio';
 import HistPedidos from './screens/HistPedidos/histPedidos';
+import EditarFilme from './screens/EditarFilme/EditarFilme';
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
         <Route path="/adm" element={<Admin />} />
         <Route path="/relatorio/alugueisEVendas" element={<Relatorio />} />
         <Route path="/histPedidos" element={<HistPedidos />} />
+        <Route path="/editarFilme" element={<EditarFilme />} />
         <Route path="/" element={<Login />} />
       </Routes>
     </Router>

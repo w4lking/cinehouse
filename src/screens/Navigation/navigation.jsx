@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import "./navigation.css";
 
 function App() {
+  const navigate = useNavigate();
   document.title = 'Bem-Vindo'; // hook para alterar titulo da aba
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -9,6 +11,18 @@ function App() {
     setMenuOpen(!menuOpen);
   };
   
+  const handlePerfil = () => {
+    navigate('/UserSettings');
+  };
+
+  const handleAdm = () => {
+    navigate('/adm');
+  };
+
+  const handleSair = () => {
+    navigate('/');
+  };
+
   const movies = [
     {
       title: "A Guerra dos Tronos",
@@ -141,10 +155,10 @@ function App() {
         </button>
         <ul>
           <li>Home</li>
-          <li>Perfil</li>
+          <li onClick={handlePerfil}>Perfil</li>
           <li>Filmes</li>
-          <li>Gerenciar Relatórios</li>
-          <li>Sair</li>
+          <li onClick={handleAdm}>Gerenciar Relatórios</li>
+          <li onClick={handleSair}>Sair</li>
         </ul>
       </aside>
       <main className="content">

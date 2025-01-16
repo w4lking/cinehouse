@@ -34,7 +34,7 @@ const Admin = () => {
           <img src={movieIconPng} alt="Ícone de Gerenciar Usuários" className="card-image" />
           <button>Adicionar filmes</button>
           <button>Editar filme</button>
-          <button>Buscar Filme</button>
+          <button>Remover filme</button>
         </div>
       </div>
     </div>
