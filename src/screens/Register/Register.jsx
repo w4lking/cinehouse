@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Register.css';
-import ApiService from "../services/apiService";
+import ApiService from "../../services/apiService";
 
 
 const Register = () => {
