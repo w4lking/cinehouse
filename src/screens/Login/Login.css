@@ -6,7 +6,6 @@ body.login-page {
   margin: 0;
   font-family: Arial, sans-serif;
   background-color: #333333;
-  color: #ffffff;
 }
 
 .login-container {
@@ -15,13 +14,13 @@ body.login-page {
   border: 1px solid #646566;
   border-radius: 4px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  background-color: #95B8D1;
+  background-color: #9b9ea1;
 }
 
-h2 {
+.h2-login {
   margin-bottom: 20px;
   text-align: center;
-  color: #7ed5ea;
+  color: #ffffff;
 }
 
 .form-group {
@@ -50,7 +49,7 @@ input {
   right: 0;
   bottom: -20px;
   font-size: 12px;
-  color: #626769;
+  color: #ffffff;
   cursor: pointer;
 }
 
@@ -76,17 +75,21 @@ input {
   opacity: 0;
 }
 
-button {
-  width: 100%;
-  padding: 10px;
+.button-group-entrar {
+  width: 30%;
+  padding: 3px;
   margin-top: 10px;
   border: none;
   border-radius: 4px;
-  background-color: #3778c2;
-  color: #ffffff;
+  color: #da0808;
   cursor: pointer;
+} 
+
+.btn1{
+  background-color: #0084ff;
+  color:white;
 }
 
-button:hover {
-  background-color: #000000;
+.btn1:hover{
+  background-color: #0a57a0d7;
 }

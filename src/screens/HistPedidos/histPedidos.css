@@ -1,23 +1,56 @@
+/* Estilização principal da página */
 .container {
-  max-width: 50%;
+  max-width: 80%;
   margin: 0 auto;
   padding: 20px;
   font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centraliza o conteúdo horizontalmente */
 }
 
+/* Título centralizado */
 h1 {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 30px; /* Espaçamento maior entre o título e a tabela */
+  font-size: 32px;
+  color: #333;
+  font-weight: bold;
 }
 
+/* Botão Voltar fixo no canto superior esquerdo */
+.back-button {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: #0056b3;
+}
+
+/* Tabela centralizada */
 table {
   width: 100%;
+  max-width: 800px;
   border-collapse: collapse;
+  margin-top: 20px; /* Espaçamento entre o título e a tabela */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+/* Cabeçalhos e células da tabela */
 th, td {
-  padding: 10px;
-  text-align: left;
+  padding: 12px;
+  text-align: center; /* Centraliza o conteúdo das células */
   border-bottom: 1px solid #ddd;
 }
 
@@ -33,10 +66,34 @@ tr:hover {
   background-color: #f1f1f1;
 }
 
-td.Compra {
-  color: green;
+/* Estilização dos botões de ação */
+.extend-button,
+.return-button {
+  padding: 8px 12px;
+  margin: 5px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-td.Alocacao {
-  color: blue;
+/* Botão de Estender Locação */
+.extend-button {
+  background-color: #28a745;
+  color: white;
+}
+
+.extend-button:hover {
+  background-color: #218838;
+}
+
+/* Botão de Devolver Pedido */
+.return-button {
+  background-color: #dc3545;
+  color: white;
+}
+
+.return-button:hover {
+  background-color: #c82333;
 }

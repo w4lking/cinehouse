@@ -32,7 +32,7 @@ const Register = () => {
 
   return (
     <div className="register-container">
-      <h2>Criar Conta</h2>
+      <h2 className="h2-criar">Criar Conta</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="username">Nome de Usuário</label>
@@ -94,9 +94,16 @@ const Register = () => {
             required
           />
         </div>
-        <button type="submit">Registrar</button>
+
+        <div className="button-group-registrar">
+          <button type="submit" className="btn-registrar">Registrar</button>
+        </div>
+
+        <div className="button-group-registrar">
+          <button onClick={handleGoBack} className="btn-voltar">Voltar</button> {/* Adiciona o botão "Voltar" */}
+        </div>
+        
       </form>
-      <button onClick={handleGoBack}>Voltar</button> {/* Adiciona o botão "Voltar" */}
     </div>
   );
 };

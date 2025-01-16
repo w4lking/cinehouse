@@ -5,7 +5,6 @@ const HistCompras = () => {
   const [entries, setEntries] = useState([]);
 
   useEffect(() => {
-    // Simula a busca de dados de uma API
     const fetchData = async () => {
       const data = [
         { id: 1, name: 'Produto A', value: 'R$ 100,00', type: 'Compra' },
@@ -18,8 +17,23 @@ const HistCompras = () => {
     fetchData();
   }, []);
 
+  // Função para estender a locação
+  const handleExtendLocacao = (id) => {
+    alert(`Estendendo locação do pedido #${id}`);
+  };
+
+  // Função para devolver o pedido
+  const handleDevolverPedido = (id) => {
+    alert(`Devolvendo pedido #${id}`);
+  };
+
   return (
     <div className="container">
+      {/* Botão Voltar */}
+      <button className="back-button" onClick={() => window.history.back()}>
+        Voltar
+      </button>
+
       <h1>Histórico de Compras e Alocações</h1>
       <table>
         <thead>
@@ -30,6 +44,7 @@ const HistCompras = () => {
             <th>Tipo Pedido</th>
             <th>Data Início</th>
             <th>Data Fim</th>
+            <th>Ações</th>
           </tr>
         </thead>
         <tbody>
@@ -43,6 +58,24 @@ const HistCompras = () => {
               </td>
               <td>{entry.type === 'Alocacao' ? entry.startDate : '-'}</td>
               <td>{entry.type === 'Alocacao' ? entry.endDate : '-'}</td>
+              <td>
+                {entry.type === 'Alocacao' && (
+                  <>
+                    <button
+                      className="extend-button"
+                      onClick={() => handleExtendLocacao(entry.id)}
+                    >
+                      Estender Locação
+                    </button>
+                    <button
+                      className="return-button"
+                      onClick={() => handleDevolverPedido(entry.id)}
+                    >
+                      Devolver Pedido
+                    </button>
+                  </>
+                )}
+              </td>
             </tr>
           ))}
         </tbody>

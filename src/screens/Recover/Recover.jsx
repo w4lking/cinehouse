@@ -27,7 +27,7 @@ const Recover = () => {
 
   return (
     <div className="recovery-container">
-      <h2>Recuperar Conta</h2>
+      <h2 className="titulo-recuperar">Recuperar Conta</h2>
       <form onSubmit={handleRecover}>
         <div className="form-group">
           <label htmlFor="email">Email</label>
@@ -40,9 +40,15 @@ const Recover = () => {
             required
           />
         </div>
-        <button type="submit">Recuperar conta</button>
+
+        <div className="button-group-registrar">
+          <button type="submit" className="btn-recuperar">Recuperar conta</button> {/* Adiciona o botão "Voltar" */}
+        </div>
+
+        <div className="button-group-registrar">
+          <button onClick={handleGoBack} className="btn-recuperar-voltar">Voltar</button> {/* Adiciona o botão "Voltar" */}
+        </div>
       </form>
-      <button onClick={handleGoBack}>Voltar</button> {/* Adiciona o botão "Voltar" */}
     </div>
   );
 };

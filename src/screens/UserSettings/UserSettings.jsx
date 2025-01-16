@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './UserSettings.css';
 
 const UserSettings = ({ userName }) => {
@@ -8,6 +9,7 @@ const UserSettings = ({ userName }) => {
   const [houseNumber, setHouseNumber] = useState('');
   const [neighborhood, setNeighborhood] = useState('');
   const [city, setCity] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     document.title = 'Editar perfil'; // hook para alterar titulo da aba
@@ -26,12 +28,15 @@ const UserSettings = ({ userName }) => {
   };
 
   const handleDeleteAccount = () => {
+    navigate();
   };
 
   const handlePurchaseHistory = () => {
+    navigate('/histPedidos');
   };
 
-  const handleRentalHistory = () => {
+  const handleLocacoes = () => {
+    navigate();
   };
 
   return (
@@ -104,8 +109,7 @@ const UserSettings = ({ userName }) => {
         </div>
         <div className="button-group">
           <button type="button" onClick={handleDeleteAccount}>Deletar conta</button>
-          <button type="button" onClick={handlePurchaseHistory}>Histórico de compras</button>
-          <button type="button" onClick={handleRentalHistory}>Histórico de locações</button>
+          <button type="button" onClick={handlePurchaseHistory}>Histórico de pedidos</button>
         </div>
         <div className="centered-button-group">
           <button type="submit">Salvar Alterações</button>

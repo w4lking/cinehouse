@@ -47,7 +47,7 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      <h2>Login</h2>
+      <h2 className="h2-login">Login</h2>
       {showAlert && <div className="alert">Por favor, insira suas credenciais para fazer login.</div>}
       <form onSubmit={handleLogin}>
         <div className="form-group">
@@ -75,11 +75,15 @@ const Login = () => {
             Recuperar senha
           </a>
         </div>
-        <button type="submit">Entrar</button>
+        
+        <div className="button-group-entrar">
+          <button type="submit" className="btn1">Entrar</button>
+        </div>
+
+        <div className="button-group-entrar">
+          <button onClick={handleCreateAccount} className="btn1">Criar Conta</button>
+        </div>
       </form>
-      <button onClick={handleCreateAccount} className="create-account-button">
-        Criar Conta
-      </button>
     </div>
   );
 };
