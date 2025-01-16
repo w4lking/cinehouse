@@ -9,6 +9,7 @@ const MovieManagement = () => {
   const [description, setDescription] = useState('');
   const [genre, setGenre] = useState('');
   const [stockQuantity, setStockQuantity] = useState('');
+  const [isAvailable, setIsAvailable] = useState('Sim'); // Estado para o dropdown
 
   useEffect(() => {
     document.title = 'Gerencia de Filmes'; // hook para alterar titulo da aba
@@ -32,7 +33,7 @@ const MovieManagement = () => {
       <h2>Gerenciamento de Filme</h2>
       <form onSubmit={handleSave}>
         <div className="form-group">
-          <label htmlFor="movieId">ID ou Nome do Filme</label>
+          <label htmlFor="movieId">Nome do Filme</label>
           <input
             type="text"
             id="movieId"
@@ -52,16 +53,6 @@ const MovieManagement = () => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="rentalPrice">Valor do Filme (Locação)</label>
-          <input
-            type="text"
-            id="rentalPrice"
-            value={rentalPrice}
-            onChange={(e) => setRentalPrice(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
           <label htmlFor="releaseDate">Data de Lançamento</label>
           <input
             type="date"
@@ -72,7 +63,7 @@ const MovieManagement = () => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="description">Descrição</label>
+          <label htmlFor="description">Sinopse</label>
           <textarea
             id="description"
             value={description}
@@ -100,8 +91,21 @@ const MovieManagement = () => {
             required
           />
         </div>
+
+        <div className="form-group">
+  <label htmlFor="isAvailable">Disponível para Locação</label>
+  <select
+    id="isAvailable"
+    value={isAvailable}
+    onChange={(e) => setIsAvailable(e.target.value)}
+    required
+  >
+    <option value="Sim">Sim</option>
+    <option value="Não">Não</option>
+  </select>
+</div>
         <div className="button-group">
-          <button type="submit">Salvar</button>
+          <button type="submit">Registrar Filme</button>
           <button type="button" onClick={handleGoBack}>Voltar</button>
         </div>
       </form>

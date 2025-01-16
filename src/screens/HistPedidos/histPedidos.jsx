@@ -5,6 +5,7 @@ const HistCompras = () => {
   const [entries, setEntries] = useState([]);
 
   useEffect(() => {
+    document.title = 'Historico de Pedidos'; // hook para alterar titulo da aba
     const fetchData = async () => {
       const data = [
         { id: 1, name: 'Produto A', value: 'R$ 100,00', type: 'Compra' },
