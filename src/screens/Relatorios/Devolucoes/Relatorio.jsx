@@ -20,7 +20,7 @@ function RelatorioDevolucao() {
 
   return (
     <div className="relatorio-container">
-      <h1>Relatório de aluguéis e vendas</h1>
+      <h1>Relatório de devoluções</h1>
       <div className="relatorio-tabelas">
         <div className="tabela">
           <h2>Datas de devolução de filmes</h2>
@@ -28,7 +28,7 @@ function RelatorioDevolucao() {
             <thead>
               <tr>
                 <th>Nome do Filme</th>
-                <th>Quantidade de Cópias Vendidas</th>
+                <th>Quantidade em estoque</th>
               </tr>
             </thead>
             <tbody>

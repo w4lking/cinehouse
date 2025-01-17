@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useState } from "react";
 import "./GerenciarUsuarios.css";
 
 const usuarios = [
@@ -17,9 +17,27 @@ const usuarios = [
 ];
 
 function GerenciarUsuarios() {
+  const [searchTerm, setSearchTerm] = useState("");
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+    console.log("Search term:", event.target.value); // Para testar a funcionalidade
+  };
+
   return (
     <div className="gerenciar-usuarios-container">
       <h1>GERENCIAR USUÁRIOS</h1>
+
+      {/* Barra de pesquisa */}
+      <div className="search-bar">
+        <input
+          type="text"
+          placeholder="Buscar por usuários."
+          value={searchTerm}
+          onChange={handleSearch}
+        />
+        <button>Buscar</button>
+      </div>
+
       <div className="usuarios-lista">
         {usuarios.map((usuario) => (
           <div className="usuario-item" key={usuario.id}>

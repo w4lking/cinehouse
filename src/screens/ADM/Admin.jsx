@@ -1,12 +1,30 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 import "./Admin.css";
+import { useNavigate } from "react-router-dom";
 import pranchetaPng from "./imagens/prancheta.png";
 import userIconPng from "./imagens/userIcon.png";
 import movieIconPng from "./imagens/movieIcon.png";
 
 const Admin = () => {
   document.title = "Administrativo CineHouse"; // hook para alterar título da aba
+  const navigate = useNavigate();
+
+  const handleAddUser = () => {
+    navigate("/adm/criarUsuario");
+  };
+
+  const handleManageUser = () => {
+    navigate("/gerenciarUsuarios");
+  };
+
+  const handleRelatorioVenda = () => {
+    navigate("/relatorio/alugueisEVendas");
+  };
+
+  const handleRelatorioDevolucao = () => {
+    navigate("/relatorio/devolucao");
+  };
 
   return (
     <div>
@@ -20,9 +38,8 @@ const Admin = () => {
               alt="Ícone de Gerenciar Usuários"
               className="card-image"
             />
-            <button>Adicionar usuário</button>
-            <button>Editar usuário</button>
-            <button>Buscar usuário</button>
+            <button onClick={handleAddUser}>Adicionar usuário</button>
+            <button onClick={handleManageUser}>Vizualizar usuários</button>
           </div>
         </div>
 
@@ -34,9 +51,12 @@ const Admin = () => {
               alt="Ícone de Gerar Relatório"
               className="card-image"
             />
-            <button>Relatório de finanças</button>
-            <button>Relatório de vendas/alugéis</button>
-            <button>Relatório de devoluções</button>
+            <button onClick={handleRelatorioVenda}>
+              Relatório de vendas/alugéis
+            </button>
+            <button onClick={handleRelatorioDevolucao}>
+              Relatório de devoluções
+            </button>
           </div>
         </div>
 

@@ -21,7 +21,38 @@
     gap: 10px;
   }
   
-.usuario-item {
+  .search-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 10px;
+  }
+  
+  .search-bar input {
+    width: 60%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .search-bar button {
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    background-color: #00cc00;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .search-bar button:hover {
+    background-color: #009900;
+  }
+
+
+  .usuario-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
