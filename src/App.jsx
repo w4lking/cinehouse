@@ -1,15 +1,17 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Login from './screens/Login/Login';
-import Recover from './screens/Recover/Recover';
-import Register from './screens/Register/Register';
-import Navigation from './screens/Navigation/navigation';
-import UserSettings from './screens/UserSettings/UserSettings';
-import MovieManagement from './screens/MovieManagement/MovieManagement';
-import Admin from './screens/ADM/Admin';
-import Relatorio from './screens/Relatorios/AluguelEVenda/Relatorio';
-import HistPedidos from './screens/HistPedidos/histPedidos';
-import EditarFilme from './screens/EditarFilme/EditarFilme';
+/* eslint-disable no-unused-vars */
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Login from "./screens/Login/Login";
+import Recover from "./screens/Recover/Recover";
+import Register from "./screens/Register/Register";
+import Navigation from "./screens/Navigation/navigation";
+import UserSettings from "./screens/UserSettings/UserSettings";
+import MovieManagement from "./screens/MovieManagement/MovieManagement";
+import Admin from "./screens/ADM/Admin";
+import Relatorio from "./screens/Relatorios/AluguelEVenda/Relatorio";
+import HistPedidos from "./screens/HistPedidos/histPedidos";
+import EditarFilme from "./screens/EditarFilme/EditarFilme";
+import GerenciarUsuarios from "./screens/GrenciarUsuarios/GerenciarUsuarios";
 
 const App = () => {
   return (
@@ -25,6 +27,7 @@ const App = () => {
         <Route path="/relatorio/alugueisEVendas" element={<Relatorio />} />
         <Route path="/histPedidos" element={<HistPedidos />} />
         <Route path="/editarFilme" element={<EditarFilme />} />
+        <Route path="/gerenciarUsuarios" element={<GerenciarUsuarios />} />
         <Route path="/" element={<Login />} />
       </Routes>
     </Router>
