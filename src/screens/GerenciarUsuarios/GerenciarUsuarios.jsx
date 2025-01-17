@@ -10,10 +10,8 @@ function GerenciarUsuarios() {
     const fetchUsuarios = async () => {
       try {
         const response = await ApiService.getUsuarios();
-
-        // Aqui, garantimos que a lista de usuários é extraída corretamente
         if (response && response.status === "success") {
-          setUsuarios(response.data); // Atualiza o estado com a lista de usuários
+          setUsuarios(response.data);
         } else {
           console.error("Erro: resposta inesperada da API", response);
         }
