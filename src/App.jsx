@@ -11,7 +11,9 @@ import Admin from "./screens/ADM/Admin";
 import Relatorio from "./screens/Relatorios/AluguelEVenda/Relatorio";
 import HistPedidos from "./screens/HistPedidos/histPedidos";
 import EditarFilme from "./screens/EditarFilme/EditarFilme";
-import GerenciarUsuarios from "./screens/GrenciarUsuarios/GerenciarUsuarios";
+import GerenciarUsuarios from "./screens/GerenciarUsuarios/GerenciarUsuarios";
+import RelatorioDevolucao from "./screens/Relatorios/Devolucoes/Relatorio";
+import CriarUsuario from "./screens/CriarUsuario/CriarUsuario";
 
 const App = () => {
   return (
@@ -25,9 +27,11 @@ const App = () => {
         <Route path="/movieManagement" element={<MovieManagement />} />
         <Route path="/adm" element={<Admin />} />
         <Route path="/relatorio/alugueisEVendas" element={<Relatorio />} />
+        <Route path="/relatorio/devolucao" element={<RelatorioDevolucao />} />
         <Route path="/histPedidos" element={<HistPedidos />} />
         <Route path="/editarFilme" element={<EditarFilme />} />
         <Route path="/gerenciarUsuarios" element={<GerenciarUsuarios />} />
+        <Route path="/adm/criarUsuario" element={<CriarUsuario />} />
         <Route path="/" element={<Login />} />
       </Routes>
     </Router>

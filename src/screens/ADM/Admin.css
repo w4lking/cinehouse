@@ -1,25 +1,14 @@
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #ffffff;
-  display: flex;
-  justify-content: center; /* Centraliza horizontalmente */
-  align-items: center; /* Centraliza verticalmente */
-  height: 100vh; /* Garante que ocupe a altura total da página */
-}
-
 .container {
   display: flex;
-  background-color: #f7f7f7;
-  flex-wrap: wrap; /* Permite que os elementos quebrem para a próxima linha, se necessário */
+  background-color: #f9f9f9;
+  flex-wrap: wrap; /* Permite que os elementos "quebrem" para a próxima linha, se necessário */
   justify-content: center; /* Centraliza os itens no eixo horizontal */
   gap: 20px; /* Espaçamento entre os quadrados */
+  margin-top: 50px; /* Ajuste para separação superior */
 }
 
-
 .card {
-  background-color: #ffffff; /* Cor de fundo branca */
-  color: #000000; /* Fonte preta */
+  width: 300px; /* Largura fixa */
   border-radius: 8px; /* Bordas arredondadas */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -27,8 +16,7 @@ body {
 }
 
 .card-header {
-  background-color: #ffffff; /* Cor de fundo branca */
-  color: #000000; /* Fonte preta */
+  background-color: #d0cccc;
   font-weight: bold;
   padding: 10px;
   text-align: center;
@@ -37,9 +25,8 @@ body {
 }
 
 .card-body {
-  background-color: #ffffff; /* Cor de fundo branca */
-  color: #000000; /* Fonte preta */
   display: flex;
+  background-color: #ffffff;
   flex-direction: column;
   justify-content: center; /* Alinha o conteúdo verticalmente */
   align-items: center; /* Alinha horizontalmente */
