@@ -25,7 +25,7 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      const response = await ApiService.registerUser(username, cpf, email, birthDate, password);
+      const response = await ApiService.registerUserClient(username, cpf, email, birthDate, password);
       setSuccessMessage(response.message || 'Usuário registrado com sucesso!');
       setErrorMessage('');
       // Limpa os campos após o sucesso
