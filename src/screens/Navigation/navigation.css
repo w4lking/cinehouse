@@ -36,6 +36,7 @@ body {
   margin: 0 auto;
   text-align: center;
   font-size: 24px;
+  color:white;
 }
 
 .nav-links {
@@ -141,4 +142,12 @@ body {
 .movie-info {
   text-align: center;
   padding: 10px;
+}
+
+.search-bar {
+  margin-top: 16px; /* Adicione um espaço superior */
+  padding: 5px 8px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
 }

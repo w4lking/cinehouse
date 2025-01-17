@@ -50,7 +50,7 @@ input:focus {
 }
 
 input[type="password"] {
-  background-color: #fffbea; /* Fundo amarelo claro para a senha */
+  background-color: #ffffff; /* Fundo amarelo claro para a senha */
 }
 
 .button-group {
