@@ -3,7 +3,7 @@ import React from "react";
 import "./Relatorio.css";
 import AreaChart from "./charts/AreaChart";
 
-function Relatorio() {
+function RelatorioDevolucao() {
   // Exemplo de dados
   const filmesMaisVendidos = [
     { nome: "Avatar", quantidade: 150 },
@@ -18,54 +18,21 @@ function Relatorio() {
     { nome: "Homem de Ferro 3", quantidade: 90 },
   ];
 
-  //Exemplo de dados
-  const filmesMaisAlugados = [
-    { nome: "Toy Story", quantidade: 300 },
-    { nome: "Harry Potter e a Pedra Filosofal", quantidade: 250 },
-    { nome: "Shrek", quantidade: 220 },
-    { nome: "A Era do Gelo", quantidade: 200 },
-    { nome: "Matrix", quantidade: 180 },
-    { nome: "Homem-Aranha", quantidade: 170 },
-    { nome: "Jurassic Park", quantidade: 160 },
-    { nome: "Madagascar", quantidade: 150 },
-    { nome: "De Volta para o Futuro", quantidade: 140 },
-    { nome: "O Exterminador do Futuro", quantidade: 130 },
-  ];
-
   return (
     <div className="relatorio-container">
-      <h1>Relatório de aluguéis e vendas</h1>
+      <h1>Relatório de devoluções</h1>
       <div className="relatorio-tabelas">
         <div className="tabela">
-          <h2>Filmes mais vendidos</h2>
+          <h2>Datas de devolução de filmes</h2>
           <table>
             <thead>
               <tr>
                 <th>Nome do Filme</th>
-                <th>Quantidade de Cópias Vendidas</th>
+                <th>Quantidade em estoque</th>
               </tr>
             </thead>
             <tbody>
               {filmesMaisVendidos.map((filme, index) => (
-                <tr key={index}>
-                  <td>{filme.nome}</td>
-                  <td>{filme.quantidade}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <div className="tabela">
-          <h2>Filmes mais alugados</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>Nome do Filme</th>
-                <th>Quantidade de Cópias Alugadas</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filmesMaisAlugados.map((filme, index) => (
                 <tr key={index}>
                   <td>{filme.nome}</td>
                   <td>{filme.quantidade}</td>
@@ -96,4 +63,4 @@ function Relatorio() {
   );
 }
 
-export default Relatorio;
+export default RelatorioDevolucao;
