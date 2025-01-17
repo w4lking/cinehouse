@@ -4,17 +4,22 @@ import './histPedidos.css';
 
 const HistCompras = () => {
   const [entries, setEntries] = useState([]);
+  const [loading, setLoading] = useState(true); // Estado para controle de carregamento
+
+  const navigate = useNavigate(); // Agora o useNavigate está no lugar certo
 
   useEffect(() => {
-    const navigate = useNavigate();
-    document.title = 'Historico de Pedidos'; // hook para alterar titulo da aba
+    document.title = 'Histórico de Pedidos'; // Alteração do título da aba
+
     const fetchData = async () => {
       const data = [
         { id: 1, name: 'Produto A', value: 'R$ 100,00', type: 'Compra' },
         { id: 2, name: 'Produto B', value: 'R$ 150,00', type: 'Alocacao', startDate: '2025-01-01', endDate: '2025-01-10' },
         { id: 3, name: 'Produto C', value: 'R$ 200,00', type: 'Compra' },
       ];
-      setEntries(data);
+      
+      setEntries(data); // Atualiza o estado com os dados mockados
+      setLoading(false); // Altera o estado de carregamento
     };
 
     fetchData();
@@ -29,6 +34,10 @@ const HistCompras = () => {
   const handleDevolverPedido = (id) => {
     alert(`Devolvendo pedido #${id}`);
   };
+
+  if (loading) {
+    return <div>Carregando...</div>; // Exibe mensagem de carregamento enquanto os dados não estiverem prontos
+  }
 
   return (
     <div className="container">
