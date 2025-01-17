@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './histPedidos.css';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import "./histPedidos.css";
 
 const HistCompras = () => {
   const [entries, setEntries] = useState([]);
@@ -9,15 +9,22 @@ const HistCompras = () => {
   const navigate = useNavigate(); // Agora o useNavigate está no lugar certo
 
   useEffect(() => {
-    document.title = 'Histórico de Pedidos'; // Alteração do título da aba
+    document.title = "Histórico de Pedidos"; // Alteração do título da aba
 
     const fetchData = async () => {
       const data = [
-        { id: 1, name: 'Produto A', value: 'R$ 100,00', type: 'Compra' },
-        { id: 2, name: 'Produto B', value: 'R$ 150,00', type: 'Alocacao', startDate: '2025-01-01', endDate: '2025-01-10' },
-        { id: 3, name: 'Produto C', value: 'R$ 200,00', type: 'Compra' },
+        { id: 1, name: "Produto A", value: "R$ 100,00", type: "Compra" },
+        {
+          id: 2,
+          name: "Produto B",
+          value: "R$ 150,00",
+          type: "Alocacao",
+          startDate: "2025-01-01",
+          endDate: "2025-01-10",
+        },
+        { id: 3, name: "Produto C", value: "R$ 200,00", type: "Compra" },
       ];
-      
+
       setEntries(data); // Atualiza o estado com os dados mockados
       setLoading(false); // Altera o estado de carregamento
     };
@@ -65,13 +72,13 @@ const HistCompras = () => {
               <td>{entry.id}</td>
               <td>{entry.name}</td>
               <td>{entry.value}</td>
-              <td className={entry.type === 'Compra' ? 'Compra' : 'Alocacao'}>
+              <td className={entry.type === "Compra" ? "Compra" : "Alocacao"}>
                 {entry.type}
               </td>
-              <td>{entry.type === 'Alocacao' ? entry.startDate : '-'}</td>
-              <td>{entry.type === 'Alocacao' ? entry.endDate : '-'}</td>
+              <td>{entry.type === "Alocacao" ? entry.startDate : "-"}</td>
+              <td>{entry.type === "Alocacao" ? entry.endDate : "-"}</td>
               <td>
-                {entry.type === 'Alocacao' && (
+                {entry.type === "Alocacao" && (
                   <>
                     <button
                       className="extend-button"
