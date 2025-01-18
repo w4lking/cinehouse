@@ -68,8 +68,8 @@ class ApiService {
 
   async getHistorico() {
     // Atualiza a URL para o endpoint de pedidos
-    const url = `${this.server}api/pedido`; 
-    
+    const url = `${this.server}api/pedido`;
+
     try {
       const response = await axios.get(url, {
         headers: {
@@ -85,7 +85,6 @@ class ApiService {
       throw error;
     }
   }
-
 
   async getFilmes() {
     const url = `${this.server}api/filmes`;
@@ -119,6 +118,38 @@ class ApiService {
     }
   }
 
+  async getRelatorioLocacao() {
+    const url = `${this.server}api/relatorio/locacao`;
+
+    try {
+      const response = await axios.get(url, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      console.error("Erro ao gerar relatorio de locação:", error);
+      throw error;
+    }
+  }
+
+  async getRelatorioVendas() {
+    const url = `${this.server}api/relatorio/vendas`;
+    try {
+      const response = await axios.get(url, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      console.error("Erro ao gerar relatorio de locação:", error);
+      throw error;
+    }
+  }
 }
 
 export default new ApiService();
