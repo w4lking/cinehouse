@@ -161,6 +161,12 @@ function GerenciarUsuarios() {
                 </span>
               </div>
               <div className="usuario-acoes">
+              <button
+                  className="btn funcionario"
+                  onClick={() => handleEditClick(usuario)}
+                >
+                  Adicionar Funcionario
+                </button>
                 <button
                   className="btn alterar"
                   onClick={() => handleEditClick(usuario)}
