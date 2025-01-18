@@ -49,9 +49,10 @@ table {
 
 /* Cabeçalhos e células da tabela */
 th, td {
-  padding: 12px;
+  padding: 20px;
   text-align: center; /* Centraliza o conteúdo das células */
   border-bottom: 1px solid #ddd;
+  white-space: nowrap; /* Garante que o texto fique em uma linha */
 }
 
 th {

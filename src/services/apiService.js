@@ -85,7 +85,6 @@ class ApiService {
       throw error;
     }
   }
-  
 
 
   async getFilmes() {

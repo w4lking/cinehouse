@@ -128,7 +128,7 @@ const HistCompras = () => {
               <td>{entry.tipoPedido}</td>
               <td>{entry.statusPedido}</td>
               <td>{entry.dataPagamento ? formatDate(entry.dataPagamento) : "-"}</td> {/* Formata dataPagamento */}
-              <td>{entry.valorTotal}</td>
+              <td class="valor-total">R$ {entry.valorTotal}</td>
               <td>
                 {entry.tipoPedido === "Alocacao" && entry.statusPedido !== "Finalizado" && (
                   <>
