@@ -1,25 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import ApiService from "../../services/apiService"; // Importe seu serviço aqui
+import ApiService from "../../services/apiService";
 import "./histPedidos.css";
 
 const HistCompras = () => {
   const [entries, setEntries] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null); // Para mostrar erros em caso de falha na requisição
+  const [error, setError] = useState(null);
 
   const navigate = useNavigate();
 
-  // Função para formatar as datas
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString('pt-BR'); // Formato brasileiro (dd/mm/aaaa)
+    return date.toLocaleDateString("pt-BR");
   };
 
-  // Função para formatar as datas com hora
   const formatDateTime = (dateString) => {
     const date = new Date(dateString);
-    return date.toLocaleString('pt-BR'); // Formato de data e hora local
+    return date.toLocaleString("pt-BR");
   };
 
   useEffect(() => {
@@ -27,20 +25,18 @@ const HistCompras = () => {
 
     const fetchData = async () => {
       try {
-        const response = await ApiService.getHistorico(); // Requisição ao backend
+        const response = await ApiService.getHistorico();
+        console.log(response);
 
-        console.log(response); // Adiciona para depurar a resposta
-
-        // Verifique se a resposta possui a chave "data"
         if (response && response.status === "success" && response.data) {
-          setEntries(response.data); // Acesse diretamente a chave "data" dos pedidos
+          setEntries(response.data);
         } else {
           throw new Error("Resposta inesperada da API");
         }
 
-        setLoading(false); // Atualiza o estado de carregamento
+        setLoading(false);
       } catch (err) {
-        console.error("Erro ao buscar pedidos:", err); // Imprime o erro completo no console para mais detalhes
+        console.error("Erro ao buscar pedidos:", err);
         setError("Erro ao carregar os pedidos");
         setLoading(false);
       }
@@ -49,33 +45,36 @@ const HistCompras = () => {
     fetchData();
   }, []);
 
-  // Função para estender a locação
   const handleExtendLocacao = (id) => {
     alert(`Estendendo locação do pedido #${id}`);
   };
 
-  // Função para devolver o pedido
   const handleDevolverPedido = async (idPedido, statusPedido) => {
     try {
-      const response = await ApiService.devolverPedido(idPedido, statusPedido); // Chama a API para devolver o pedido
-
-      // Exibe mensagem de sucesso
+      const response = await ApiService.devolverPedido(idPedido, statusPedido);
       setStatusMessage(`Pedido #${idPedido} devolvido com sucesso!`);
-      // Atualiza o histórico de pedidos após a devolução
-      setEntries(entries.map(entry => 
-        entry.idpedido === idPedido ? { ...entry, statusPedido: "Devolvido" } : entry
-      ));
+      setEntries((prevEntries) =>
+        prevEntries.map((entry) =>
+          entry.idpedido === idPedido
+            ? { ...entry, statusPedido: response.statusPedido || "Devolvido" }
+            : entry
+        )
+      );
     } catch (error) {
-      setStatusMessage(`Erro ao devolver o pedido #${idPedido}: ${error.message}`);
+      setStatusMessage(
+        `Erro ao devolver o pedido #${idPedido}: ${
+          error.response?.data?.message || error.message
+        }`
+      );
     }
   };
 
   if (loading) {
-    return <div>Carregando...</div>; // Exibe mensagem de carregamento
+    return <div>Carregando...</div>;
   }
 
   if (error) {
-    return <div>{error}</div>; // Exibe mensagem de erro, se houver
+    return <div>{error}</div>;
   }
 
   return (
@@ -105,25 +104,29 @@ const HistCompras = () => {
               <td>{formatDate(entry.dataPedido)}</td> {/* Formata dataPedido */}
               <td>{entry.tipoPedido}</td>
               <td>{entry.statusPedido}</td>
-              <td>{entry.dataPagamento ? formatDate(entry.dataPagamento) : "-"}</td> {/* Formata dataPagamento */}
+              <td>
+                {entry.dataPagamento ? formatDate(entry.dataPagamento) : "-"}
+              </td>{" "}
+              {/* Formata dataPagamento */}
               <td class="valor-total">R$ {entry.valorTotal.toFixed(2)}</td>
               <td>
-                {entry.tipoPedido === "Alocacao" && entry.statusPedido !== "Finalizado" && (
-                  <>
-                    <button
-                      className="extend-button"
-                      onClick={() => handleExtendLocacao(entry.idPedido)}
-                    >
-                      Estender Locação
-                    </button>
-                    <button
-                      className="return-button"
-                      onClick={() => handleDevolverPedido(entry.idPedido)}
-                    >
-                      Devolver Pedido
-                    </button>
-                  </>
-                )}
+                {entry.tipoPedido === "Alocacao" &&
+                  entry.statusPedido !== "Finalizado" && (
+                    <>
+                      <button
+                        className="extend-button"
+                        onClick={() => handleExtendLocacao(entry.idpedido)}
+                      >
+                        Estender Locação
+                      </button>
+                      <button
+                        className="return-button"
+                        onClick={() => handleDevolverPedido(entry.idpedido, "Devolvido")}
+                      >
+                        Devolver Pedido
+                      </button>
+                    </>
+                  )}
                 {entry.statusPedido === "Finalizado" && (
                   <span>Pedido Finalizado</span>
                 )}

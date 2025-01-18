@@ -177,6 +177,27 @@ class ApiService {
     }
   }
 
+  async devolverPedido(idPedido, statusPedido) {
+    const url = `${this.server}api/pedido/devolver/${idPedido}/${statusPedido}`;
+    try {
+      const response = await axios.put(
+        url,
+        {}, 
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      return response.data; 
+    } catch (error) {
+      console.error(
+        "Erro ao devolver o pedido:",
+        error.response ? error.response.data : error.message
+      );
+      throw error;
+    }
+  }
 }
 
 export default new ApiService();
