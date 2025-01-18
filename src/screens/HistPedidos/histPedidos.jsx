@@ -54,41 +54,19 @@ const HistCompras = () => {
     alert(`Estendendo locação do pedido #${id}`);
   };
 
-  // Função para devolver o pedido e atualizar o status
-  const handleDevolverPedido = async (id) => {
+  // Função para devolver o pedido
+  const handleDevolverPedido = async (idPedido, statusPedido) => {
     try {
-      // Verificar se o pedido existe na lista de pedidos carregados
-      const pedido = entries.find((entry) => entry.idpedido === id);
-      
-      if (!pedido) {
-        throw new Error("Pedido não encontrado");
-      }
+      const response = await ApiService.devolverPedido(idPedido, statusPedido); // Chama a API para devolver o pedido
 
-      if (pedido.statusPedido === "Finalizado") {
-        throw new Error("Este pedido já foi finalizado.");
-      }
-
-      // Envia uma requisição para atualizar o status do pedido para "Finalizado"
-      const response = await ApiService.atualizarStatusPedido(id, "Finalizado");
-
-      console.log("Resposta da API ao tentar devolver o pedido:", response); // Adiciona log da resposta da API
-
-      if (response.status === "success") {
-        // Atualiza o estado local dos pedidos sem fazer uma nova requisição para a lista inteira
-        const updatedEntries = entries.map((entry) =>
-          entry.idpedido === id ? { ...entry, statusPedido: "Finalizado" } : entry
-        );
-        setEntries(updatedEntries);
-        alert(`Pedido #${id} foi finalizado!`);
-      } else {
-        throw new Error(`Erro ao atualizar o status do pedido: ${response.message || 'Resposta inesperada'}`);
-      }
+      // Exibe mensagem de sucesso
+      setStatusMessage(`Pedido #${idPedido} devolvido com sucesso!`);
+      // Atualiza o histórico de pedidos após a devolução
+      setEntries(entries.map(entry => 
+        entry.idpedido === idPedido ? { ...entry, statusPedido: "Devolvido" } : entry
+      ));
     } catch (error) {
-      console.error("Erro ao devolver o pedido:", error); // Adicionando log completo do erro
-      if (error.response) {
-        console.error("Erro da resposta:", error.response.data); // Exibe a resposta de erro da API
-      }
-      alert(`Erro ao tentar devolver o pedido: ${error.message || 'Erro desconhecido'}`);
+      setStatusMessage(`Erro ao devolver o pedido #${idPedido}: ${error.message}`);
     }
   };
 
@@ -128,7 +106,7 @@ const HistCompras = () => {
               <td>{entry.tipoPedido}</td>
               <td>{entry.statusPedido}</td>
               <td>{entry.dataPagamento ? formatDate(entry.dataPagamento) : "-"}</td> {/* Formata dataPagamento */}
-              <td class="valor-total">R$ {entry.valorTotal}</td>
+              <td class="valor-total">R$ {entry.valorTotal.toFixed(2)}</td>
               <td>
                 {entry.tipoPedido === "Alocacao" && entry.statusPedido !== "Finalizado" && (
                   <>

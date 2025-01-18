@@ -47,6 +47,7 @@ function GerenciarUsuarios() {
   const [showPopup, setShowPopup] = useState(false); // Controle do popup
   const [selectedUsuario, setSelectedUsuario] = useState(null); // Dados do usuário selecionado para editar
 
+  document.title = "Gerencia";
   useEffect(() => {
     const fetchUsuarios = async () => {
       try {
