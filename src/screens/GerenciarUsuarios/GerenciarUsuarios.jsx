@@ -54,7 +54,7 @@ function GerenciarUsuarios() {
               <div className="usuario-info">
                 <span className="usuario-icon">👤</span>
                 <span>
-                  ID: {usuario.idusuarios} Nome do usuário: {usuario.nome}
+                  ID: {usuario.idusuario} Nome do usuário: {usuario.nome}
                 </span>
               </div>
               <div className="usuario-acoes">
