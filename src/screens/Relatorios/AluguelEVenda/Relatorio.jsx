@@ -12,7 +12,6 @@ function Relatorio() {
     try {
       const response = await ApiService.getRelatorioVendas();
       const data = response.data; // Garante que é um array
-      console.log("Dados recebidos:", data); // Adicione para verificar os dados recebidos
       setFilmesMaisVendidos(data);
     } catch (error) {
       console.error("Erro ao buscar filmes vendidos:", error);

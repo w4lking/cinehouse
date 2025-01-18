@@ -150,6 +150,22 @@ class ApiService {
       throw error;
     }
   }
+
+  async getRelatorioDevolucao() {
+    const url = `${this.server}api/relatorio/devolucao`;
+    try {
+      const response = await axios.get(url, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      console.error("Erro ao gerar relatorio de devolução:", error);
+      throw error;
+    }
+  }
 }
 
 export default new ApiService();
