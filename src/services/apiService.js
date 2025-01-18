@@ -116,6 +116,23 @@ class ApiService {
     }
   }
 
+  async getAllFilmes() {
+    const url = `${this.server}api/all/filmes`;
+    try {
+      const response = await axios.get(url, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      console.error("Erro ao buscar os filmes:", error);
+      throw error;
+    }
+  }
+
+  // api para deletar filme
   async deletarFilme(idFilme) {
     const url = `${this.server}api/delete/filme/${idFilme}`;
     try {
@@ -126,8 +143,16 @@ class ApiService {
       });
       return response.data;
     } catch (error) {
-      console.error("Erro ao deletar o filme:", error);
-      throw error;
+      if (error.response) {
+        console.error(
+          "Erro de resposta ao deletar Filme:",
+          error.response.data
+        );
+        return error.response.data;
+      } else {
+        console.error("Erro ao deletar Filme:", error.message);
+        throw error;
+      }
     }
   }
 
