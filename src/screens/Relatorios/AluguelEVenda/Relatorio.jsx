@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 import "./Relatorio.css";
-import AreaChart from "./charts/AreaChart";
+import AreaChartComponent from "./charts/AreaChart";
 
 function Relatorio() {
   // Exemplo de dados
@@ -82,7 +82,7 @@ function Relatorio() {
         <div className="cards-container">
           <div className="card">
             <h3>Area Chart</h3>
-            <AreaChart />
+            <AreaChartComponent />
           </div>
           <div className="card">
             <h3>Bar Chart</h3>

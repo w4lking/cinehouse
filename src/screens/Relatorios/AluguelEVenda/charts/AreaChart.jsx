@@ -1,6 +1,13 @@
 "use client";
-
-import { AreaChart, Area, ResponsiveContainer } from "recharts";
+import {
+  BarChart,
+  Area,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+} from "recharts";
 
 const filmesMaisVendidos = [
   { nome: "Avatar", quantidade: 150 },
@@ -15,27 +22,17 @@ const filmesMaisVendidos = [
   { nome: "Homem de Ferro 3", quantidade: 90 },
 ];
 
-//Exemplo de dados
-const filmesMaisAlugados = [
-  { nome: "Toy Story", quantidade: 300 },
-  { nome: "Harry Potter e a Pedra Filosofal", quantidade: 250 },
-  { nome: "Shrek", quantidade: 220 },
-  { nome: "A Era do Gelo", quantidade: 200 },
-  { nome: "Matrix", quantidade: 180 },
-  { nome: "Homem-Aranha", quantidade: 170 },
-  { nome: "Jurassic Park", quantidade: 160 },
-  { nome: "Madagascar", quantidade: 150 },
-  { nome: "De Volta para o Futuro", quantidade: 140 },
-  { nome: "O Exterminador do Futuro", quantidade: 130 },
-];
-
 const AreaChartComponent = () => {
   return (
-    <ResponsiveContainer width="100%" height="100%">
-      <AreaChart width={500} height={400} data={filmesMaisAlugados}>
-        <Area dataKey="quantidade" />
-      </AreaChart>
-    </ResponsiveContainer>
+    <AreaChart width={300} height={300} data={filmesMaisVendidos}>
+      <YAxis />
+      <XAxis dataKey="quantidade" />
+      <CartesianGrid />
+      <Tooltip />
+      <Legend />
+
+      <Area dataKey="quantidade" />
+    </A>
   );
 };
 
