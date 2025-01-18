@@ -9,6 +9,18 @@ function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [filmes, setFilmes] = useState([]); // Estado para armazenar filmes
   const [searchTerm, setSearchTerm] = useState(""); // Estado para a busca
+  const [selectedGenre, setSelectedGenre] = useState(""); // Estado para o filtro de gênero
+
+  const mapeaGenero = {
+    1: "Drama",
+    2: "Ação",
+    3: "Comédia",
+    4: "Suspense",
+    5: "Aventura",
+    6: "Terror",
+    7: "Mistério",
+    8: "Crime",
+  };
 
   // Busca os filmes da API ao carregar o componente
   useEffect(() => {
@@ -44,10 +56,16 @@ function App() {
     navigate("/");
   };
 
-  // Filtra os filmes com base no termo de busca
-  const filteredFilmes = filmes.filter((filme) =>
-    filme.nomeFilme.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // Filtro de filmes
+  const filteredFilmes = filmes.filter((filme) => {
+    const genreMatch = selectedGenre
+      ? mapeaGenero[filme.categoria_idcategoria] === selectedGenre
+      : true;
+    return (
+      genreMatch &&
+      filme.nomeFilme.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  });
 
   return (
     <div className="app">
@@ -61,6 +79,8 @@ function App() {
         <nav className="nav-links">
           <a href="#movies">Filmes</a>
           <a href="#series">Séries</a>
+
+          {/* Barra de Busca */}
           <input
             type="text"
             placeholder="Buscar..."
@@ -68,6 +88,20 @@ function App() {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
+
+          {/* Filtro de Gênero */}
+          <select
+            value={selectedGenre}
+            onChange={(e) => setSelectedGenre(e.target.value)}
+            className="genre-filter"
+          >
+            <option value="">Filtrar por Gênero</option>
+            {Object.values(mapeaGenero).map((genre) => (
+              <option key={genre} value={genre}>
+                {genre}
+              </option>
+            ))}
+          </select>
         </nav>
       </header>
       <aside className={`sidebar ${menuOpen ? "open" : ""}`}>
@@ -91,8 +125,8 @@ function App() {
                   key={filme.idfilme}
                   title={filme.nomeFilme}
                   year={filme.ano}
-                  classification={filme.classificacaoIndicativa}
-                  genre={filme.categoria_idcategoria}
+                  classification={filme.classificacaoIndicativa === 0 ? "Livre" : filme.classificacaoIndicativa}
+                  genre={mapeaGenero[filme.categoria_idcategoria] || "Desconhecido"}
                   image={filme.imagem}
                 />
               ))
@@ -105,7 +139,7 @@ function App() {
     </div>
   );
 
-  function MovieContainer({ title, year, genre, classification ,image }) {
+  function MovieContainer({ title, year, genre, classification, image }) {
     return (
       <div className="movie-container">
         <img src={image} alt={title} className="movie-image" />

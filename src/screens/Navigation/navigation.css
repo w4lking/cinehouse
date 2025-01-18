@@ -169,3 +169,16 @@ body {
   font-style: italic;
   color: #95a5a6;
 }
+
+/* Estilos para o filtro de gênero */
+.genre-filter {
+  padding: 5px 10px;
+  font-size: 1rem;
+  margin-left: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  color:white;
+  background-color: #2c3e50;
+}
+
+

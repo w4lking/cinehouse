@@ -131,6 +131,35 @@ class ApiService {
     }
   }
 
+  // api para editar filme
+  async alterarFilme(idFilme, nomeFilme, sinopse, dataLancamento, precoCompra, qtdEstoque, disponivelLocacao, classificacaoIndicativa, imagem) {
+    const url = `${this.server}api/update/filme/${idFilme}`;
+    try {
+      const response = await axios.put(
+        url,
+        {
+         nomeFilme,
+          sinopse,
+          dataLancamento,
+          precoCompra,
+          qtdEstoque,
+          disponivelLocacao,
+          classificacaoIndicativa,
+          imagem,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Erro ao alterar o filme:", error);
+      throw error;
+    }
+  }
+
   async deletarUsuario(idUsuario) {
     const url = `${this.server}api/delete/user/${idUsuario}`;
     try {
