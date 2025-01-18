@@ -50,6 +50,44 @@ class ApiService {
     }
   }
 
+  async getPedidos() {
+    const url = `${this.server}api/pedido`;
+    try {
+      const response = await axios.get(url, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      console.error("Erro ao buscar os pedidos:", error);
+      throw error;
+    }
+  }
+
+  async getHistorico() {
+    // Atualiza a URL para o endpoint de pedidos
+    const url = `${this.server}api/pedido`; 
+    
+    try {
+      const response = await axios.get(url, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      // Exibe no console a resposta com os pedidos
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      // Corrige a mensagem de erro para "pedidos"
+      console.error("Erro ao buscar os pedidos:", error);
+      throw error;
+    }
+  }
+  
+
+
   async getFilmes() {
     const url = `${this.server}api/filmes`;
     try {
