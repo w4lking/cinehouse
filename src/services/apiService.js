@@ -26,7 +26,6 @@ class ApiService {
           },
         }
       );
-
       return response.data;
     } catch (error) {
       console.error("Erro ao registrar usuário:", error);
@@ -42,10 +41,25 @@ class ApiService {
           "Content-Type": "application/json",
         },
       });
-      console.log(response.data);
       return response.data;
     } catch (error) {
       console.error("Erro ao buscar os usuários:", error);
+      throw error;
+    }
+  }
+
+  async getCategoria() {
+    const url = `${this.server}api/categoria`;
+    try {
+      const response = await axios.get(url, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      console.error("Erro ao buscar as categorias:", error);
       throw error;
     }
   }
@@ -68,8 +82,8 @@ class ApiService {
 
   async getHistorico() {
     // Atualiza a URL para o endpoint de pedidos
-    const url = `${this.server}api/pedido`; 
-    
+    const url = `${this.server}api/pedido`;
+
     try {
       const response = await axios.get(url, {
         headers: {
@@ -85,7 +99,6 @@ class ApiService {
       throw error;
     }
   }
-
 
   async getFilmes() {
     const url = `${this.server}api/filmes`;
@@ -111,10 +124,55 @@ class ApiService {
           "Content-Type": "application/json",
         },
       });
-
       return response.data;
     } catch (error) {
       console.error("Erro ao deletar o filme:", error);
+      throw error;
+    }
+  }
+
+  async deletarUsuario(idUsuario) {
+    const url = `${this.server}api/delete/user/${idUsuario}`;
+    try {
+      const response = await axios.delete(url, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      return response.data;
+    } catch (error) {
+      if (error.response) {
+        console.error(
+          "Erro de resposta ao deletar usuário:",
+          error.response.data
+        );
+        return error.response.data;
+      } else {
+        console.error("Erro ao deletar usuário:", error.message);
+        throw error;
+      }
+    }
+  }
+
+  async alterarUsuario(idUsuario, username, email, birthDate) {
+    const url = `${this.server}api/update/user/${idUsuario}`;
+    try {
+      const response = await axios.put(
+        url,
+        {
+          username,
+          email,
+          birthDate,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Erro ao alterar o usuário:", error);
       throw error;
     }
   }

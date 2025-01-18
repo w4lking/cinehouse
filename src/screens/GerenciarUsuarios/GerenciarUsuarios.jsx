@@ -13,6 +13,34 @@ function formatDateToISO(dateString) {
   return `${year}-${month}-${day}`;
 }
 
+//Função de delete
+const handleDeleteClick = async (idUsuario) => {
+  const confirmDelete = window.confirm(
+    `Tem certeza que deseja deletar este usuário com o ID ${idUsuario}?`
+  );
+
+  if (!confirmDelete) return;
+
+  try {
+    const response = await ApiService.deletarUsuario(idUsuario);
+
+    if (
+      response &&
+      (response.status === "ok" || response.status === "success")
+    ) {
+      alert("Usuário deletado com sucesso!");
+      window.location.reload();
+    } else {
+      alert(
+        `Erro ao deletar o usuário: ${response.message || "Erro desconhecido"}`
+      );
+    }
+  } catch (error) {
+    console.error("Erro ao deletar o usuário:", error);
+    alert("Erro inesperado ao deletar o usuário.");
+  }
+};
+
 function GerenciarUsuarios() {
   const [usuarios, setUsuarios] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -50,12 +78,11 @@ function GerenciarUsuarios() {
   );
 
   const handleEditClick = (usuario) => {
-    // Formata a data para `yyyy-MM-dd` ao abrir o popup
     setSelectedUsuario({
       ...usuario,
-      dataNasc: usuario.dataNasc ? usuario.dataNasc : "",
+      dataNasc: usuario.dataNasc || "", // Garante que 'dataNasc' nunca seja undefined
     });
-    setShowPopup(true); // Abre o popup
+    setShowPopup(true); // Abre o popup de edição
   };
 
   const handlePopupClose = () => {
@@ -64,29 +91,46 @@ function GerenciarUsuarios() {
 
   const handleSaveChanges = async () => {
     try {
-      // Formata a data para ISO antes de salvar
+      // Prepara os dados para enviar à API
       const usuarioParaSalvar = {
         ...selectedUsuario,
         dataNasc: selectedUsuario.dataNasc.includes("/")
-          ? formatDateToISO(selectedUsuario.dataNasc)
-          : selectedUsuario.dataNasc, // Garante que está no formato ISO
+          ? formatDateToISO(selectedUsuario.dataNasc) // Converte a data para ISO, se necessário
+          : selectedUsuario.dataNasc,
       };
 
-      // Aqui você adiciona a lógica para salvar via API
-      console.log("Salvar alterações para:", usuarioParaSalvar);
-
-      // Atualiza a lista de usuários localmente após salvar
-      setUsuarios((prevUsuarios) =>
-        prevUsuarios.map((usuario) =>
-          usuario.idusuario === usuarioParaSalvar.idusuario
-            ? usuarioParaSalvar
-            : usuario
-        )
+      // Chama a API para atualizar o usuário
+      const response = await ApiService.alterarUsuario(
+        usuarioParaSalvar.idusuario,
+        usuarioParaSalvar.nome,
+        usuarioParaSalvar.email,
+        usuarioParaSalvar.dataNasc
       );
 
-      setShowPopup(false); // Fecha o popup após salvar
+      if (
+        response &&
+        (response.status === "ok" || response.status === "success")
+      ) {
+        alert("Usuário atualizado com sucesso!");
+        setUsuarios((prevUsuarios) =>
+          prevUsuarios.map((usuario) =>
+            usuario.idusuario === usuarioParaSalvar.idusuario
+              ? { ...usuario, ...usuarioParaSalvar }
+              : usuario
+          )
+        );
+
+        setShowPopup(false); // Fecha o popup após salvar
+      } else {
+        alert(
+          `Erro ao atualizar o usuário: ${
+            response.message || "Erro desconhecido"
+          }`
+        );
+      }
     } catch (error) {
       console.error("Erro ao salvar alterações:", error);
+      alert("Erro inesperado ao atualizar o usuário.");
     }
   };
 
@@ -123,7 +167,12 @@ function GerenciarUsuarios() {
                 >
                   Alterar
                 </button>
-                <button className="btn deletar">Deletar</button>
+                <button
+                  className="btn deletar"
+                  onClick={() => handleDeleteClick(usuario.idusuario)}
+                >
+                  Deletar
+                </button>
               </div>
             </div>
           ))
