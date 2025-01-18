@@ -100,6 +100,15 @@
     background-color: #009900;
   }
   
+  .funcionario{
+    background-color: blue;
+    color:white;
+  }
+
+  .funcionario:hover{
+    background-color:rgba(0, 0, 255, 0.747) ;
+  }
+
   .deletar {
     background-color: #ff3333;
     color: #fff;
