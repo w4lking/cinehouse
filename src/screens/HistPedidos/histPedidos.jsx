@@ -93,6 +93,7 @@ const HistCompras = () => {
             <th>Tipo Pedido</th>
             <th>Status Pedido</th>
             <th>Data Pagamento</th>
+            <th>Data Devolução</th>
             <th>Valor Total</th>
             <th>Ações</th>
           </tr>
@@ -106,12 +107,15 @@ const HistCompras = () => {
               <td>{entry.statusPedido}</td>
               <td>
                 {entry.dataPagamento ? formatDate(entry.dataPagamento) : "-"}
-              </td>{" "}
+              </td>
+              <td>{formatDate(entry.dataLimiteLocacao)}</td>
               {/* Formata dataPagamento */}
-              <td class="valor-total">R$ {entry.valorTotal.toFixed(2)}</td>
+              <td className="valor-total">R$ {entry.valorTotal.toFixed(2)}</td>
               <td>
+                {/* Condicional para exibir os botões de ação somente se o statusPedido não for "Devolvido" */}
                 {entry.tipoPedido === "Alocacao" &&
-                  entry.statusPedido !== "Finalizado" && (
+                  entry.statusPedido !== "Finalizado" &&
+                  entry.statusPedido !== "Devolvido" && (
                     <>
                       <button
                         className="extend-button"
@@ -129,6 +133,9 @@ const HistCompras = () => {
                   )}
                 {entry.statusPedido === "Finalizado" && (
                   <span>Pedido Finalizado</span>
+                )}
+                {entry.statusPedido === "Devolvido" && (
+                  <span>Pedido Devolvido</span>
                 )}
               </td>
             </tr>

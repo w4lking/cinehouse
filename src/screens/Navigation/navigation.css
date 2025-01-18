@@ -15,7 +15,8 @@ body {
   justify-content: space-between;
   background-color: #2c3e50;
   color: white;
-  padding: 10px 20px;
+  padding: 5px 20px;
+
 }
 
 .menu-container {
@@ -70,6 +71,10 @@ body {
   border: none;
   border-radius: 5px;
   outline: none;
+  background-color: #2c3e50;
+  color:white;
+  width: 250px;
+  margin-top: 20px;
 }
 
 .sidebar {
@@ -182,3 +187,18 @@ body {
 }
 
 
+/* Filtros */
+.filters {
+  margin-top: 20px;
+}
+
+.year-filter, .price-filter {
+  padding: 5px 10px;
+  font-size: 1rem;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  color: white;
+  background-color: #2c3e50;
+  width: 100%;
+}

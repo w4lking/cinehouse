@@ -10,6 +10,8 @@ function App() {
   const [filmes, setFilmes] = useState([]); // Estado para armazenar filmes
   const [searchTerm, setSearchTerm] = useState(""); // Estado para a busca
   const [selectedGenre, setSelectedGenre] = useState(""); // Estado para o filtro de gênero
+  const [selectedYear, setSelectedYear] = useState(""); // Estado para o filtro de ano
+  const [selectedPrice, setSelectedPrice] = useState(""); // Estado para o filtro de preço
 
   const mapeaGenero = {
     1: "Drama",
@@ -61,11 +63,23 @@ function App() {
     const genreMatch = selectedGenre
       ? mapeaGenero[filme.categoria_idcategoria] === selectedGenre
       : true;
+
+    const yearMatch = selectedYear ? String(filme.ano) === selectedYear : true; // Garantir que a comparação de ano funcione
+    
+    const priceMatch = selectedPrice
+      ? filme.preco <= parseFloat(selectedPrice) // Garantir que selectedPrice seja convertido para número
+      : true;
+
     return (
       genreMatch &&
+      yearMatch &&
+      priceMatch &&
       filme.nomeFilme.toLowerCase().includes(searchTerm.toLowerCase())
     );
   });
+
+  // Obter os anos disponíveis para o filtro
+  const years = [...new Set(filmes.map(filme => filme.ano))]; // Cria uma lista única de anos
 
   return (
     <div className="app">
@@ -115,6 +129,36 @@ function App() {
           <li onClick={handleAdm}>Gerenciar Relatórios</li>
           <li onClick={handleSair}>Sair</li>
         </ul>
+
+        {/* Filtros */}
+        <div className="filters">
+          {/* Filtro de Ano */}
+          <select
+            value={selectedYear}
+            onChange={(e) => setSelectedYear(e.target.value)}
+            className="year-filter"
+          >
+            <option value="">Filtrar por Ano</option>
+            {years.map((year) => (
+              <option key={year} value={year}>
+                {year}
+              </option>
+            ))}
+          </select>
+
+          {/* Filtro de Preço */}
+          <select
+            value={selectedPrice}
+            onChange={(e) => setSelectedPrice(e.target.value)}
+            className="price-filter"
+          >
+            <option value="">Filtrar por Preço</option>
+            <option value="10">Até R$10</option>
+            <option value="20">Até R$20</option>
+            <option value="50">Até R$50</option>
+            <option value="100">Até R$100</option>
+          </select>
+        </div>
       </aside>
       <main className="content">
         <section className="main-content">
