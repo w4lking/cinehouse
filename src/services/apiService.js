@@ -2,9 +2,9 @@ import axios from "axios";
 
 class ApiService {
   constructor() {
-    // this.server = 'https://jsonserver-jet.vercel.app/api/';
+    this.server = 'https://cinehouse-server.vercel.app/';
 
-    this.server = "http://localhost:5000/";
+    // this.server = "http://localhost:5000/";
   }
 
   async registerUser(username, cpf, email, birthDate, password) {
@@ -156,14 +156,76 @@ class ApiService {
     }
   }
 
+  async getCategoria() {
+    const url = `${this.server}api/categoria`;
+    try {
+      const response = await axios.get(url, {
+        headers: { "Content-Type": "application/json" },
+      });
+      console.log("Categorias recebidas:", response.data);
+      setCategorias(response.data.data); // Acesse a propriedade 'data'
+    } catch (error) {
+      console.error("Erro ao buscar as categorias:", error);
+    }
+  }
+
+  async adicionarFilme(
+    nomeFilme,
+    sinopse,
+    dataLancamento,
+    precoCompra,
+    qtdEstoque,
+    disponivelLocacao,
+    classificacaoIndicativa,
+    imagem,
+    categoria_idcategoria // Novo campo
+  ) {
+    const url = `${this.server}api/add/filme`;
+    try {
+      const response = await axios.post(
+        url,
+        {
+          nomeFilme,
+          sinopse,
+          dataLancamento,
+          precoCompra,
+          qtdEstoque,
+          disponivelLocacao,
+          classificacaoIndicativa,
+          imagem,
+          categoria_idcategoria, // Enviar para o backend
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Erro ao adicionar filme:", error);
+      throw error;
+    }
+  }
+
   // api para editar filme
-  async alterarFilme(idFilme, nomeFilme, sinopse, dataLancamento, precoCompra, qtdEstoque, disponivelLocacao, classificacaoIndicativa, imagem) {
+  async alterarFilme(
+    idFilme,
+    nomeFilme,
+    sinopse,
+    dataLancamento,
+    precoCompra,
+    qtdEstoque,
+    disponivelLocacao,
+    classificacaoIndicativa,
+    imagem
+  ) {
     const url = `${this.server}api/update/filme/${idFilme}`;
     try {
       const response = await axios.put(
         url,
         {
-         nomeFilme,
+          nomeFilme,
           sinopse,
           dataLancamento,
           precoCompra,
@@ -236,14 +298,14 @@ class ApiService {
     try {
       const response = await axios.put(
         url,
-        {}, 
+        {},
         {
           headers: {
             "Content-Type": "application/json",
           },
         }
       );
-      return response.data; 
+      return response.data;
     } catch (error) {
       console.error(
         "Erro ao devolver o pedido:",

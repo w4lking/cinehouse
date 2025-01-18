@@ -4,6 +4,7 @@ import ApiService from "../../services/apiService";
 
 function GerenciarFilmes() {
   const [filmes, setFilmes] = useState([]);
+  const [categorias, setCategorias] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [showPopup, setShowPopup] = useState(false); // Controle do popup de edição
   const [showAddPopup, setShowAddPopup] = useState(false); // Controle do popup de adicionar filme
@@ -20,6 +21,8 @@ function GerenciarFilmes() {
     imagem: "",
   });
 
+  const [selectedCategoria, setSelectedCategoria] = useState(""); // ID da categoria selecionada
+
   useEffect(() => {
     const fetchFilmes = async () => {
       try {
@@ -35,6 +38,20 @@ function GerenciarFilmes() {
     };
 
     fetchFilmes();
+  }, []);
+
+  useEffect(() => {
+    const fetchCategorias = async () => {
+      try {
+        const categoriasData = await ApiService.getCategoria();
+        console.log("Categorias recebidas no componente:", categoriasData);
+        setCategorias(categoriasData); // Certifique-se de que isso corresponde ao formato esperado
+      } catch (error) {
+        console.error("Erro ao carregar categorias:", error);
+      }
+    };
+
+    fetchCategorias();
   }, []);
 
   document.title = "Gerenciar Filmes";
@@ -75,7 +92,18 @@ function GerenciarFilmes() {
   };
 
   const handleAddPopupClose = () => {
-    setShowAddPopup(false); // Fecha o popup de adicionar filme
+    setShowAddPopup(false);
+    // Reseta o estado do formulário ao fechar
+    setNewFilme({
+      nomeFilme: "",
+      sinopse: "",
+      dataLancamento: "",
+      precoCompra: "",
+      qtdEstoque: "",
+      disponivelLocacao: false,
+      classificacaoIndicativa: "",
+      imagem: "",
+    });
   };
 
   const handleSaveChanges = async () => {
@@ -118,10 +146,47 @@ function GerenciarFilmes() {
     }
   };
 
-  const handleAddFilme = () => {
-    // Adicionar lógica para salvar um novo filme via API
-    console.log("Adicionar novo filme:", newFilme);
-    setShowAddPopup(false); // Fecha o popup após adicionar
+  const handleAddFilme = async () => {
+    if (!selectedCategoria) {
+      alert("Por favor, selecione uma categoria.");
+      return;
+    }
+
+    try {
+      const response = await ApiService.adicionarFilme(
+        newFilme.nomeFilme,
+        newFilme.sinopse,
+        newFilme.dataLancamento,
+        parseFloat(newFilme.precoCompra),
+        parseInt(newFilme.qtdEstoque, 10),
+        newFilme.disponivelLocacao,
+        newFilme.classificacaoIndicativa,
+        newFilme.imagem,
+        selectedCategoria // Enviar o ID da categoria selecionada
+      );
+
+      if (
+        response &&
+        (response.status === "ok" || response.status === "success")
+      ) {
+        alert("Filme adicionado com sucesso!");
+
+        // Atualizar a lista de filmes sem recarregar a página
+        setFilmes((prevFilmes) => [...prevFilmes, response.data]);
+
+        // Fechar popup e resetar estado
+        handleAddPopupClose();
+      } else {
+        alert(
+          `Erro ao adicionar o Filme: ${
+            response.message || "Erro desconhecido"
+          }`
+        );
+      }
+    } catch (error) {
+      console.error("Erro ao adicionar filme:", error);
+      alert("Erro ao adicionar filme. Tente novamente.");
+    }
   };
 
   const handleDeleteFilme = async (idFilme) => {
@@ -147,7 +212,10 @@ function GerenciarFilmes() {
         );
       }
     } catch (error) {
-      console.error("O filme pode estar sendo referenciado em um pedido:", error);
+      console.error(
+        "O filme pode estar sendo referenciado em um pedido:",
+        error
+      );
       alert("Erro inesperado ao deletar o filme.");
     }
   };
@@ -329,6 +397,22 @@ function GerenciarFilmes() {
                 setNewFilme({ ...newFilme, sinopse: e.target.value })
               }
             />
+            <label>Categoria:</label>
+            <select
+              value={selectedCategoria}
+              onChange={(e) => setSelectedCategoria(e.target.value)}
+            >
+              <option value="">Selecione uma Categoria</option>
+              {Array.isArray(categorias) &&
+                categorias.map((categoria) => (
+                  <option
+                    key={categoria.idcategoria}
+                    value={categoria.idcategoria}
+                  >
+                    {categoria.nome}
+                  </option>
+                ))}
+            </select>
             <label>Data de Lançamento:</label>
             <input
               type="date"
