@@ -50,6 +50,22 @@ class ApiService {
     }
   }
 
+  async getFilmes() {
+    const url = `${this.server}api/filmes`;
+    try {
+      const response = await axios.get(url, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      console.error("Erro ao buscar os filmes:", error);
+      throw error;
+    }
+  }
+
   async deletarFilme(idFilme) {
     const url = `${this.server}api/delete/filme/${idFilme}`;
     try {

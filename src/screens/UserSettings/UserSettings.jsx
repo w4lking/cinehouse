@@ -31,14 +31,6 @@ const UserSettings = ({ userName }) => {
     navigate();
   };
 
-  const handlePurchaseHistory = () => {
-    navigate('/histPedidos');
-  };
-
-  const handleLocacoes = () => {
-    navigate();
-  };
-
   return (
     <div className="user-settings-container">
       <h2>Olá, {userName}</h2>
@@ -108,11 +100,10 @@ const UserSettings = ({ userName }) => {
           />
         </div>
         <div className="button-group">
+          <button type="submit">Salvar Alterações</button>
           <button type="button" onClick={handleDeleteAccount}>Deletar conta</button>
-          <button type="button" onClick={handlePurchaseHistory}>Histórico de pedidos</button>
         </div>
         <div className="centered-button-group">
-          <button type="submit">Salvar Alterações</button>
           <button type="button" onClick={handleGoBack}>Voltar</button>
         </div>
       </form>
