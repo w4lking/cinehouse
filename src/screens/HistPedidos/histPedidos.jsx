@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { data, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ApiService from "../../services/apiService"; // Importe seu serviço aqui
 import "./histPedidos.css";
 
@@ -12,6 +12,7 @@ const HistCompras = () => {
   const [pedidoDetalhes, setPedidoDetalhes] = useState(null); // Detalhes do pedido
   const [modalLoading, setModalLoading] = useState(false); // Loading para o modal
   const [modalError, setModalError] = useState(null); // Erro no modal
+  
 
   const navigate = useNavigate();
 
@@ -30,7 +31,6 @@ const HistCompras = () => {
         const response = await ApiService.getHistorico();
         console.log(response);
         if (response && response.status === "success" && response.data) {
-          setEntries(response.data);
           setEntries(response.data);
         } else {
           throw new Error("Resposta inesperada da API");
@@ -140,6 +140,7 @@ const HistCompras = () => {
       setModalLoading(false); // Finaliza o carregamento
     }
   };
+
   if (loading) return <div>Carregando...</div>;
   if (error) return <div>{error}</div>;
 
@@ -164,63 +165,72 @@ const HistCompras = () => {
           </tr>
         </thead>
         <tbody>
-          {entries.map((entry) => (
-            <tr key={entry.idpedido}>
-              <td>{entry.idpedido}</td>
-              <td>{formatDate(entry.dataPedido)}</td>
-              <td>{entry.tipoPedido}</td>
-              <td>{entry.statusPedido}</td>
-              <td>{entry.dataPagamento ? formatDate(entry.dataPagamento) : "-"}</td>
-              <td>{entry.dataLimiteLocacao ? formatDate(entry.dataLimiteLocacao) : "-"}
-              </td>
-              <td className="valor-total">R$ {entry.valorTotal}</td>
-              <td>
-                {/* Condicional para exibir os botões de ação somente se o statusPedido não for "Devolvido" */}
-                {entry.tipoPedido === "Alocacao" &&
-                  entry.statusPedido !== "Finalizado" &&
-                  entry.statusPedido !== "Devolvido" &&
-                  entry.statusPedido != "Estendido" && (
-                    <>
-                      <button
-                        className="extend-button"
-                        onClick={() =>
-                          handleEstenderPedido(
-                            entry.idpedido,
-                            "Estendido",
-                            entry.dataLimiteLocacao
-                          )
-                        }
-                      >
-                        Estender Locação
-                      </button>
-                      <button
-                        className="return-button"
-                        onClick={() =>
-                          handleDevolverPedido(entry.idpedido, "Devolvido")
-                        }
-                      >
-                        Devolver Pedido
-                      </button>
-                    </>
+          {entries.map((entry) => {
+            const dataLimiteLocacao = new Date(entry.dataLimiteLocacao);
+            const dataAtual = new Date();
+            const emAtraso = dataLimiteLocacao < dataAtual;
+            const pedidoDevolvido = entry.statusPedido === "Devolvido";
+            const tipoPedido = entry.tipoPedido === "Alocacao";
+
+            return (
+              <tr key={entry.idpedido}>
+                <td>{entry.idpedido}</td>
+                <td>{formatDate(entry.dataPedido)}</td>
+                <td>{entry.tipoPedido}</td>
+                <td>{entry.statusPedido}</td>
+                <td>{entry.dataPagamento ? formatDate(entry.dataPagamento) : "-"}</td>
+                <td>{entry.dataLimiteLocacao ? formatDate(entry.dataLimiteLocacao) : "-"}</td>
+                <td className="valor-total">R$ {entry.valorTotal}</td>
+                <td>
+                  {/* Condicional para exibir os botões de ação somente se o statusPedido não for "Devolvido" */}
+                  {entry.tipoPedido === "Alocacao" &&
+                    entry.statusPedido !== "Finalizado" &&
+                    entry.statusPedido !== "Devolvido" &&
+                    entry.statusPedido !== "Estendido" && (
+                      <>
+                        <button
+                          className="extend-button"
+                          onClick={() =>
+                            handleEstenderPedido(
+                              entry.idpedido,
+                              "Estendido",
+                              entry.dataLimiteLocacao
+                            )
+                          }
+                        >
+                          Estender Locação
+                        </button>
+                        <button
+                          className="return-button"
+                          onClick={() => handleDevolverPedido(entry.idpedido, "Devolvido")}
+                        >
+                          Devolver Pedido
+                        </button>
+                      </>
+                    )}
+                  {entry.statusPedido === "Finalizado" && <span>Pedido Finalizado</span>}
+                  {entry.statusPedido === "Estendido" && (
+                    <span>Locação Estendida. Verifique prazo de devolução</span>
                   )}
-                {entry.statusPedido === "Finalizado" && (
-                  <span>Pedido Finalizado</span>
-                )}
-                {entry.statusPedido === "Estendido" && (
-                  <span>Locação Estendida. Verifique prazo de devolução</span>
-                )}
-                {entry.statusPedido === "Devolvido" && (
-                  <span>Pedido Devolvido</span>
-                )}
-                <button
-                  className="info-button"
-                  onClick={() => handleOpenModal(entry.idpedido)}
-                >
-                  info
-                </button>
-              </td>
-            </tr>
-          ))}
+                  {pedidoDevolvido && <span>Pedido Devolvido</span>}
+
+                  {/* Exibe alerta de atraso se não foi devolvido */}
+                  {tipoPedido && !pedidoDevolvido && emAtraso && (
+                    <span style={{ color: "red", fontWeight: "bold" }}>
+                      Atraso
+                    </span>
+                  )}
+
+                  <button
+                    className="info-button"
+                    onClick={() => handleOpenModal(entry.idpedido)}
+                  >
+                    info
+                  </button>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
 
