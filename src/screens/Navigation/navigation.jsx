@@ -71,7 +71,7 @@ function App() {
     const yearMatch = selectedYear ? String(filme.ano) === selectedYear : true; // Garantir que a comparação de ano funcione
     
     const priceMatch = selectedPrice
-      ? filme.preco <= parseFloat(selectedPrice) // Garantir que selectedPrice seja convertido para número
+      ? filme.precoCompra <= parseFloat(selectedPrice) // Garantir que selectedPrice seja convertido para número
       : true;
 
     return (
@@ -123,7 +123,7 @@ function App() {
         </nav>
       </header>
       <aside className={`sidebar ${menuOpen ? "open" : ""}`}>
-        <button className="close-button" onClick={toggleMenu}>
+        <button className="close-button-navigation" onClick={toggleMenu}>
           X
         </button>
         <ul>

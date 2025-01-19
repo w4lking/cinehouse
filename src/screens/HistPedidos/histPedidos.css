@@ -18,7 +18,7 @@ h1 {
 }
 
 /* Botão Voltar fixo no canto superior esquerdo */
-.back-button {
+.back-button-pedidos {
   position: fixed;
   top: 20px;
   left: 20px;
