@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { data, useNavigate } from "react-router-dom";
 import ApiService from "../../services/apiService"; // Importe seu serviço aqui
 import "./histPedidos.css";
 
@@ -30,6 +30,7 @@ const HistCompras = () => {
         const response = await ApiService.getHistorico();
         console.log(response);
         if (response && response.status === "success" && response.data) {
+          setEntries(response.data);
           setEntries(response.data);
         } else {
           throw new Error("Resposta inesperada da API");
@@ -139,16 +140,12 @@ const HistCompras = () => {
       setModalLoading(false); // Finaliza o carregamento
     }
   };
-
   if (loading) return <div>Carregando...</div>;
   if (error) return <div>{error}</div>;
 
   return (
     <div className="container">
-      <button
-        className="back-button-pedidos"
-        onClick={() => window.history.back()}
-      >
+      <button className="back-button-pedidos" onClick={() => window.history.back()}>
         Voltar
       </button>
 
@@ -173,9 +170,8 @@ const HistCompras = () => {
               <td>{formatDate(entry.dataPedido)}</td>
               <td>{entry.tipoPedido}</td>
               <td>{entry.statusPedido}</td>
-
-              <td>
-                {entry.dataPagamento ? formatDate(entry.dataPagamento) : "-"}
+              <td>{entry.dataPagamento ? formatDate(entry.dataPagamento) : "-"}</td>
+              <td>{entry.dataLimiteLocacao ? formatDate(entry.dataLimiteLocacao) : "-"}
               </td>
               <td className="valor-total">R$ {entry.valorTotal}</td>
               <td>

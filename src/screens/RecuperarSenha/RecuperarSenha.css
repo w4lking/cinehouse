@@ -1,0 +1,139 @@
+.recuperar-senha-body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f4f8;
+  color: #333;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+.recuperar-senha-container {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.recuperar-senha-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Título */
+.recuperar-senha-titulo {
+  font-size: 2.2rem;
+  color: #007bff;
+  margin-bottom: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* Subtítulo */
+.recuperar-senha-subtitulo {
+  font-size: 1.1rem;
+  color: #777;
+  margin-bottom: 20px;
+  font-weight: 400;
+}
+
+/* Formulário */
+.recuperar-senha-formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Rótulos */
+.recuperar-senha-rotulo {
+  font-size: 1rem;
+  color: #444;
+  margin-bottom: 8px;
+  text-align: left;
+  font-weight: 500;
+}
+
+/* Campos de entrada */
+.recuperar-senha-input {
+  padding: 14px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background-color: #fafafa;
+  outline: none;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.recuperar-senha-input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+}
+
+/* Botão */
+.recuperar-senha-botao {
+  padding: 12px;
+  font-size: 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.recuperar-senha-botao:hover {
+  background-color: #0056b3;
+  transform: translateY(-3px);
+}
+
+.recuperar-senha-botao:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.3);
+}
+
+/* Mensagem */
+.recuperar-senha-mensagem {
+  margin-top: 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #28a745;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.recuperar-senha-mensagem-error {
+  color: #dc3545;
+}
+
+.recuperar-senha-mensagem .icon {
+  margin-right: 8px;
+}
+
+/* Estilos responsivos */
+@media (max-width: 480px) {
+  .recuperar-senha-container {
+    padding: 20px;
+    width: 90%;
+  }
+
+  .recuperar-senha-titulo {
+    font-size: 2rem;
+  }
+
+  .recuperar-senha-input {
+    padding: 12px;
+    font-size: 0.9rem;
+  }
+
+  .recuperar-senha-botao {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+}
