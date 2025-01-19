@@ -4,7 +4,7 @@ body {
   font-family: 'Poppins', sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f4f4f9;
+  background-color: #fdfdfd; /* Fundo mais claro */
 }
 
 .admin-container {
@@ -16,7 +16,7 @@ body {
 
 .admin-title {
   font-size: 28px;
-  color: #333;
+  color: #444; /* Texto ligeiramente mais claro */
   margin-bottom: 40px;
 }
 
@@ -29,21 +29,21 @@ body {
 
 .card {
   width: 350px;
-  background-color: #ffffff;
+  background-color: #ffffff; /* Fundo do card claro */
   border-radius: 12px;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* Sombras mais leves */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   overflow: hidden;
 }
 
 .card:hover {
   transform: scale(1.05);
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Hover com sombra suave */
 }
 
 .card-header {
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
-  color: white;
+  background: linear-gradient(135deg, #a8d5e2, #a2d2ff); /* Gradiente claro */
+  color: #003366; /* Texto mais suave */
   font-size: 18px;
   font-weight: bold;
   padding: 20px;
@@ -71,8 +71,8 @@ body {
   width: 100%;
   padding: 12px;
   margin-top: 10px;
-  background: #6a11cb;
-  color: white;
+  background: #a8d5e2; /* Fundo mais claro */
+  color: #003366; /* Texto mais visível */
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -82,7 +82,7 @@ body {
 }
 
 .card-body button:hover {
-  background: #2575fc;
+  background: #a2d2ff; /* Hover em tom mais claro */
   transform: scale(1.03);
 }
 

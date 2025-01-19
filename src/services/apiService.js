@@ -433,8 +433,8 @@ class ApiService {
     }
   }
 
-  async devolverPedido(idPedido, statusPedido) {
-    const url = `${this.server}api/pedido/devolver/${idPedido}/${statusPedido}`;
+  async devolverPedido(idPedido, statusPedido, qtdEstoque) {
+    const url = `${this.server}api/pedido/devolver/qtdEstoque${idPedido}/${statusPedido}/${qtdEstoque}`;
     try {
       const response = await axios.put(
         url,
@@ -535,6 +535,21 @@ class ApiService {
       return response.data;
     } catch (error) {
       console.error("Erro ao adicionar funcionário:", error);
+      throw error;
+    }
+  }
+
+  async recuperarSenha(email) {
+    const url = `${this.server}api/user/recover`;
+    try {
+      const response = await axios.post(
+        url,
+        { email },
+        { headers: { "Content-Type": "application/json" } }
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Erro ao recuperar senha:", error);
       throw error;
     }
   }
