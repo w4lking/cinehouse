@@ -235,7 +235,7 @@ function App() {
                 ? "Livre"
                 : selectedMovie.classificacaoIndicativa}
             </p>
-            <img src={selectedMovie.imagem} alt={selectedMovie.nomeFilme} />
+            <img className="img-filme"src={selectedMovie.imagem} alt={selectedMovie.nomeFilme} />
             <p>
               <strong>Preço Unitário:</strong> R$
               {selectedMovie.precoCompra.toFixed(2)}

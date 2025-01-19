@@ -350,3 +350,10 @@ body {
 .titulo-filme{
   color:black;
 }
+
+.img-filme{
+  width: 50%;
+  height: 300px;
+  object-fit: cover;
+  border-bottom: 2px solid #e0e0e0;
+}
