@@ -539,6 +539,20 @@ class ApiService {
     }
   }
 
+  async alterarFuncionario(cargo, salario, idusuario) {
+    const url = `${this.server}api/update/funcionario/${idusuario}`;
+    try {
+      const response = await axios.put(
+        url,
+        { cargo, salario },
+        { headers: { "Content-Type": "application/json" } }
+      );
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async recuperarSenha(email) {
     const url = `${this.server}api/user/recover`;
     try {
