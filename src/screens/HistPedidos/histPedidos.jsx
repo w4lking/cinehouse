@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { data, useNavigate } from "react-router-dom";
 import ApiService from "../../services/apiService"; // Importe seu serviço aqui
 import "./histPedidos.css";
-import exclamacao from "./exclamacao.png";
 
 const HistCompras = () => {
   const [entries, setEntries] = useState([]);
