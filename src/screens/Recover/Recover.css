@@ -38,30 +38,47 @@ input {
   color: #333;
 }
 
-.button-group-registrar{
+/* Buttons */
+.button-group-registrar {
+  margin-top: 20px;
+}
+
+.btn-recuperar1, 
+.btn-recuperar-voltar1 {
   width: 100%;
-  padding: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
   border: none;
   border-radius: 5px;
-  color: #fff;
-  font-size: 16px;
-  transition: background-color 0.3s ease;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
 }
 
-.btn-recuperar{
-  background-color: #0084ff;
-  color:white;
+/* Button Recuperar Conta */
+.btn-recuperar1 {
+  background: linear-gradient(to right, #007bff, #00b7ff); /* Gradiente azul */
+  color: white;
 }
 
-.btn-recuperar-voltar{
-  background-color: #0084ff;
-  color:white;
+.btn-recuperar1:hover {
+  background: linear-gradient(to right, #0056b3, #0088cc); /* Gradiente azul mais escuro */
+  transform: scale(1.05); /* Efeito de aumento */
 }
 
-.btn-recuperar:hover{
-  background-color: #0a57a0d7;
+/* Button Voltar */
+.btn-recuperar-voltar1 {
+  background: linear-gradient(to right, #0056b3, #0088cc); /* Gradiente laranja */
+  color: white;
+  margin-top: 10px; /* Adiciona um pequeno espaço entre os botões */
 }
 
-.btn-recuperar-voltar:hover{
-  background-color: #0a57a0d7;
+.btn-recuperar-voltar1:hover {
+  background: linear-gradient(to right, #0056b3, #0088cc); /* Gradiente laranja mais escuro */
+  transform: scale(1.05); /* Efeito de aumento */
+}
+
+/* Button animation */
+.btn-recuperar1:active, .btn-recuperar-voltar1:active {
+  transform: scale(0.95); /* Efeito de redução quando clicado */
 }

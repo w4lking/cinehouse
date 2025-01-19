@@ -42,11 +42,11 @@ const Recover = () => {
         </div>
 
         <div className="button-group-registrar">
-          <button type="submit" className="btn-recuperar">Recuperar conta</button> {/* Adiciona o botão "Voltar" */}
+          <button type="submit" className="btn-recuperar1">Recuperar conta</button> {/* Adiciona o botão "Voltar" */}
         </div>
 
         <div className="button-group-registrar">
-          <button onClick={handleGoBack} className="btn-recuperar-voltar">Voltar</button> {/* Adiciona o botão "Voltar" */}
+          <button onClick={handleGoBack} className="btn-recuperar-voltar1">Voltar</button> {/* Adiciona o botão "Voltar" */}
         </div>
       </form>
     </div>
