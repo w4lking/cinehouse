@@ -145,7 +145,7 @@ const HistCompras = () => {
 
   return (
     <div className="container">
-      <button className="back-button" onClick={() => window.history.back()}>
+      <button className="back-button-pedidos" onClick={() => window.history.back()}>
         Voltar
       </button>
 
@@ -157,9 +157,10 @@ const HistCompras = () => {
             <th>Data Pedido</th>
             <th>Tipo Pedido</th>
             <th>Status Pedido</th>
-            <th>Data devolução</th>
             <th>Data pagamento</th>
+            <th>Data devolução</th>
             <th>Valor Total</th>
+            <th>Ações</th>
           </tr>
         </thead>
         <tbody>
@@ -169,9 +170,8 @@ const HistCompras = () => {
               <td>{formatDate(entry.dataPedido)}</td>
               <td>{entry.tipoPedido}</td>
               <td>{entry.statusPedido}</td>
-
-              <td>
-                {entry.dataPagamento ? formatDate(entry.dataPagamento) : "-"}
+              <td>{entry.dataPagamento ? formatDate(entry.dataPagamento) : "-"}</td>
+              <td>{entry.dataLimiteLocacao ? formatDate(entry.dataLimiteLocacao) : "-"}
               </td>
               <td className="valor-total">R$ {entry.valorTotal}</td>
               <td>
