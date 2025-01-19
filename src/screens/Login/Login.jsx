@@ -43,8 +43,8 @@ const Login = () => {
         sessionStorage.setItem("id", response.idusuario);
         sessionStorage.setItem("cliente", response.idcliente);
         sessionStorage.setItem("perfil", response.perfil);
-        sessionStorage.setItem("token", response.token); // Salve o token no armazenamento local
-        navigate("/navigation"); // Redirecione para a página protegida
+        sessionStorage.setItem("token", response.token); 
+        navigate("/navigation"); 
       } else {
         setShowAlert(true);
       }
