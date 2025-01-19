@@ -157,8 +157,8 @@ const HistCompras = () => {
             <th>Data Pedido</th>
             <th>Tipo Pedido</th>
             <th>Status Pedido</th>
-            <th>Data Pagamento</th>
-            <th>Data Devolução</th>
+            <th>Data devolução</th>
+            <th>Data pagamento</th>
             <th>Valor Total</th>
           </tr>
         </thead>
