@@ -1,25 +1,26 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { data, useNavigate } from "react-router-dom";
 import ApiService from "../../services/apiService"; // Importe seu serviço aqui
 import "./histPedidos.css";
+import exclamacao from "./exclamacao.png";
 
 const HistCompras = () => {
   const [entries, setEntries] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null); // Para mostrar erros em caso de falha na requisição
+  const [error, setError] = useState(null);
+  const [modalData, setModalData] = useState(null); // Estado para armazenar os dados do pedido no modal
+  const [isModalOpen, setIsModalOpen] = useState(false); // Controle do modal
+  const [pedidoDetalhes, setPedidoDetalhes] = useState(null); // Detalhes do pedido
+  const [modalLoading, setModalLoading] = useState(false); // Loading para o modal
+  const [modalError, setModalError] = useState(null); // Erro no modal
 
   const navigate = useNavigate();
 
-  // Função para formatar as datas
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString('pt-BR'); // Formato brasileiro (dd/mm/aaaa)
-  };
-
-  // Função para formatar as datas com hora
-  const formatDateTime = (dateString) => {
-    const date = new Date(dateString);
-    return date.toLocaleString('pt-BR'); // Formato de data e hora local
+    return isNaN(date.getTime())
+      ? "Data Inválida"
+      : date.toLocaleDateString("pt-BR");
   };
 
   useEffect(() => {
@@ -27,20 +28,15 @@ const HistCompras = () => {
 
     const fetchData = async () => {
       try {
-        const response = await ApiService.getHistorico(); // Requisição ao backend
-
-        console.log(response); // Adiciona para depurar a resposta
-
-        // Verifique se a resposta possui a chave "data"
+        const response = await ApiService.getHistorico();
         if (response && response.status === "success" && response.data) {
-          setEntries(response.data); // Acesse diretamente a chave "data" dos pedidos
+          setEntries(response.data);
         } else {
           throw new Error("Resposta inesperada da API");
         }
-
-        setLoading(false); // Atualiza o estado de carregamento
+        setLoading(false);
       } catch (err) {
-        console.error("Erro ao buscar pedidos:", err); // Imprime o erro completo no console para mais detalhes
+        console.error("Erro ao buscar pedidos:", err);
         setError("Erro ao carregar os pedidos");
         setLoading(false);
       }
@@ -49,60 +45,105 @@ const HistCompras = () => {
     fetchData();
   }, []);
 
-  // Função para estender a locação
-  const handleExtendLocacao = (id) => {
-    alert(`Estendendo locação do pedido #${id}`);
+  // Função para fechar o modal
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setPedidoDetalhes(null); // Limpa os detalhes ao fechar
   };
 
-  // Função para devolver o pedido e atualizar o status
-  const handleDevolverPedido = async (id) => {
+  const handleEstenderPedido = async (
+    idPedido,
+    statusPedido,
+    dataLimiteLocacaoAtual
+  ) => {
     try {
-      // Verificar se o pedido existe na lista de pedidos carregados
-      const pedido = entries.find((entry) => entry.idpedido === id);
-      
-      if (!pedido) {
-        throw new Error("Pedido não encontrado");
-      }
+      // Adiciona 3 dias à data de devolução atual
+      const novaDataLimite = new Date(dataLimiteLocacaoAtual);
+      novaDataLimite.setDate(novaDataLimite.getDate() + 3);
 
-      if (pedido.statusPedido === "Finalizado") {
-        throw new Error("Este pedido já foi finalizado.");
-      }
+      // Converte para o formato ISO (ou outro formato esperado pelo backend)
+      const novaDataLimiteFormatada = novaDataLimite
+        .toISOString()
+        .split("T")[0];
 
-      // Envia uma requisição para atualizar o status do pedido para "Finalizado"
-      const response = await ApiService.atualizarStatusPedido(id, "Finalizado");
+      const response = await ApiService.EstenderPedido(
+        idPedido,
+        "Estendido", // Atualiza diretamente para o status "Estendido"
+        novaDataLimiteFormatada
+      );
 
-      console.log("Resposta da API ao tentar devolver o pedido:", response); // Adiciona log da resposta da API
-
-      if (response.status === "success") {
-        // Atualiza o estado local dos pedidos sem fazer uma nova requisição para a lista inteira
-        const updatedEntries = entries.map((entry) =>
-          entry.idpedido === id ? { ...entry, statusPedido: "Finalizado" } : entry
-        );
-        setEntries(updatedEntries);
-        alert(`Pedido #${id} foi finalizado!`);
-      } else {
-        throw new Error(`Erro ao atualizar o status do pedido: ${response.message || 'Resposta inesperada'}`);
-      }
+      setStatusMessage(`Pedido #${idPedido} estendido com sucesso!`);
+      setEntries((prevEntries) =>
+        prevEntries.map((entry) =>
+          entry.idpedido === idPedido
+            ? {
+                ...entry,
+                statusPedido: "Estendido",
+                dataLimiteLocacao: novaDataLimiteFormatada,
+              }
+            : entry
+        )
+      );
     } catch (error) {
-      console.error("Erro ao devolver o pedido:", error); // Adicionando log completo do erro
-      if (error.response) {
-        console.error("Erro da resposta:", error.response.data); // Exibe a resposta de erro da API
-      }
-      alert(`Erro ao tentar devolver o pedido: ${error.message || 'Erro desconhecido'}`);
+      setStatusMessage(
+        `Erro ao estender o pedido #${idPedido}: ${
+          error.response?.data?.message || error.message
+        }`
+      );
     }
   };
 
-  if (loading) {
-    return <div>Carregando...</div>; // Exibe mensagem de carregamento
-  }
+  const handleDevolverPedido = async (idPedido, statusPedido) => {
+    try {
+      const response = await ApiService.devolverPedido(idPedido, statusPedido);
+      setEntries((prevEntries) =>
+        prevEntries.map((entry) =>
+          entry.idpedido === idPedido
+            ? { ...entry, statusPedido: response.statusPedido || "Devolvido" }
+            : entry
+        )
+      );
+    } catch (error) {
+      setStatusMessage(
+        `Erro ao devolver o pedido #${idPedido}: ${
+          error.response?.data?.message || error.message
+        }`
+      );
+    }
+  };
 
-  if (error) {
-    return <div>{error}</div>; // Exibe mensagem de erro, se houver
-  }
+  const handleOpenModal = async (idpedido) => {
+    setModalLoading(true); // Indica que está carregando
+    setModalError(null); // Reseta erros anteriores
+    setIsModalOpen(true); // Abre o modal
+
+    try {
+      // Chama a API para obter os detalhes do pedido
+      const detalhes = await ApiService.getPedidoById(idpedido);
+
+      // Verifica se os dados existem e pega o primeiro elemento do array
+      if (
+        detalhes &&
+        detalhes.status === "success" &&
+        Array.isArray(detalhes.data)
+      ) {
+        const data = detalhes.data[0]; // Acessa o primeiro item do array
+        setPedidoDetalhes(data); // Atualiza os detalhes do pedido
+      } else {
+        throw new Error("Dados do pedido estão em um formato inesperado.");
+      }
+    } catch (error) {
+      console.error("Erro ao carregar informações do pedido:", error);
+      setModalError("Erro ao carregar os detalhes do pedido.");
+    } finally {
+      setModalLoading(false); // Finaliza o carregamento
+    }
+  };
+  if (loading) return <div>Carregando...</div>;
+  if (error) return <div>{error}</div>;
 
   return (
     <div className="container">
-      {/* Botão Voltar */}
       <button className="back-button" onClick={() => window.history.back()}>
         Voltar
       </button>
@@ -124,36 +165,93 @@ const HistCompras = () => {
           {entries.map((entry) => (
             <tr key={entry.idpedido}>
               <td>{entry.idpedido}</td>
-              <td>{formatDate(entry.dataPedido)}</td> {/* Formata dataPedido */}
+              <td>{formatDate(entry.dataPedido)}</td>
               <td>{entry.tipoPedido}</td>
               <td>{entry.statusPedido}</td>
-              <td>{entry.dataPagamento ? formatDate(entry.dataPagamento) : "-"}</td> {/* Formata dataPagamento */}
-              <td class="valor-total">R$ {entry.valorTotal}</td>
+
               <td>
-                {entry.tipoPedido === "Alocacao" && entry.statusPedido !== "Finalizado" && (
-                  <>
-                    <button
-                      className="extend-button"
-                      onClick={() => handleExtendLocacao(entry.idPedido)}
-                    >
-                      Estender Locação
-                    </button>
-                    <button
-                      className="return-button"
-                      onClick={() => handleDevolverPedido(entry.idPedido)}
-                    >
-                      Devolver Pedido
-                    </button>
-                  </>
-                )}
+                {entry.dataPagamento ? formatDate(entry.dataPagamento) : "-"}
+              </td>
+              <td className="valor-total">R$ {entry.valorTotal}</td>
+              <td>
+                {/* Condicional para exibir os botões de ação somente se o statusPedido não for "Devolvido" */}
+                {entry.tipoPedido === "Alocacao" &&
+                  entry.statusPedido !== "Finalizado" &&
+                  entry.statusPedido !== "Devolvido" &&
+                  entry.statusPedido != "Estendido" && (
+                    <>
+                      <button
+                        className="extend-button"
+                        onClick={() =>
+                          handleEstenderPedido(
+                            entry.idpedido,
+                            "Estendido",
+                            entry.dataLimiteLocacao
+                          )
+                        }
+                      >
+                        Estender Locação
+                      </button>
+                      <button
+                        className="return-button"
+                        onClick={() =>
+                          handleDevolverPedido(entry.idpedido, "Devolvido")
+                        }
+                      >
+                        Devolver Pedido
+                      </button>
+                    </>
+                  )}
                 {entry.statusPedido === "Finalizado" && (
                   <span>Pedido Finalizado</span>
                 )}
+                {entry.statusPedido === "Estendido" && (
+                  <span>Locação Estendida. Verifique prazo de devolução</span>
+                )}
+                {entry.statusPedido === "Devolvido" && (
+                  <span>Pedido Devolvido</span>
+                )}
+                <button
+                  className="info-button"
+                  onClick={() => handleOpenModal(entry.idpedido)}
+                >
+                  exclamacao
+                </button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+
+      {isModalOpen && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <button className="close-button" onClick={handleCloseModal}>
+              Fechar
+            </button>
+            {modalError && <ErrorMessage message={modalError} />}
+            {modalError && <p className="error-message">{modalError}</p>}
+            {pedidoDetalhes && (
+              <div>
+                <h2>Detalhes do Pedido</h2>
+                <p>
+                  <strong>Nome filme:</strong> {pedidoDetalhes.nomeFilme}
+                </p>
+                <p>
+                  <strong>Valor Total:</strong> {pedidoDetalhes.valorTotal}
+                </p>
+                <p>
+                  <strong>Preço unitário:</strong>
+                  {pedidoDetalhes.precoUnitario}
+                </p>
+                <p>
+                  <strong>Quantidade:</strong> {pedidoDetalhes.quantidade}
+                </p>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

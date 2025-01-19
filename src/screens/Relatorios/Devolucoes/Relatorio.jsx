@@ -32,13 +32,14 @@ function RelatorioDevolucao() {
       <h1>Relatório de devoluções</h1>
       <div className="relatorio-tabelas">
         <div className="tabela">
-          <h2>Datas de devolução de filmes</h2>
+          <h2>Filmes devolvidos</h2>
           <table>
             <thead>
               <tr>
                 <th>Nome do usuário</th>
                 <th>Status do pedido</th>
                 <th>Data pedido</th>
+                <th>Nome do produto</th>
               </tr>
             </thead>
             <tbody>
@@ -47,6 +48,7 @@ function RelatorioDevolucao() {
                   <td>{devolucao.nome}</td>
                   <td>{devolucao.statusPedido}</td>
                   <td>{devolucao.dataPedido}</td>
+                  <td>{devolucao.nomeFilme}</td>
                 </tr>
               ))}
             </tbody>
