@@ -9,6 +9,18 @@
   margin: 0;
 }
 
+.mensagem {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.mensagem.visivel {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
 .recuperar-senha-container {
   background-color: #fff;
   border-radius: 12px;

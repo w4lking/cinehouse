@@ -1,9 +1,12 @@
-import React, { useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import "./RecuperarSenha.css";
+import ApiService from "../../services/apiService";
 
 const RecuperarSenha = () => {
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+
   const email = searchParams.get("email");
   const token = searchParams.get("token");
 
@@ -11,20 +14,35 @@ const RecuperarSenha = () => {
   const [confirmarSenha, setConfirmarSenha] = useState("");
   const [mensagem, setMensagem] = useState("");
   const [erro, setErro] = useState(false);
+  const [carregando, setCarregando] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (senha === confirmarSenha) {
-      setMensagem("Senha atualizada com sucesso!");
-      setErro(false);
 
-      // Aqui você pode enviar a nova senha para o backend com o token
-      console.log("Email:", email);
-      console.log("Token:", token);
-      console.log("Nova Senha:", senha);
-    } else {
+    if (senha !== confirmarSenha) {
       setMensagem("As senhas não coincidem. Tente novamente.");
       setErro(true);
+      return;
+    }
+
+    setCarregando(true);
+    setErro(false);
+    setMensagem("");
+
+    try {
+      const response = await ApiService.resetPassword(email, token, senha);
+      if (response.ok) {
+        setMensagem("Sua senha foi atualizada com sucesso! Redirecionando...");
+        setTimeout(() => navigate("/login"), 3000); // Aguarda 2 segundos antes de redirecionar
+      } else {
+        setMensagem("Erro ao atualizar senha. Tente novamente.");
+        setErro(true);
+      }
+    } catch (error) {
+      setMensagem("Erro ao atualizar senha. Tente novamente.");
+      setErro(true);
+    } finally {
+      setCarregando(false);
     }
   };
 
@@ -59,8 +77,12 @@ const RecuperarSenha = () => {
                   required
                 />
               </label>
-              <button type="submit" className="recuperar-senha-botao">
-                Confirmar
+              <button
+                type="submit"
+                className="recuperar-senha-botao"
+                disabled={carregando}
+              >
+                {carregando ? "Processando..." : "Confirmar"}
               </button>
             </form>
             {mensagem && (

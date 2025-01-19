@@ -195,7 +195,7 @@ class ApiService {
           disponivelLocacao,
           classificacaoIndicativa,
           imagem,
-          idcategoria
+          idcategoria,
         },
         {
           headers: {
@@ -236,7 +236,7 @@ class ApiService {
           disponivelLocacao,
           classificacaoIndicativa,
           imagem,
-          idcategoria
+          idcategoria,
         },
         {
           headers: {
@@ -372,7 +372,7 @@ class ApiService {
           disponivelLocacao,
           classificacaoIndicativa,
           imagem,
-          idcategoria
+          idcategoria,
         },
         {
           headers: {
@@ -553,6 +553,24 @@ class ApiService {
       throw error;
     }
   }
+
+  async resetPassword(email, token, senha) {
+    const url = `${this.server}api/user/reset/password`;
+    try {
+      const response = await axios.post(
+        url,
+        { email, token, senha },
+        { headers: { "Content-Type": "application/json" } }
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Erro ao alterar senha:", error);
+      throw error;
+    }
+  }
+
+
+  
 }
 
 export default new ApiService();
