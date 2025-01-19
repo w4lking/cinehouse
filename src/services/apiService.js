@@ -195,7 +195,7 @@ class ApiService {
           disponivelLocacao,
           classificacaoIndicativa,
           imagem,
-          idcategoria
+          idcategoria,
         },
         {
           headers: {
@@ -236,7 +236,7 @@ class ApiService {
           disponivelLocacao,
           classificacaoIndicativa,
           imagem,
-          idcategoria
+          idcategoria,
         },
         {
           headers: {
@@ -372,7 +372,7 @@ class ApiService {
           disponivelLocacao,
           classificacaoIndicativa,
           imagem,
-          idcategoria
+          idcategoria,
         },
         {
           headers: {
@@ -535,6 +535,20 @@ class ApiService {
       return response.data;
     } catch (error) {
       console.error("Erro ao adicionar funcionário:", error);
+      throw error;
+    }
+  }
+
+  async alterarFuncionario(cargo, salario, idFuncionario) {
+    const url = `${this.server}api/update/user/${idFuncionario}`;
+    try {
+      const response = await axios.put(
+        url,
+        { cargo, salario },
+        { headers: { "Content-Type": "application/json" } }
+      );
+      return response.data;
+    } catch (error) {
       throw error;
     }
   }

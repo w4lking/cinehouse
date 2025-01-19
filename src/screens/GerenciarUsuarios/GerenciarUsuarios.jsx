@@ -53,6 +53,12 @@ function GerenciarUsuarios() {
     salario: "",
   }); // Armazena os dados do funcionário
 
+  // Estados
+  const [isEditFuncionarioOpen, setIsEditFuncionarioOpen] = useState(false);
+  const [selectedFuncionario, setSelectedFuncionario] = useState(null);
+  const [cargo, setCargo] = useState("");
+  const [salario, setSalario] = useState("");
+
   document.title = "Gerencia";
   useEffect(() => {
     const fetchUsuarios = async () => {
@@ -163,6 +169,14 @@ function GerenciarUsuarios() {
     setShowPopup(false); // Fecha o popup
   };
 
+  const handleEditClick = (usuario) => {
+    setSelectedUsuario({
+      ...usuario,
+      dataNasc: usuario.dataNasc || "",
+    });
+    setShowPopup(true); // Abre o popup de edição
+  };
+
   const handleSaveChanges = async () => {
     try {
       // Prepara os dados para enviar à API
@@ -208,6 +222,61 @@ function GerenciarUsuarios() {
     }
   };
 
+  const handleSaveAlteracaoFuncionario = async (event) => {
+    event.preventDefault();
+
+    if (!cargo || !salario) {
+      alert("Por favor, preencha todos os campos!");
+      return;
+    }
+
+    try {
+      const idFuncionario = selectedFuncionario.idusuario; // ID do funcionário
+      const response = await ApiService.alterarFuncionario(
+        cargo,
+        salario,
+        idFuncionario
+      );
+
+      if (response.status === "success") {
+        alert("Funcionário alterado com sucesso!");
+        // Atualize a lista de usuários no estado
+        const usuariosAtualizados = usuarios.map((usuario) =>
+          usuario.idusuario === idFuncionario
+            ? { ...usuario, cargo, salario }
+            : usuario
+        );
+        setUsuarios(usuariosAtualizados);
+        setIsEditFuncionarioOpen(false); // Fecha o popup
+      } else {
+        alert(`Erro ao alterar o funcionário: ${response.message}`);
+      }
+    } catch (error) {
+      console.error("Erro ao alterar o funcionário:", error);
+      if (error.response) {
+        alert(`Erro: ${error.response.data.message}`);
+      } else {
+        alert(`Erro inesperado: ${error.message}`);
+      }
+    }
+  };
+
+  // Abrir o pop-up alterar funcionario
+  const handleEditFuncionarioClick = (usuario) => {
+    setSelectedFuncionario(usuario); // Define o funcionário selecionado
+    setCargo(usuario.cargo || ""); // Preenche com o cargo atual (se disponível)
+    setSalario(usuario.salario || ""); // Preenche com o salário atual (se disponível)
+    setIsEditFuncionarioOpen(true); // Abre o pop-up
+  };
+
+  // Fechar o pop-up alterar funcionário
+  const handleClosePopup = () => {
+    setIsEditFuncionarioOpen(false);
+    setSelectedFuncionario(null);
+    setCargo("");
+    setSalario("");
+  };
+
   return (
     <div className="gerenciar-usuarios-container">
       <h1>GERENCIAR USUÁRIOS</h1>
@@ -234,12 +303,22 @@ function GerenciarUsuarios() {
                 </span>
               </div>
               <div className="usuario-acoes">
-                <button
-                  className="btn-funcionario"
-                  onClick={() => handleAddFuncionarioClick(usuario)}
-                >
-                  Adicionar Funcionario
-                </button>
+                {/* Verifica se o usuário já é funcionário */}
+                {usuario.idFuncionario ? (
+                  <button
+                    className="btn-funcionario-alterar-funcionario"
+                    onClick={() => handleEditFuncionarioClick(usuario)}
+                  >
+                    Alterar Funcionario
+                  </button>
+                ) : (
+                  <button
+                    className="btn-funcionario-adicionar-funcionario"
+                    onClick={() => handleAddFuncionarioClick(usuario)}
+                  >
+                    Adicionar Funcionario
+                  </button>
+                )}
                 <button
                   className="btn alterar"
                   onClick={() => handleEditClick(usuario)}
@@ -310,6 +389,7 @@ function GerenciarUsuarios() {
         </div>
       )}
 
+      {/* Popup para adicionar funcionário */}
       {showFuncionarioPopup && (
         <div className="popup-funcionario">
           <div className="popup-funcionario-content">
@@ -358,6 +438,51 @@ function GerenciarUsuarios() {
                 Cancelar
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Popup para alterar funcionário */}
+      {isEditFuncionarioOpen && (
+        <div className="popup-alterar-func">
+          <div className="popup-alterar-func-content">
+            <h2>Alterar Funcionário</h2>
+            <form onSubmit={handleSaveAlteracaoFuncionario}>
+              <div className="form-group">
+                <label htmlFor="cargo">Cargo</label>
+                <select
+                  id="cargo"
+                  value={cargo}
+                  onChange={(e) => setCargo(e.target.value)}
+                >
+                  <option value="">Selecione o cargo</option>
+                  <option value="caixa">Caixa</option>
+                  <option value="administrador">Administrador</option>
+                </select>
+              </div>
+              <div className="form-group">
+                <label htmlFor="salario">Salário</label>
+                <input
+                  type="number"
+                  id="salario"
+                  value={salario}
+                  onChange={(e) => setSalario(e.target.value)}
+                  placeholder="Digite o salário"
+                />
+              </div>
+              <div className="popup-actions">
+                <button
+                  type="button"
+                  onClick={handleClosePopup}
+                  className="btn cancelar"
+                >
+                  Cancelar
+                </button>
+                <button type="submit" className="btn salvar">
+                  Salvar
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       )}
