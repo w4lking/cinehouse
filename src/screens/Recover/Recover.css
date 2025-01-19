@@ -10,11 +10,14 @@ body.recover-page {
 }
 
 .recovery-container {
-  width: 350px;
+  width: 400px;
   padding: 30px;
   border-radius: 10px;
-  background: #9b9ea1;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
   text-align: center;
 }
 
@@ -28,6 +31,7 @@ body.recover-page {
   margin-bottom: 20px;
   color:white;
 }
+
 input {
   width: 100%;
   padding: 10px;
@@ -38,18 +42,52 @@ input {
   color: #333;
 }
 
-.button-group-registrar{
-  width: 100%;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  color: #fff;
-  font-size: 16px;
-  transition: background-color 0.3s ease;
+/* Buttons */
+.button-group-registrar {
+  margin-top: 20px;
 }
 
-.btn-recuperar{
-  background-color: #0084ff;
+.btn-recuperar1, 
+.btn-recuperar-voltar1 {
+  width: 100%;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+/* Button Recuperar Conta */
+.btn-recuperar1 {
+  background: linear-gradient(to right, #007bff, #00b7ff); /* Gradiente azul */
+  color: white;
+}
+
+.btn-recuperar1:hover {
+  background: linear-gradient(to right, #0056b3, #0088cc); /* Gradiente azul mais escuro */
+  transform: scale(1.05); /* Efeito de aumento */
+}
+
+/* Button Voltar */
+.btn-recuperar-voltar1 {
+  background: linear-gradient(to right, #0056b3, #0088cc); /* Gradiente laranja */
+  color: white;
+  margin-top: 10px; /* Adiciona um pequeno espaço entre os botões */
+}
+
+.btn-recuperar-voltar1:hover {
+  background: linear-gradient(to right, #0056b3, #0088cc); /* Gradiente laranja mais escuro */
+  transform: scale(1.05); /* Efeito de aumento */
+}
+
+/* Button animation */
+.btn-recuperar1:active, .btn-recuperar-voltar1:active {
+  transform: scale(0.95); /* Efeito de redução quando clicado */
+}
+
+.label-recover{
   color:white;
 }
 
@@ -64,4 +102,24 @@ input {
 
 .btn-recuperar-voltar:hover{
   background-color: #0a57a0d7;
+}
+
+.mensagem-recuperar {
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.mensagem-recuperar-sucesso {
+  color: #155724;
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+}
+
+.mensagem-recuperar-erro {
+  color: #721c24;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
 }

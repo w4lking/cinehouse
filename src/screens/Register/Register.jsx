@@ -65,7 +65,7 @@ const Register = () => {
       {errorMessage && <p className="error-message">{errorMessage}</p>}
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="username">Nome de Usuário</label>
+          <label className="label-register" htmlFor="username">Nome de Usuário</label>
           <input
             type="text"
             id="username"
@@ -76,7 +76,7 @@ const Register = () => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="cpf">CPF</label>
+          <label className="label-register" htmlFor="cpf">CPF</label>
           <input
             type="text"
             id="cpf"
@@ -94,7 +94,7 @@ const Register = () => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="email">E-mail</label>
+          <label className="label-register" htmlFor="email">E-mail</label>
           <input
             type="email"
             id="email"
@@ -105,7 +105,7 @@ const Register = () => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="birthDate">Data de Nascimento</label>
+          <label className="label-register" htmlFor="birthDate">Data de Nascimento</label>
           <input
             type="date"
             id="birthDate"
@@ -115,7 +115,7 @@ const Register = () => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="password">Senha</label>
+          <label className="label-register" htmlFor="password">Senha</label>
           <input
             type="password"
             id="password"

@@ -53,7 +53,7 @@ function CreateUser() {
   return (
     <div className="container">
       <div className="form-box">
-        <h2>Criar Usuário</h2>
+        <h2>Adicionar Usuário</h2>
         {successMessage && <p className="success-message">{successMessage}</p>}
         {errorMessage && <p className="error-message">{errorMessage}</p>}
         <form onSubmit={handleSubmit}>

@@ -239,11 +239,10 @@ const HistCompras = () => {
                   <strong>Nome filme:</strong> {pedidoDetalhes.nomeFilme}
                 </p>
                 <p>
-                  <strong>Valor Total:</strong> {pedidoDetalhes.valorTotal}
+                  <strong>Valor Total:</strong> R$: {pedidoDetalhes.valorTotal}
                 </p>
                 <p>
-                  <strong>Preço unitário:</strong>
-                  {pedidoDetalhes.precoUnitario}
+                  <strong>Preço unitário:</strong>R$ :{pedidoDetalhes.precoUnitario}
                 </p>
                 <p>
                   <strong>Quantidade:</strong> {pedidoDetalhes.quantidade}

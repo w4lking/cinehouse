@@ -32,11 +32,11 @@ const UserSettings = ({ userName }) => {
   };
 
   return (
-    <div className="user-settings-container">
-      <h2>Olá, {userName}</h2>
+    <div className="user-settings-container1">
+      <h2>Edição de informações</h2>
       <form onSubmit={handleSaveChanges}>
         <div className="form-group">
-          <label htmlFor="email">E-mail</label>
+          <label className="label-editar-user"htmlFor="email">E-mail</label>
           <input
             type="email"
             id="email"
@@ -46,7 +46,7 @@ const UserSettings = ({ userName }) => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="password">Senha</label>
+          <label className="label-editar-user" htmlFor="password">Senha</label>
           <input
             type="password"
             id="password"
@@ -56,7 +56,7 @@ const UserSettings = ({ userName }) => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="street">Rua</label>
+          <label className="label-editar-user" htmlFor="street">Rua</label>
           <input
             type="text"
             id="street"
@@ -67,7 +67,7 @@ const UserSettings = ({ userName }) => {
         </div>
         <div className="form-group house-number-container">
           <div>
-            <label htmlFor="houseNumber">N° Casa</label>
+            <label className="label-editar-user" htmlFor="houseNumber">N° Casa</label>
             <input
               type="text"
               id="houseNumber"
@@ -78,7 +78,7 @@ const UserSettings = ({ userName }) => {
             />
           </div>
           <div>
-            <label htmlFor="neighborhood">Bairro</label>
+            <label className="label-editar-user" htmlFor="neighborhood">Bairro</label>
             <input
               type="text"
               id="neighborhood"
@@ -90,7 +90,7 @@ const UserSettings = ({ userName }) => {
           </div>
         </div>
         <div className="form-group">
-          <label htmlFor="city">Cidade</label>
+          <label className="label-editar-user" htmlFor="city">Cidade</label>
           <input
             type="text"
             id="city"

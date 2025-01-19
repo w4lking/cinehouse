@@ -53,11 +53,11 @@ body.login-page {
   position: relative;
 }
 
-label {
+body.login-page label {
   display: block;
   margin-bottom: 8px;
   font-weight: bold;
-  color: #00b7ff;
+  color: #ffffff;
   text-align: left;
 }
 
