@@ -10,11 +10,14 @@ body.recover-page {
 }
 
 .recovery-container {
-  width: 350px;
+  width: 400px;
   padding: 30px;
   border-radius: 10px;
-  background: #9b9ea1;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
   text-align: center;
 }
 
@@ -28,6 +31,7 @@ body.recover-page {
   margin-bottom: 20px;
   color:white;
 }
+
 input {
   width: 100%;
   padding: 10px;
@@ -81,4 +85,8 @@ input {
 /* Button animation */
 .btn-recuperar1:active, .btn-recuperar-voltar1:active {
   transform: scale(0.95); /* Efeito de redução quando clicado */
+}
+
+.label-recover{
+  color:white;
 }

@@ -30,7 +30,7 @@ const Recover = () => {
       <h2 className="titulo-recuperar">Recuperar Conta</h2>
       <form onSubmit={handleRecover}>
         <div className="form-group">
-          <label htmlFor="email">Email</label>
+          <label className="label-recover"htmlFor="email">Email</label>
           <input
             type="email"
             id="email"
