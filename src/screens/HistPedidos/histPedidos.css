@@ -33,7 +33,7 @@ h1 {
   transition: background-color 0.3s ease;
 }
 
-.back-button:hover {
+.botao_voltar:hover {
   background-color: #0056b3;
 }
 
