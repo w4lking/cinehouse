@@ -108,10 +108,10 @@ function App() {
         <h1 className="logo">CineHouse</h1>
         <nav className="nav-links">
           {/* Barra de Busca */}
-          <input
+          <input 
             type="text"
             placeholder="Buscar..."
-            className="search-bar"
+            className="search-bar-filme"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
