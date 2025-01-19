@@ -1,6 +1,6 @@
 /* Estilização principal da página */
 .container {
-  max-width: 80%;
+  max-width: 90%; /* Aumenta o tamanho máximo do contêiner */
   margin: 0 auto;
   padding: 20px;
   font-family: Arial, sans-serif;
@@ -8,7 +8,6 @@
   flex-direction: column;
   align-items: center; /* Centraliza o conteúdo horizontalmente */
 }
-
 /* Título centralizado */
 h1 {
   text-align: center;
@@ -38,15 +37,13 @@ h1 {
   background-color: #0056b3;
 }
 
-/* Tabela centralizada */
 table {
-  width: 100%;
-  max-width: 800px;
+  width: 100%; /* Garante que a tabela ocupe todo o espaço disponível */
+  max-width: none; /* Remove o limite de largura */
   border-collapse: collapse;
   margin-top: 20px; /* Espaçamento entre o título e a tabela */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
-
 /* Cabeçalhos e células da tabela */
 th,
 td {
@@ -189,4 +186,26 @@ tr:hover {
 .error-message {
   color: red;
   font-weight: bold;
+}
+
+table tbody td {
+  position: relative; /* Necessário para posicionar o botão dentro da célula */
+}
+
+.info-button {
+  position: absolute;
+  top: 50%; /* Centraliza verticalmente */
+  right: 10px; /* Define a distância do canto direito */
+  transform: translateY(-50%); /* Ajusta o alinhamento vertical */
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.info-button:hover {
+  background-color: #0056b3; /* Cor ao passar o mouse */
 }

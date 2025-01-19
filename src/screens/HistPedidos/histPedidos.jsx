@@ -29,8 +29,6 @@ const HistCompras = () => {
       try {
         const response = await ApiService.getHistorico();
         console.log(response);
-
-        const response = await ApiService.getHistorico();
         if (response && response.status === "success" && response.data) {
           setEntries(response.data);
           setEntries(response.data);
@@ -162,7 +160,6 @@ const HistCompras = () => {
             <th>Data Pagamento</th>
             <th>Data Devolução</th>
             <th>Valor Total</th>
-            <th>Ações</th>
           </tr>
         </thead>
         <tbody>
@@ -219,7 +216,7 @@ const HistCompras = () => {
                   className="info-button"
                   onClick={() => handleOpenModal(entry.idpedido)}
                 >
-                  exclamacao
+                  info
                 </button>
               </td>
             </tr>
