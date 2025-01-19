@@ -94,7 +94,7 @@ tr:hover {
 }
 
 .return-button:hover {
-  background-color: #c82333;
+  background-color: #ffffff;
 }
 
 .info-button {
@@ -138,7 +138,7 @@ tr:hover {
 }
 
 .close-button:hover {
-  color: red;
+  background-color: #dc35468f;
 }
 
 .modal-content h2 {

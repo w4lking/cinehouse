@@ -44,7 +44,7 @@ const Recover = () => {
       <h2 className="titulo-recuperar">Recuperar Conta</h2>
       <form onSubmit={handleRecover}>
         <div className="form-group">
-          <label htmlFor="email">Email</label>
+          <label className="label-recover"htmlFor="email">Email</label>
           <input
             type="email"
             id="email"
@@ -56,19 +56,11 @@ const Recover = () => {
         </div>
 
         <div className="button-group-registrar">
-          <button type="submit" className="btn-recuperar">
-            Recuperar conta
-          </button>
+          <button type="submit" className="btn-recuperar1">Recuperar conta</button> {/* Adiciona o botão "Voltar" */}
         </div>
 
         <div className="button-group-registrar">
-          <button
-            type="button"
-            onClick={handleGoBack}
-            className="btn-recuperar-voltar"
-          >
-            Voltar
-          </button>
+          <button onClick={handleGoBack} className="btn-recuperar-voltar1">Voltar</button> {/* Adiciona o botão "Voltar" */}
         </div>
       </form>
 

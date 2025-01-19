@@ -52,9 +52,6 @@ form {
   flex-direction: column;
   align-items: stretch;
 }
-
-
-
 /* Form inputs */
 .form-group {
   margin-bottom: 20px;
@@ -97,7 +94,7 @@ input:focus {
 .error-message {
   margin-bottom: 20px;
   padding: 10px;
-  background-color: #dc3545;
+  background-color: #9e9e9e;
   color: white;
   border-radius: 5px;
   font-weight: bold;
@@ -142,4 +139,8 @@ input:focus {
 .register-button:active,
 .back-button:active {
   transform: scale(0.95);
+}
+
+.label-register{
+  color:white;
 }
