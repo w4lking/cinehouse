@@ -539,8 +539,8 @@ class ApiService {
     }
   }
 
-  async alterarFuncionario(cargo, salario, idFuncionario) {
-    const url = `${this.server}api/update/user/${idFuncionario}`;
+  async alterarFuncionario(cargo, salario, idusuario) {
+    const url = `${this.server}api/update/funcionario/${idusuario}`;
     try {
       const response = await axios.put(
         url,

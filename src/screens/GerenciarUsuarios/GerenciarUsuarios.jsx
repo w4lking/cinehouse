@@ -82,14 +82,6 @@ function GerenciarUsuarios() {
     fetchUsuarios();
   }, []);
 
-const handleEditClick = (usuario) => {
-    setSelectedUsuario({
-      ...usuario,
-      dataNasc: usuario.dataNasc || "",
-    });
-    setShowPopup(true); // Abre o popup de edição
-  };
-
   const handleSaveFuncionario = async () => {
     if (!funcionarioData.cargo || !funcionarioData.salario) {
       alert("Por favor, preencha todos os campos.");
@@ -185,6 +177,61 @@ const handleEditClick = (usuario) => {
     setShowPopup(true); // Abre o popup de edição
   };
 
+  const handleSaveAlteracaoFuncionario = async (e) => {
+    e.preventDefault();
+
+    if (!selectedFuncionario) {
+      alert("Nenhum usuário selecionado.");
+      return;
+    }
+
+    try {
+      // Prepara os dados para enviar à API
+      const funcionarioParaSalvar = {
+        ...selectedFuncionario,
+        dataNasc: selectedFuncionario.dataNasc.includes("/")
+          ? formatDateToISO(selectedFuncionario.dataNasc) // Converte a data para ISO, se necessário
+          : selectedFuncionario.dataNasc,
+      };
+
+      console.log("Dados do funcionário para salvar:", funcionarioParaSalvar); // Log para depuração
+
+      // Chama a API para atualizar o funcionário
+      const response = await ApiService.alterarFuncionario(
+        cargo,
+        salario,
+        funcionarioParaSalvar.idFuncionario
+      );
+
+      console.log("Resposta da API:", response); // Log da resposta da API
+
+      if (
+        response &&
+        (response.status === "ok" || response.status === "success")
+      ) {
+        alert("Funcionário atualizado com sucesso!");
+        setUsuarios((prevUsuarios) =>
+          prevUsuarios.map((usuario) =>
+            usuario.idusuario === funcionarioParaSalvar.idusuario
+              ? { ...usuario, ...funcionarioParaSalvar }
+              : usuario
+          )
+        );
+
+        setIsEditFuncionarioOpen(false); // Fecha o popup após salvar
+      } else {
+        alert(
+          `Erro ao atualizar o funcionário: ${
+            response.message || "Erro desconhecido"
+          }`
+        );
+      }
+    } catch (error) {
+      console.error("Erro ao salvar alterações:", error);
+      alert("Erro inesperado ao atualizar o funcionário.");
+    }
+  };
+
   const handleSaveChanges = async () => {
     try {
       // Prepara os dados para enviar à API
@@ -194,7 +241,7 @@ const handleEditClick = (usuario) => {
           ? formatDateToISO(selectedUsuario.dataNasc) // Converte a data para ISO, se necessário
           : selectedUsuario.dataNasc,
       };
-
+      console.log("Dados do usuário para salvar:", usuarioParaSalvar); // Log para depuração
       // Chama a API para atualizar o usuário
       const response = await ApiService.alterarUsuario(
         usuarioParaSalvar.idusuario,
@@ -227,45 +274,6 @@ const handleEditClick = (usuario) => {
     } catch (error) {
       console.error("Erro ao salvar alterações:", error);
       alert("Erro inesperado ao atualizar o usuário.");
-    }
-  };
-
-  const handleSaveAlteracaoFuncionario = async (event) => {
-    event.preventDefault();
-
-    if (!cargo || !salario) {
-      alert("Por favor, preencha todos os campos!");
-      return;
-    }
-
-    try {
-      const idFuncionario = selectedFuncionario.idusuario; // ID do funcionário
-      const response = await ApiService.alterarFuncionario(
-        cargo,
-        salario,
-        idFuncionario
-      );
-
-      if (response.status === "success") {
-        alert("Funcionário alterado com sucesso!");
-        // Atualize a lista de usuários no estado
-        const usuariosAtualizados = usuarios.map((usuario) =>
-          usuario.idusuario === idFuncionario
-            ? { ...usuario, cargo, salario }
-            : usuario
-        );
-        setUsuarios(usuariosAtualizados);
-        setIsEditFuncionarioOpen(false); // Fecha o popup
-      } else {
-        alert(`Erro ao alterar o funcionário: ${response.message}`);
-      }
-    } catch (error) {
-      console.error("Erro ao alterar o funcionário:", error);
-      if (error.response) {
-        alert(`Erro: ${error.response.data.message}`);
-      } else {
-        alert(`Erro inesperado: ${error.message}`);
-      }
     }
   };
 
@@ -399,8 +407,8 @@ const handleEditClick = (usuario) => {
 
       {/* Popup para adicionar funcionário */}
       {showFuncionarioPopup && (
-        <div className="popup-funcionario">
-          <div className="popup-funcionario-content">
+        <div className="popup">
+          <div className="popup-content">
             <h2>Adicionar Funcionário</h2>
             <label>ID do Usuário:</label>
             <input type="text" value={funcionarioData.idusuario} disabled />
@@ -432,11 +440,8 @@ const handleEditClick = (usuario) => {
               }
             />
 
-            <div className="popup-actions-funcionario">
-              <button
-                className="btn salvar funcionario"
-                onClick={handleSaveFuncionario}
-              >
+            <div className="popup-actions">
+              <button className="btn salvar" onClick={handleSaveFuncionario}>
                 Salvar
               </button>
               <button
@@ -450,13 +455,12 @@ const handleEditClick = (usuario) => {
         </div>
       )}
 
-      {/* Popup para alterar funcionário */}
       {isEditFuncionarioOpen && (
-        <div className="popup-alterar-func">
-          <div className="popup-alterar-func-content">
+        <div className="popup">
+          <div className="popup-content">
             <h2>Alterar Funcionário</h2>
             <form onSubmit={handleSaveAlteracaoFuncionario}>
-              <div className="form-group">
+              <div className="form-group-funcionario">
                 <label htmlFor="cargo">Cargo</label>
                 <select
                   id="cargo"
@@ -468,7 +472,7 @@ const handleEditClick = (usuario) => {
                   <option value="administrador">Administrador</option>
                 </select>
               </div>
-              <div className="form-group">
+              <div className="form-group-funcionario">
                 <label htmlFor="salario">Salário</label>
                 <input
                   type="number"
@@ -479,15 +483,15 @@ const handleEditClick = (usuario) => {
                 />
               </div>
               <div className="popup-actions">
+                <button type="submit" className="btn salvar">
+                  Salvar
+                </button>
                 <button
                   type="button"
                   onClick={handleClosePopup}
                   className="btn cancelar"
                 >
                   Cancelar
-                </button>
-                <button type="submit" className="btn salvar">
-                  Salvar
                 </button>
               </div>
             </form>
