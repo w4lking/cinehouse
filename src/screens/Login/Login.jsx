@@ -65,10 +65,10 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      <h2 className="h2-login">Login</h2>
+      <h2 className="h2-login">Bem-vindo ao CineHouse</h2>
       {showAlert && (
         <div className="alert">
-          Por favor, insira suas credenciais para fazer login.
+          Houve um erro. Suas credenciais podem estar incorretas.
         </div>
       )}
       <form onSubmit={handleLogin}>
@@ -79,7 +79,7 @@ const Login = () => {
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="E-mail"
+            placeholder="Digite seu e-mail"
             required
           />
         </div>
@@ -90,7 +90,7 @@ const Login = () => {
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="Senha"
+            placeholder="Digite sua senha"
             required
           />
           <a
@@ -98,16 +98,14 @@ const Login = () => {
             onClick={handleForgotPassword}
             className="forgot-password-link"
           >
-            Recuperar senha
+            Esqueceu sua senha?
           </a>
         </div>
-
         <div className="button-group-entrar">
           <button type="submit" className="btn1">
             Entrar
           </button>
         </div>
-
         <div className="button-group-entrar">
           <button onClick={handleCreateAccount} className="btn1">
             Criar Conta
