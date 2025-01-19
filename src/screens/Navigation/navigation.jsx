@@ -123,7 +123,7 @@ function App() {
         </nav>
       </header>
       <aside className={`sidebar ${menuOpen ? "open" : ""}`}>
-        <button className="close-button" onClick={toggleMenu}>
+        <button className="close-button-navigation" onClick={toggleMenu}>
           X
         </button>
         <ul>
