@@ -13,12 +13,41 @@ function formatDateToISO(dateString) {
   return `${year}-${month}-${day}`;
 }
 
+//Função de delete
+const handleDeleteClick = async (idUsuario) => {
+  const confirmDelete = window.confirm(
+    `Tem certeza que deseja deletar este usuário com o ID ${idUsuario}?`
+  );
+
+  if (!confirmDelete) return;
+
+  try {
+    const response = await ApiService.deletarUsuario(idUsuario);
+
+    if (
+      response &&
+      (response.status === "ok" || response.status === "success")
+    ) {
+      alert("Usuário deletado com sucesso!");
+      window.location.reload();
+    } else {
+      alert(
+        `Erro ao deletar o usuário: ${response.message || "Erro desconhecido"}`
+      );
+    }
+  } catch (error) {
+    console.error("Erro ao deletar o usuário:", error);
+    alert("Erro inesperado ao deletar o usuário.");
+  }
+};
+
 function GerenciarUsuarios() {
   const [usuarios, setUsuarios] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [showPopup, setShowPopup] = useState(false); // Controle do popup
   const [selectedUsuario, setSelectedUsuario] = useState(null); // Dados do usuário selecionado para editar
 
+  document.title = "Gerencia";
   useEffect(() => {
     const fetchUsuarios = async () => {
       try {
@@ -49,14 +78,37 @@ function GerenciarUsuarios() {
     usuario.nome.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const handleEditClick = (usuario) => {
-    // Formata a data para `yyyy-MM-dd` ao abrir o popup
-    setSelectedUsuario({
-      ...usuario,
-      dataNasc: usuario.dataNasc ? usuario.dataNasc : "",
-    });
-    setShowPopup(true); // Abre o popup
+  // Função de adicionar funcionário
+  const handleAddFuncionarioClick = async (usuario) => {
+    const cargoPadrao = "Administrador";  // Cargo padrão
+    const salarioPadrao = 2000;  // Salário padrão
+    
+    try {
+      // Certifique-se de que o usuário.idusuario está sendo passado corretamente
+      const response = await ApiService.AdicionarFuncionario({
+        usuario_idusuario: usuario.idusuario,
+        cargo: cargoPadrao,
+        salario: salarioPadrao
+      });
+  
+      // Verifique a resposta da API
+      if (response && response.status === "success") {
+        alert(`Usuário ${usuario.nome} foi adicionado como funcionário com sucesso!`);
+      } else {
+        alert(`Erro ao adicionar funcionário: ${response?.message || "Erro desconhecido"}`);
+      }
+    } catch (error) {
+      console.error("Erro ao adicionar funcionário:", error);
+      if (error.response) {
+        // Exibe detalhes completos da resposta de erro do backend
+        console.error("Detalhes do erro:", error.response.data);
+        alert(`Erro ao adicionar funcionário: ${error.response.data.message || "Erro desconhecido"}`);
+      } else {
+        alert("Erro inesperado ao adicionar funcionário.");
+      }
+    }
   };
+  
 
   const handlePopupClose = () => {
     setShowPopup(false); // Fecha o popup
@@ -64,29 +116,46 @@ function GerenciarUsuarios() {
 
   const handleSaveChanges = async () => {
     try {
-      // Formata a data para ISO antes de salvar
+      // Prepara os dados para enviar à API
       const usuarioParaSalvar = {
         ...selectedUsuario,
         dataNasc: selectedUsuario.dataNasc.includes("/")
-          ? formatDateToISO(selectedUsuario.dataNasc)
-          : selectedUsuario.dataNasc, // Garante que está no formato ISO
+          ? formatDateToISO(selectedUsuario.dataNasc) // Converte a data para ISO, se necessário
+          : selectedUsuario.dataNasc,
       };
 
-      // Aqui você adiciona a lógica para salvar via API
-      console.log("Salvar alterações para:", usuarioParaSalvar);
-
-      // Atualiza a lista de usuários localmente após salvar
-      setUsuarios((prevUsuarios) =>
-        prevUsuarios.map((usuario) =>
-          usuario.idusuario === usuarioParaSalvar.idusuario
-            ? usuarioParaSalvar
-            : usuario
-        )
+      // Chama a API para atualizar o usuário
+      const response = await ApiService.alterarUsuario(
+        usuarioParaSalvar.idusuario,
+        usuarioParaSalvar.nome,
+        usuarioParaSalvar.email,
+        usuarioParaSalvar.dataNasc
       );
 
-      setShowPopup(false); // Fecha o popup após salvar
+      if (
+        response &&
+        (response.status === "ok" || response.status === "success")
+      ) {
+        alert("Usuário atualizado com sucesso!");
+        setUsuarios((prevUsuarios) =>
+          prevUsuarios.map((usuario) =>
+            usuario.idusuario === usuarioParaSalvar.idusuario
+              ? { ...usuario, ...usuarioParaSalvar }
+              : usuario
+          )
+        );
+
+        setShowPopup(false); // Fecha o popup após salvar
+      } else {
+        alert(
+          `Erro ao atualizar o usuário: ${
+            response.message || "Erro desconhecido"
+          }`
+        );
+      }
     } catch (error) {
       console.error("Erro ao salvar alterações:", error);
+      alert("Erro inesperado ao atualizar o usuário.");
     }
   };
 
@@ -95,14 +164,13 @@ function GerenciarUsuarios() {
       <h1>GERENCIAR USUÁRIOS</h1>
 
       {/* Barra de pesquisa */}
-      <div className="search-bar">
+      <div className="search-bar-usuario">
         <input
           type="text"
           placeholder="Buscar por usuários."
           value={searchTerm}
           onChange={handleSearch}
         />
-        <button>Buscar</button>
       </div>
 
       {/* Lista de usuários */}
@@ -117,13 +185,24 @@ function GerenciarUsuarios() {
                 </span>
               </div>
               <div className="usuario-acoes">
+              <button
+                  className="btn-funcionario"
+                  onClick={() => handleAddFuncionarioClick(usuario)}
+                >
+                  Adicionar Funcionario
+                </button>
                 <button
                   className="btn alterar"
                   onClick={() => handleEditClick(usuario)}
                 >
                   Alterar
                 </button>
-                <button className="btn deletar">Deletar</button>
+                <button
+                  className="btn deletar"
+                  onClick={() => handleDeleteClick(usuario.idusuario)}
+                >
+                  Deletar
+                </button>
               </div>
             </div>
           ))

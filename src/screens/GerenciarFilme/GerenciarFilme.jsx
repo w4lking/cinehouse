@@ -4,14 +4,29 @@ import ApiService from "../../services/apiService";
 
 function GerenciarFilmes() {
   const [filmes, setFilmes] = useState([]);
+  const [categorias, setCategorias] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [showPopup, setShowPopup] = useState(false);  // Controle do popup
-  const [selectedFilme, setSelectedFilme] = useState(null);  // Dados do filme selecionado para editar
+  const [showPopup, setShowPopup] = useState(false); // Controle do popup de edição
+  const [showAddPopup, setShowAddPopup] = useState(false); // Controle do popup de adicionar filme
+  const [selectedFilme, setSelectedFilme] = useState(null); // Dados do filme selecionado para editar
+  const [newFilme, setNewFilme] = useState({
+    // Estado para o novo filme
+    nomeFilme: "",
+    sinopse: "",
+    dataLancamento: "",
+    precoCompra: "",
+    qtdEstoque: "",
+    disponivelLocacao: false,
+    classificacaoIndicativa: "",
+    imagem: "",
+  });
+
+  const [selectedCategoria, setSelectedCategoria] = useState(""); // ID da categoria selecionada
 
   useEffect(() => {
     const fetchFilmes = async () => {
       try {
-        const response = await ApiService.getFilmes();  // Fazendo a chamada para buscar filmes
+        const response = await ApiService.getAllFilmes(); // Fazendo a chamada para buscar filmes
         if (response && response.status === "success") {
           setFilmes(response.data);
         } else {
@@ -25,28 +40,184 @@ function GerenciarFilmes() {
     fetchFilmes();
   }, []);
 
+  useEffect(() => {
+    const fetchCategorias = async () => {
+      try {
+        const categoriasData = await ApiService.getCategoria();
+        console.log("Categorias recebidas no componente:", categoriasData);
+        setCategorias(categoriasData); // Certifique-se de que isso corresponde ao formato esperado
+      } catch (error) {
+        console.error("Erro ao carregar categorias:", error);
+      }
+    };
+
+    fetchCategorias();
+  }, []);
+
   document.title = "Gerenciar Filmes";
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
+
+  const formatDateToDisplay = (dateString) => {
+    const [year, month, day] = dateString.split("-");
+    return `${day}/${month}/${year}`;
+  };
+
+  function formatDateToISO(dateString) {
+    const [day, month, year] = dateString.split("/");
+    return `${year}-${month}-${day}`;
+  }
 
   const filteredFilmes = filmes.filter((filme) =>
     filme.nomeFilme.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const handleEditClick = (filme) => {
-    setSelectedFilme(filme);  // Preenche os dados no estado
-    setShowPopup(true);  // Abre o popup
+    setSelectedFilme({
+      ...filme,
+      dataLancamento: new Date(filme.dataLancamento)
+        .toISOString()
+        .split("T")[0], // Converte para yyyy-mm-dd
+    });
+    setShowPopup(true);
+  };
+
+  const handleAddFilmeClick = () => {
+    setShowAddPopup(true); // Abre o popup de adicionar filme
   };
 
   const handlePopupClose = () => {
-    setShowPopup(false);  // Fecha o popup
+    setShowPopup(false); // Fecha o popup de edição
   };
 
-  const handleSaveChanges = () => {
-    // Aqui você pode adicionar a lógica para salvar as alterações via API
-    console.log("Salvar alterações para:", selectedFilme);
-    setShowPopup(false);  // Fecha o popup após salvar
+  const handleAddPopupClose = () => {
+    setShowAddPopup(false);
+    // Reseta o estado do formulário ao fechar
+    setNewFilme({
+      nomeFilme: "",
+      sinopse: "",
+      dataLancamento: "",
+      precoCompra: "",
+      qtdEstoque: "",
+      disponivelLocacao: false,
+      classificacaoIndicativa: "",
+      imagem: "",
+    });
+  };
+
+  const handleSaveChanges = async () => {
+    try {
+      const filmeParaSalvar = {
+        ...selectedFilme,
+        disponivelLocacao: selectedFilme.disponivelLocacao ? 1 : 0, // Define 1 ou 0 baseado no estado atual
+      };
+
+      // Chama a API para atualizar o filme
+      const response = await ApiService.alterarFilme(
+        filmeParaSalvar.idfilme,
+        filmeParaSalvar.nomeFilme,
+        filmeParaSalvar.sinopse,
+        filmeParaSalvar.dataLancamento,
+        filmeParaSalvar.precoCompra,
+        filmeParaSalvar.qtdEstoque,
+        filmeParaSalvar.disponivelLocacao,
+        filmeParaSalvar.classificacaoIndicativa,
+        filmeParaSalvar.imagem
+      );
+
+      if (
+        response &&
+        (response.status === "ok" || response.status === "success")
+      ) {
+        alert("Filme atualizado com sucesso!");
+        window.location.reload();
+        setShowPopup(false); // Fecha o popup após salvar
+      } else {
+        alert(
+          `Erro ao atualizar o Filme: ${
+            response.message || "Erro desconhecido"
+          }`
+        );
+      }
+    } catch (error) {
+      console.error("Erro ao salvar alterações:", error);
+      alert("Erro inesperado ao atualizar o filme.");
+    }
+  };
+
+  const handleAddFilme = async () => {
+    if (!selectedCategoria) {
+      alert("Por favor, selecione uma categoria.");
+      return;
+    }
+
+    try {
+      const response = await ApiService.adicionarFilme(
+        newFilme.nomeFilme,
+        newFilme.sinopse,
+        newFilme.dataLancamento,
+        parseFloat(newFilme.precoCompra),
+        parseInt(newFilme.qtdEstoque, 10),
+        newFilme.disponivelLocacao,
+        newFilme.classificacaoIndicativa,
+        newFilme.imagem,
+        selectedCategoria // Enviar o ID da categoria selecionada
+      );
+
+      if (
+        response &&
+        (response.status === "ok" || response.status === "success")
+      ) {
+        alert("Filme adicionado com sucesso!");
+
+        // Atualizar a lista de filmes sem recarregar a página
+        setFilmes((prevFilmes) => [...prevFilmes, response.data]);
+
+        // Fechar popup e resetar estado
+        handleAddPopupClose();
+      } else {
+        alert(
+          `Erro ao adicionar o Filme: ${
+            response.message || "Erro desconhecido"
+          }`
+        );
+      }
+    } catch (error) {
+      console.error("Erro ao adicionar filme:", error);
+      alert("Erro ao adicionar filme. Tente novamente.");
+    }
+  };
+
+  const handleDeleteFilme = async (idFilme) => {
+    const confirmDelete = window.confirm(
+      `Tem certeza que deseja deletar este Filme com o ID ${idFilme}?`
+    );
+
+    if (!confirmDelete) return;
+
+    try {
+      const response = await ApiService.deletarFilme(idFilme); // Aguarda a resposta da API
+      if (
+        response &&
+        (response.status === "ok" ||
+          response.status === "success" ||
+          response.status === 200)
+      ) {
+        alert("Filme deletado com sucesso!");
+        window.location.reload();
+      } else {
+        alert(
+          `Erro ao deletar o Filme: ${response.message || "Erro desconhecido"}`
+        );
+      }
+    } catch (error) {
+      console.error(
+        "O filme pode estar sendo referenciado em um pedido:",
+        error
+      );
+      alert("Erro inesperado ao deletar o filme.");
+    }
   };
 
   return (
@@ -54,6 +225,9 @@ function GerenciarFilmes() {
       <h1>Gerenciar Filmes</h1>
 
       {/* Barra de pesquisa */}
+      <button className="back-button" onClick={() => window.history.back()}>
+        Voltar
+      </button>
       <div className="search-bar">
         <input
           type="text"
@@ -61,7 +235,7 @@ function GerenciarFilmes() {
           value={searchTerm}
           onChange={handleSearch}
         />
-        <button>Buscar</button>
+        <button onClick={handleAddFilmeClick}>Adicionar Filme</button>
       </div>
 
       {/* Lista de filmes */}
@@ -76,8 +250,18 @@ function GerenciarFilmes() {
                 </span>
               </div>
               <div className="filme-acoes">
-                <button className="btn alterar" onClick={() => handleEditClick(filme)}>Alterar</button>
-                <button className="btn deletar">Deletar</button>
+                <button
+                  className="btn alterar"
+                  onClick={() => handleEditClick(filme)}
+                >
+                  Alterar
+                </button>
+                <button
+                  className="btn deletar"
+                  onClick={() => handleDeleteFilme(filme.idfilme)}
+                >
+                  Deletar
+                </button>
               </div>
             </div>
           ))
@@ -94,59 +278,202 @@ function GerenciarFilmes() {
             <label>ID Filme:</label>
             <input
               type="text"
-              value={selectedFilme.idFilme}
-              disabled
+              value={selectedFilme.idfilme}
+              onChange={(e) =>
+                setSelectedFilme({ ...selectedFilme, idfilme: e.target.value })
+              }
             />
             <label>Nome do Filme:</label>
             <input
               type="text"
               value={selectedFilme.nomeFilme}
-              onChange={(e) => setSelectedFilme({ ...selectedFilme, nomeFilme: e.target.value })}
+              onChange={(e) =>
+                setSelectedFilme({
+                  ...selectedFilme,
+                  nomeFilme: e.target.value,
+                })
+              }
             />
             <label>Sinopse:</label>
             <textarea
+              type="text"
               value={selectedFilme.sinopse}
-              onChange={(e) => setSelectedFilme({ ...selectedFilme, sinopse: e.target.value })}
+              onChange={(e) =>
+                setSelectedFilme({ ...selectedFilme, sinopse: e.target.value })
+              }
             />
             <label>Data de Lançamento:</label>
             <input
               type="date"
               value={selectedFilme.dataLancamento}
-              onChange={(e) => setSelectedFilme({ ...selectedFilme, dataLancamento: e.target.value })}
+              onChange={(e) =>
+                setSelectedFilme({
+                  ...selectedFilme,
+                  dataLancamento: e.target.value,
+                })
+              }
             />
             <label>Preço de Compra:</label>
             <input
               type="number"
               value={selectedFilme.precoCompra}
-              onChange={(e) => setSelectedFilme({ ...selectedFilme, precoCompra: e.target.value })}
+              onChange={(e) =>
+                setSelectedFilme({
+                  ...selectedFilme,
+                  precoCompra: e.target.value,
+                })
+              }
             />
             <label>Quantidade em Estoque:</label>
             <input
               type="number"
               value={selectedFilme.qtdEstoque}
-              onChange={(e) => setSelectedFilme({ ...selectedFilme, qtdEstoque: e.target.value })}
+              onChange={(e) =>
+                setSelectedFilme({
+                  ...selectedFilme,
+                  qtdEstoque: e.target.value,
+                })
+              }
             />
             <label>Disponível para Locação:</label>
             <input
               type="checkbox"
               checked={selectedFilme.disponivelLocacao}
-              onChange={(e) => setSelectedFilme({ ...selectedFilme, disponivelLocacao: e.target.checked })}
+              onChange={(e) =>
+                setSelectedFilme({
+                  ...selectedFilme,
+                  disponivelLocacao: e.target.checked,
+                })
+              }
             />
             <label>Classificação Indicativa:</label>
             <input
               type="text"
               value={selectedFilme.classificacaoIndicativa}
-              onChange={(e) => setSelectedFilme({ ...selectedFilme, classificacaoIndicativa: e.target.value })}
+              onChange={(e) =>
+                setSelectedFilme({
+                  ...selectedFilme,
+                  classificacaoIndicativa: e.target.value,
+                })
+              }
             />
             <label>Imagem:</label>
             <input
               type="text"
               value={selectedFilme.imagem}
-              onChange={(e) => setSelectedFilme({ ...selectedFilme, imagem: e.target.value })}
+              onChange={(e) =>
+                setSelectedFilme({ ...selectedFilme, imagem: e.target.value })
+              }
             />
             <div className="popup-actions">
-              <button className="btn salvar" onClick={handleSaveChanges}>Salvar</button>
-              <button className="btn cancelar" onClick={handlePopupClose}>Cancelar</button>
+              <button className="btn salvar" onClick={handleSaveChanges}>
+                Salvar
+              </button>
+              <button className="btn cancelar" onClick={handlePopupClose}>
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Popup para adicionar filme */}
+      {showAddPopup && (
+        <div className="popup">
+          <div className="popup-content">
+            <h2>Adicionar Filme</h2>
+            <label>Nome do Filme:</label>
+            <input
+              type="text"
+              value={newFilme.nomeFilme}
+              onChange={(e) =>
+                setNewFilme({ ...newFilme, nomeFilme: e.target.value })
+              }
+            />
+            <label>Sinopse:</label>
+            <textarea
+              value={newFilme.sinopse}
+              onChange={(e) =>
+                setNewFilme({ ...newFilme, sinopse: e.target.value })
+              }
+            />
+            <label>Categoria:</label>
+            <select
+              value={selectedCategoria}
+              onChange={(e) => setSelectedCategoria(e.target.value)}
+            >
+              <option value="">Selecione uma Categoria</option>
+              {Array.isArray(categorias) &&
+                categorias.map((categoria) => (
+                  <option
+                    key={categoria.idcategoria}
+                    value={categoria.idcategoria}
+                  >
+                    {categoria.nome}
+                  </option>
+                ))}
+            </select>
+            <label>Data de Lançamento:</label>
+            <input
+              type="date"
+              value={newFilme.dataLancamento}
+              onChange={(e) =>
+                setNewFilme({ ...newFilme, dataLancamento: e.target.value })
+              }
+            />
+            <label>Preço de Compra:</label>
+            <input
+              type="number"
+              value={newFilme.precoCompra}
+              onChange={(e) =>
+                setNewFilme({ ...newFilme, precoCompra: e.target.value })
+              }
+            />
+            <label>Quantidade em Estoque:</label>
+            <input
+              type="number"
+              value={newFilme.qtdEstoque}
+              onChange={(e) =>
+                setNewFilme({ ...newFilme, qtdEstoque: e.target.value })
+              }
+            />
+            <label>Disponível para Locação:</label>
+            <input
+              type="checkbox"
+              checked={newFilme.disponivelLocacao}
+              onChange={(e) =>
+                setNewFilme({
+                  ...newFilme,
+                  disponivelLocacao: e.target.checked,
+                })
+              }
+            />
+            <label>Classificação Indicativa:</label>
+            <input
+              type="text"
+              value={newFilme.classificacaoIndicativa}
+              onChange={(e) =>
+                setNewFilme({
+                  ...newFilme,
+                  classificacaoIndicativa: e.target.value,
+                })
+              }
+            />
+            <label>Imagem:</label>
+            <input
+              type="text"
+              value={newFilme.imagem}
+              onChange={(e) =>
+                setNewFilme({ ...newFilme, imagem: e.target.value })
+              }
+            />
+            <div className="popup-actions">
+              <button className="btn salvar" onClick={handleAddFilme}>
+                Adicionar
+              </button>
+              <button className="btn cancelar" onClick={handleAddPopupClose}>
+                Cancelar
+              </button>
             </div>
           </div>
         </div>

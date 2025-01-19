@@ -28,7 +28,11 @@ const HistCompras = () => {
     const fetchData = async () => {
       try {
         const response = await ApiService.getHistorico();
+        console.log(response);
+
+        const response = await ApiService.getHistorico();
         if (response && response.status === "success" && response.data) {
+          setEntries(response.data);
           setEntries(response.data);
         } else {
           throw new Error("Resposta inesperada da API");
@@ -156,6 +160,7 @@ const HistCompras = () => {
             <th>Tipo Pedido</th>
             <th>Status Pedido</th>
             <th>Data Pagamento</th>
+            <th>Data Devolução</th>
             <th>Valor Total</th>
             <th>Ações</th>
           </tr>

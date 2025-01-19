@@ -9,6 +9,20 @@ function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [filmes, setFilmes] = useState([]); // Estado para armazenar filmes
   const [searchTerm, setSearchTerm] = useState(""); // Estado para a busca
+  const [selectedGenre, setSelectedGenre] = useState(""); // Estado para o filtro de gênero
+  const [selectedYear, setSelectedYear] = useState(""); // Estado para o filtro de ano
+  const [selectedPrice, setSelectedPrice] = useState(""); // Estado para o filtro de preço
+
+  const mapeaGenero = {
+    1: "Drama",
+    2: "Ação",
+    3: "Comédia",
+    4: "Suspense",
+    5: "Aventura",
+    6: "Terror",
+    7: "Mistério",
+    8: "Crime",
+  };
 
   // Busca os filmes da API ao carregar o componente
   useEffect(() => {
@@ -41,13 +55,35 @@ function App() {
   };
 
   const handleSair = () => {
+    sessionStorage.removeItem("id");
+    sessionStorage.removeItem("cliente");
+    sessionStorage.removeItem("perfil");
+    sessionStorage.removeItem("token");
     navigate("/");
   };
 
-  // Filtra os filmes com base no termo de busca
-  const filteredFilmes = filmes.filter((filme) =>
-    filme.nomeFilme.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // Filtro de filmes
+  const filteredFilmes = filmes.filter((filme) => {
+    const genreMatch = selectedGenre
+      ? mapeaGenero[filme.categoria_idcategoria] === selectedGenre
+      : true;
+
+    const yearMatch = selectedYear ? String(filme.ano) === selectedYear : true; // Garantir que a comparação de ano funcione
+    
+    const priceMatch = selectedPrice
+      ? filme.preco <= parseFloat(selectedPrice) // Garantir que selectedPrice seja convertido para número
+      : true;
+
+    return (
+      genreMatch &&
+      yearMatch &&
+      priceMatch &&
+      filme.nomeFilme.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  });
+
+  // Obter os anos disponíveis para o filtro
+  const years = [...new Set(filmes.map(filme => filme.ano))]; // Cria uma lista única de anos
 
   return (
     <div className="app">
@@ -61,6 +97,8 @@ function App() {
         <nav className="nav-links">
           <a href="#movies">Filmes</a>
           <a href="#series">Séries</a>
+
+          {/* Barra de Busca */}
           <input
             type="text"
             placeholder="Buscar..."
@@ -68,6 +106,20 @@ function App() {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
+
+          {/* Filtro de Gênero */}
+          <select
+            value={selectedGenre}
+            onChange={(e) => setSelectedGenre(e.target.value)}
+            className="genre-filter"
+          >
+            <option value="">Filtrar por Gênero</option>
+            {Object.values(mapeaGenero).map((genre) => (
+              <option key={genre} value={genre}>
+                {genre}
+              </option>
+            ))}
+          </select>
         </nav>
       </header>
       <aside className={`sidebar ${menuOpen ? "open" : ""}`}>
@@ -81,6 +133,36 @@ function App() {
           <li onClick={handleAdm}>Gerenciar Relatórios</li>
           <li onClick={handleSair}>Sair</li>
         </ul>
+
+        {/* Filtros */}
+        <div className="filters">
+          {/* Filtro de Ano */}
+          <select
+            value={selectedYear}
+            onChange={(e) => setSelectedYear(e.target.value)}
+            className="year-filter"
+          >
+            <option value="">Filtrar por Ano</option>
+            {years.map((year) => (
+              <option key={year} value={year}>
+                {year}
+              </option>
+            ))}
+          </select>
+
+          {/* Filtro de Preço */}
+          <select
+            value={selectedPrice}
+            onChange={(e) => setSelectedPrice(e.target.value)}
+            className="price-filter"
+          >
+            <option value="">Filtrar por Preço</option>
+            <option value="10">Até R$10</option>
+            <option value="20">Até R$20</option>
+            <option value="50">Até R$50</option>
+            <option value="100">Até R$100</option>
+          </select>
+        </div>
       </aside>
       <main className="content">
         <section className="main-content">
@@ -91,8 +173,8 @@ function App() {
                   key={filme.idfilme}
                   title={filme.nomeFilme}
                   year={filme.ano}
-                  classification={filme.classificacaoIndicativa}
-                  genre={filme.categoria_idcategoria}
+                  classification={filme.classificacaoIndicativa === 0 ? "Livre" : filme.classificacaoIndicativa}
+                  genre={mapeaGenero[filme.categoria_idcategoria] || "Desconhecido"}
                   image={filme.imagem}
                 />
               ))
@@ -105,7 +187,7 @@ function App() {
     </div>
   );
 
-  function MovieContainer({ title, year, genre, classification ,image }) {
+  function MovieContainer({ title, year, genre, classification, image }) {
     return (
       <div className="movie-container">
         <img src={image} alt={title} className="movie-image" />

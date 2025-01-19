@@ -26,6 +26,10 @@ const Admin = () => {
     navigate("/relatorio/devolucao");
   };
 
+  const handleAcessarGerenciamento = () => {
+    navigate("/GerenciarFilme");
+  };
+
   return (
     <div>
       {/* Container dos cards */}
@@ -61,16 +65,14 @@ const Admin = () => {
         </div>
 
         <div className="card">
-          <div className="card-header">Editar Filmes</div>
+          <div className="card-header">Gerenciamento de Filmes CINEHOUSE</div>
           <div className="card-body">
             <img
               src={movieIconPng}
               alt="Ícone de Editar Filmes"
               className="card-image"
             />
-            <button>Adicionar filmes</button>
-            <button>Editar filme</button>
-            <button>Remover filme</button>
+            <button onClick={handleAcessarGerenciamento}>Acessar</button>
           </div>
         </div>
       </div>
