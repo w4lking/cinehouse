@@ -2,9 +2,24 @@ import axios from "axios";
 
 class ApiService {
   constructor() {
-    // this.server = 'https://jsonserver-jet.vercel.app/api/';
+    this.server = 'https://cinehouse-server.vercel.app/';
 
-    this.server = "http://localhost:5000/";
+    // this.server = "http://localhost:5000/";
+  }
+
+  async loginUser(email, password) {
+    const url = `${this.server}api/user/login`;
+    try {
+      const response = await axios.post(
+        url,
+        { email, password },
+        { headers: { "Content-Type": "application/json" } }
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Erro na chamada de login:", error);
+      throw error;
+    }
   }
 
   async registerUser(username, cpf, email, birthDate, password) {
@@ -116,6 +131,23 @@ class ApiService {
     }
   }
 
+  async getAllFilmes() {
+    const url = `${this.server}api/all/filmes`;
+    try {
+      const response = await axios.get(url, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      console.error("Erro ao buscar os filmes:", error);
+      throw error;
+    }
+  }
+
+  // api para deletar filme
   async deletarFilme(idFilme) {
     const url = `${this.server}api/delete/filme/${idFilme}`;
     try {
@@ -126,19 +158,89 @@ class ApiService {
       });
       return response.data;
     } catch (error) {
-      console.error("Erro ao deletar o filme:", error);
+      if (error.response) {
+        console.error(
+          "Erro de resposta ao deletar Filme:",
+          error.response.data
+        );
+        return error.response.data;
+      } else {
+        console.error("Erro ao deletar Filme:", error.message);
+        throw error;
+      }
+    }
+  }
+
+  async getCategoria() {
+    const url = `${this.server}api/categoria`;
+    try {
+      const response = await axios.get(url, {
+        headers: { "Content-Type": "application/json" },
+      });
+      console.log("Categorias recebidas:", response.data);
+      setCategorias(response.data.data); // Acesse a propriedade 'data'
+    } catch (error) {
+      console.error("Erro ao buscar as categorias:", error);
+    }
+  }
+
+  async adicionarFilme(
+    nomeFilme,
+    sinopse,
+    dataLancamento,
+    precoCompra,
+    qtdEstoque,
+    disponivelLocacao,
+    classificacaoIndicativa,
+    imagem,
+    categoria_idcategoria // Novo campo
+  ) {
+    const url = `${this.server}api/add/filme`;
+    try {
+      const response = await axios.post(
+        url,
+        {
+          nomeFilme,
+          sinopse,
+          dataLancamento,
+          precoCompra,
+          qtdEstoque,
+          disponivelLocacao,
+          classificacaoIndicativa,
+          imagem,
+          categoria_idcategoria, // Enviar para o backend
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Erro ao adicionar filme:", error);
       throw error;
     }
   }
 
   // api para editar filme
-  async alterarFilme(idFilme, nomeFilme, sinopse, dataLancamento, precoCompra, qtdEstoque, disponivelLocacao, classificacaoIndicativa, imagem) {
+  async alterarFilme(
+    idFilme,
+    nomeFilme,
+    sinopse,
+    dataLancamento,
+    precoCompra,
+    qtdEstoque,
+    disponivelLocacao,
+    classificacaoIndicativa,
+    imagem
+  ) {
     const url = `${this.server}api/update/filme/${idFilme}`;
     try {
       const response = await axios.put(
         url,
         {
-         nomeFilme,
+          nomeFilme,
           sinopse,
           dataLancamento,
           precoCompra,
@@ -211,14 +313,14 @@ class ApiService {
     try {
       const response = await axios.put(
         url,
-        {}, 
+        {},
         {
           headers: {
             "Content-Type": "application/json",
           },
         }
       );
-      return response.data; 
+      return response.data;
     } catch (error) {
       console.error(
         "Erro ao devolver o pedido:",

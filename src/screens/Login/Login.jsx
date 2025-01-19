@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Login.css"; // importando estilizacao css
+import "./Login.css";
+import ApiService from "../../services/apiService";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -27,13 +28,29 @@ const Login = () => {
     }
   }, [showAlert]);
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     if (email === "" || password === "") {
       setShowAlert(true);
-    } else {
-      // Lógica de login aqui
-      setShowAlert(false);
+      return;
+    }
+
+    try {
+      const response = await ApiService.loginUser(email, password);
+      console.log("API Response:", response);
+
+      if (response.ok) {
+        sessionStorage.setItem("id", response.idusuario);
+        sessionStorage.setItem("cliente", response.idcliente);
+        sessionStorage.setItem("perfil", response.perfil);
+        sessionStorage.setItem("token", response.token); // Salve o token no armazenamento local
+        navigate("/navigation"); // Redirecione para a página protegida
+      } else {
+        setShowAlert(true);
+      }
+    } catch (error) {
+      console.error("Erro ao fazer login:", error);
+      setShowAlert(true);
     }
   };
 
@@ -48,10 +65,10 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      <h2 className="h2-login">Login</h2>
+      <h2 className="h2-login">Bem-vindo ao CineHouse</h2>
       {showAlert && (
         <div className="alert">
-          Por favor, insira suas credenciais para fazer login.
+          Houve um erro. Suas credenciais podem estar incorretas.
         </div>
       )}
       <form onSubmit={handleLogin}>
@@ -62,7 +79,7 @@ const Login = () => {
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="E-mail"
+            placeholder="Digite seu e-mail"
             required
           />
         </div>
@@ -73,7 +90,7 @@ const Login = () => {
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="Senha"
+            placeholder="Digite sua senha"
             required
           />
           <a
@@ -81,16 +98,14 @@ const Login = () => {
             onClick={handleForgotPassword}
             className="forgot-password-link"
           >
-            Recuperar senha
+            Esqueceu sua senha?
           </a>
         </div>
-
         <div className="button-group-entrar">
           <button type="submit" className="btn1">
             Entrar
           </button>
         </div>
-
         <div className="button-group-entrar">
           <button onClick={handleCreateAccount} className="btn1">
             Criar Conta

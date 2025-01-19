@@ -55,6 +55,10 @@ function App() {
   };
 
   const handleSair = () => {
+    sessionStorage.removeItem("id");
+    sessionStorage.removeItem("cliente");
+    sessionStorage.removeItem("perfil");
+    sessionStorage.removeItem("token");
     navigate("/");
   };
 
