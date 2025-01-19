@@ -82,6 +82,14 @@ function GerenciarUsuarios() {
     fetchUsuarios();
   }, []);
 
+const handleEditClick = (usuario) => {
+    setSelectedUsuario({
+      ...usuario,
+      dataNasc: usuario.dataNasc || "",
+    });
+    setShowPopup(true); // Abre o popup de edição
+  };
+
   const handleSaveFuncionario = async () => {
     if (!funcionarioData.cargo || !funcionarioData.salario) {
       alert("Por favor, preencha todos os campos.");

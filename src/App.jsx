@@ -13,6 +13,7 @@ import GerenciarUsuarios from "./screens/GerenciarUsuarios/GerenciarUsuarios";
 import RelatorioDevolucao from "./screens/Relatorios/Devolucoes/Relatorio";
 import CriarUsuario from "./screens/CriarUsuario/CriarUsuario";
 import GerenciarFilme from "./screens/GerenciarFilme/GerenciarFilme";
+import RecuperarSenha from "./screens/RecuperarSenha/RecuperarSenha.jsx"
 
 const App = () => {
   return (
@@ -30,6 +31,7 @@ const App = () => {
         <Route path="/gerenciarUsuarios" element={<GerenciarUsuarios />} />
         <Route path="/gerenciarFilme" element={<GerenciarFilme />} />
         <Route path="/adm/criarUsuario" element={<CriarUsuario />} />
+        <Route path="/recuperarSenha" element={<RecuperarSenha />} />
         <Route path="/" element={<Login />} />
       </Routes>
     </Router>

@@ -12,6 +12,7 @@ function App() {
   const [selectedGenre, setSelectedGenre] = useState(""); // Estado para o filtro de gênero
   const [selectedYear, setSelectedYear] = useState(""); // Estado para o filtro de ano
   const [selectedPrice, setSelectedPrice] = useState(""); // Estado para o filtro de preço
+  const perfil = sessionStorage.getItem("perfil");
 
   const [isModalOpen, setIsModalOpen] = useState(false); // Controla a visibilidade do modal
   const [selectedMovie, setSelectedMovie] = useState(null); // Armazena os detalhes do filme selecionado
@@ -62,6 +63,7 @@ function App() {
     sessionStorage.removeItem("cliente");
     sessionStorage.removeItem("perfil");
     sessionStorage.removeItem("token");
+    sessionStorage.clear();
     navigate("/");
   };
 
@@ -72,7 +74,7 @@ function App() {
       : true;
 
     const yearMatch = selectedYear ? String(filme.ano) === selectedYear : true; // Garantir que a comparação de ano funcione
-    
+
     const priceMatch = selectedPrice
       ? filme.precoCompra <= parseFloat(selectedPrice) // Garantir que selectedPrice seja convertido para número
       : true;
@@ -86,7 +88,7 @@ function App() {
   });
 
   // Obter os anos disponíveis para o filtro
-  const years = [...new Set(filmes.map(filme => filme.ano))]; // Cria uma lista única de anos
+  const years = [...new Set(filmes.map((filme) => filme.ano))]; // Cria uma lista única de anos
 
   // Função para abrir o modal com os detalhes do filme
   const handleOpenModal = (filme) => {
@@ -103,16 +105,8 @@ function App() {
   return (
     <div className="app">
       <header className="main-header">
-        <div className="menu-container">
-          <button className="menu-button" onClick={toggleMenu}>
-            ☰
-          </button>
-        </div>
         <h1 className="logo">CineHouse</h1>
         <nav className="nav-links">
-          <a href="#movies">Filmes</a>
-          <a href="#series">Séries</a>
-
           {/* Barra de Busca */}
           <input
             type="text"
@@ -137,7 +131,10 @@ function App() {
           </select>
 
           {/* Carrinho */}
-          <button className="cart-button" onClick={() => alert("Carrinho clicado!")}>
+          <button
+            className="cart-button"
+            onClick={() => alert("Carrinho clicado!")}
+          >
             🛒 {/* Ícone do carrinho */}
             {/* Exibe a quantidade de itens no carrinho (nesse caso, começando com 0) */}
             (0)
@@ -146,13 +143,15 @@ function App() {
       </header>
       <aside className={`sidebar ${menuOpen ? "open" : ""}`}>
         <button className="close-button-navigation" onClick={toggleMenu}>
-          X
+          <span className="material-icons">☰</span>
         </button>
         <ul>
-          <li>Home</li>
           <li onClick={handlePerfil}>Perfil</li>
           <li>Filmes</li>
-          <li onClick={handleAdm}>Gerenciar Relatórios</li>
+          {/* Condicional para exibir "Gerenciar Relatórios" apenas para perfis autorizados */}
+          {perfil === "funcionario" && (
+            <li onClick={handleAdm}>Gerenciar Relatórios</li>
+          )}
           <li onClick={handleSair}>Sair</li>
         </ul>
 
@@ -195,8 +194,14 @@ function App() {
                   key={filme.idfilme}
                   title={filme.nomeFilme}
                   year={filme.ano}
-                  classification={filme.classificacaoIndicativa === 0 ? "Livre" : filme.classificacaoIndicativa}
-                  genre={mapeaGenero[filme.categoria_idcategoria] || "Desconhecido"}
+                  classification={
+                    filme.classificacaoIndicativa === 0
+                      ? "Livre"
+                      : filme.classificacaoIndicativa
+                  }
+                  genre={
+                    mapeaGenero[filme.categoria_idcategoria] || "Desconhecido"
+                  }
                   image={filme.imagem}
                   filme={filme} // Passa o filme completo para o MovieContainer
                   handleOpenModal={handleOpenModal} // Passa a função para abrir o modal
@@ -217,12 +222,28 @@ function App() {
               Fechar
             </button>
             <h2>{selectedMovie.nomeFilme}</h2>
-            <p><strong>Gênero:</strong> {mapeaGenero[selectedMovie.categoria_idcategoria]}</p>
-            <p><strong>Ano:</strong> {selectedMovie.ano}</p>
-            <p><strong>Classificação Indicativa:</strong> {selectedMovie.classificacaoIndicativa === 0 ? "Livre" : selectedMovie.classificacaoIndicativa}</p>
+            <p>
+              <strong>Gênero:</strong>{" "}
+              {mapeaGenero[selectedMovie.categoria_idcategoria]}
+            </p>
+            <p>
+              <strong>Ano:</strong> {selectedMovie.ano}
+            </p>
+            <p>
+              <strong>Classificação Indicativa:</strong>{" "}
+              {selectedMovie.classificacaoIndicativa === 0
+                ? "Livre"
+                : selectedMovie.classificacaoIndicativa}
+            </p>
             <img src={selectedMovie.imagem} alt={selectedMovie.nomeFilme} />
-            <p><strong>Preço Unitário:</strong> R${selectedMovie.precoCompra.toFixed(2)}</p>
-            <p>Preço locação (3 dias): R$ {(selectedMovie.precoCompra / 2).toFixed(2)} </p>
+            <p>
+              <strong>Preço Unitário:</strong> R$
+              {selectedMovie.precoCompra.toFixed(2)}
+            </p>
+            <p>
+              Preço locação (3 dias): R${" "}
+              {(selectedMovie.precoCompra / 2).toFixed(2)}{" "}
+            </p>
             <p>Quantidade disponível: {selectedMovie.qtdEstoque}</p>
             <button className="btn-add-carrinho">Adicionar Carrinho</button>
             {/* Exemplo de mais detalhes, você pode adicionar o que achar necessário */}
@@ -232,7 +253,15 @@ function App() {
     </div>
   );
 
-  function MovieContainer({ title, year, genre, classification, image, filme, handleOpenModal }) {
+  function MovieContainer({
+    title,
+    year,
+    genre,
+    classification,
+    image,
+    filme,
+    handleOpenModal,
+  }) {
     return (
       <div className="movie-container" onClick={() => handleOpenModal(filme)}>
         <img src={image} alt={title} className="movie-image" />

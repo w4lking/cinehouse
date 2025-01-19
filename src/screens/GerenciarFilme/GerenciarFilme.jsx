@@ -238,16 +238,25 @@ function GerenciarFilmes() {
 
       {/* Barra de pesquisa */}
       <button className="back-button" onClick={() => window.history.back()}>
-        Voltar
+        <i className="fas fa-arrow-left"></i> Voltar
       </button>
+
+      {/* Barra de pesquisa */}
       <div className="search-bar">
         <input
           type="text"
-          placeholder="Buscar por filmes."
+          placeholder="Buscar por filmes"
           value={searchTerm}
           onChange={handleSearch}
+          aria-label="Barra de pesquisa"
         />
-        <button onClick={handleAddFilmeClick}>Adicionar Filme</button>
+        <button
+          className="btn-adicionar"
+          onClick={handleAddFilmeClick}
+          aria-label="Adicionar Filme"
+        >
+          <i className="fas fa-plus"></i> Adicionar
+        </button>
       </div>
 
       {/* Lista de filmes */}
@@ -256,29 +265,37 @@ function GerenciarFilmes() {
           filteredFilmes.map((filme) => (
             <div className="filme-item" key={filme.idfilme}>
               <div className="filme-info">
-                <span className="filme-icon">🎬</span>
-                <span>
-                  ID: {filme.idfilme} Nome do Filme: {filme.nomeFilme}
+                <span
+                  className="filme-icon"
+                  role="img"
+                  aria-label="Ícone de filme"
+                >
+                  🎬
+                </span>
+                <span className="filme-detalhes">
+                  <strong>Nome do Filme:</strong> {filme.nomeFilme}
                 </span>
               </div>
               <div className="filme-acoes">
                 <button
                   className="btn alterar"
                   onClick={() => handleEditClick(filme)}
+                  aria-label="Alterar filme"
                 >
-                  Alterar
+                  <i className="fas fa-edit"></i> Alterar
                 </button>
                 <button
                   className="btn deletar"
                   onClick={() => handleDeleteFilme(filme.idfilme)}
+                  aria-label="Deletar filme"
                 >
-                  Deletar
+                  <i className="fas fa-trash"></i> Deletar
                 </button>
               </div>
             </div>
           ))
         ) : (
-          <p>Nenhum filme encontrado.</p>
+          <p className="sem-filmes">Nenhum filme encontrado.</p>
         )}
       </div>
 
@@ -288,7 +305,7 @@ function GerenciarFilmes() {
           <div className="popup-content">
             <h2>Editar Filme</h2>
             <label>ID Filme:</label>
-            <input 
+            <input
               type="text"
               disabled={true}
               value={selectedFilme.idfilme}

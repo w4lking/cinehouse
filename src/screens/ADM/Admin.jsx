@@ -2,9 +2,6 @@
 import React from "react";
 import "./Admin.css";
 import { useNavigate } from "react-router-dom";
-import pranchetaPng from "./imagens/prancheta.png";
-import userIconPng from "./imagens/userIcon.png";
-import movieIconPng from "./imagens/movieIcon.png";
 
 const Admin = () => {
   document.title = "Administrativo CineHouse"; // hook para alterar título da aba
@@ -31,48 +28,46 @@ const Admin = () => {
   };
 
   return (
-    <div>
+    <div className="admin-container">
+      <h1 className="admin-title">Painel Administrativo CineHouse</h1>
       {/* Container dos cards */}
       <div className="container">
         <div className="card">
-          <div className="card-header">Gerenciar usuários</div>
+          <div className="card-header">
+            <i className="fas fa-users card-icon"></i> Gerenciar Usuários
+          </div>
           <div className="card-body">
-            <img
-              src={userIconPng}
-              alt="Ícone de Gerenciar Usuários"
-              className="card-image"
-            />
-            <button onClick={handleAddUser}>Adicionar usuário</button>
-            <button onClick={handleManageUser}>Vizualizar usuários</button>
+            <button onClick={handleAddUser}>
+              <i className="fas fa-user-plus"></i> Adicionar Usuário
+            </button>
+            <button onClick={handleManageUser}>
+              <i className="fas fa-user-edit"></i> Visualizar Usuários
+            </button>
           </div>
         </div>
 
         <div className="card">
-          <div className="card-header">Gerar relatório</div>
+          <div className="card-header">
+            <i className="fas fa-chart-line card-icon"></i> Gerar Relatórios
+          </div>
           <div className="card-body">
-            <img
-              src={pranchetaPng}
-              alt="Ícone de Gerar Relatório"
-              className="card-image"
-            />
             <button onClick={handleRelatorioVenda}>
-              Relatório de vendas/alugéis
+              <i className="fas fa-file-alt"></i> Relatório de Vendas/Aluguéis
             </button>
             <button onClick={handleRelatorioDevolucao}>
-              Relatório de devoluções
+              <i className="fas fa-clipboard-list"></i> Relatório de Devoluções
             </button>
           </div>
         </div>
 
         <div className="card">
-          <div className="card-header">Gerenciamento de Filmes CINEHOUSE</div>
+          <div className="card-header">
+            <i className="fas fa-film card-icon"></i> Gerenciamento de Filmes
+          </div>
           <div className="card-body">
-            <img
-              src={movieIconPng}
-              alt="Ícone de Editar Filmes"
-              className="card-image"
-            />
-            <button onClick={handleAcessarGerenciamento}>Acessar</button>
+            <button onClick={handleAcessarGerenciamento}>
+              <i className="fas fa-cogs"></i> Acessar
+            </button>
           </div>
         </div>
       </div>
