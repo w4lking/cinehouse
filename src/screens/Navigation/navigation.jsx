@@ -217,11 +217,11 @@ function App() {
       {/* Modal de detalhes do filme */}
       {isModalOpen && selectedMovie && (
         <div className="movie-modal-overlay">
-          <div className="movie-modal-content">
+          <div className="movie-modal-content-navigation">
             <button className="close-button" onClick={handleCloseModal}>
               Fechar
             </button>
-            <h2>{selectedMovie.nomeFilme}</h2>
+            <h2 className="titulo-filme">{selectedMovie.nomeFilme}</h2>
             <p>
               <strong>Gênero:</strong>{" "}
               {mapeaGenero[selectedMovie.categoria_idcategoria]}
