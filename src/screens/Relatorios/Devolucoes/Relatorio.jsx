@@ -1,62 +1,58 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import { useState, useEffect } from "react";
 import "./Relatorio.css";
-import AreaChart from "./charts/AreaChart";
+import ApiService from "../../../services/apiService";
 
 function RelatorioDevolucao() {
-  // Exemplo de dados
-  const filmesMaisVendidos = [
-    { nome: "Avatar", quantidade: 150 },
-    { nome: "Vingadores: Ultimato", quantidade: 200 },
-    { nome: "Titanic", quantidade: 180 },
-    { nome: "Star Wars: O Despertar da Força", quantidade: 120 },
-    { nome: "Velozes e Furiosos 7", quantidade: 110 },
-    { nome: "Os Vingadores", quantidade: 170 },
-    { nome: "O Rei Leão", quantidade: 130 },
-    { nome: "Frozen 2", quantidade: 140 },
-    { nome: "Velozes e Furiosos 8", quantidade: 100 },
-    { nome: "Homem de Ferro 3", quantidade: 90 },
-  ];
+  // Estado para armazenar os filmes mais vendidos
+  const [statusDeDevolucao, setStatusDeDevolucao] = useState([]);
+
+  // Função para buscar os dados da API
+  async function getDevolucoes() {
+    try {
+      const response = await ApiService.getRelatorioDevolucao();
+      const formattedData = response.data.map((pedido) => ({
+        ...pedido,
+        dataPedido: pedido.dataPedido
+          ? pedido.dataPedido.split("T")[0] // Extrai apenas a data
+          : "Data inválida", // Adicione um fallback para valores inválidos
+      }));
+      setStatusDeDevolucao(formattedData);
+    } catch (error) {
+      console.error("Erro ao buscar filmes vendidos:", error);
+    }
+  }
+
+  useEffect(() => {
+    getDevolucoes();
+  }, []);
 
   return (
     <div className="relatorio-container">
       <h1>Relatório de devoluções</h1>
       <div className="relatorio-tabelas">
         <div className="tabela">
-          <h2>Datas de devolução de filmes</h2>
+          <h2>Filmes devolvidos</h2>
           <table>
             <thead>
               <tr>
-                <th>Nome do Filme</th>
-                <th>Quantidade em estoque</th>
+                <th>Nome do usuário</th>
+                <th>Status do pedido</th>
+                <th>Data pedido</th>
+                <th>Nome do produto</th>
               </tr>
             </thead>
             <tbody>
-              {filmesMaisVendidos.map((filme, index) => (
+              {statusDeDevolucao.map((devolucao, index) => (
                 <tr key={index}>
-                  <td>{filme.nome}</td>
-                  <td>{filme.quantidade}</td>
+                  <td>{devolucao.nome}</td>
+                  <td>{devolucao.statusPedido}</td>
+                  <td>{devolucao.dataPedido}</td>
+                  <td>{devolucao.nomeFilme}</td>
                 </tr>
               ))}
             </tbody>
           </table>
-        </div>
-      </div>
-
-      {/* Segunda seção com os cards */}
-      <div className="dashboard-cards">
-        <h2 className="section-title">Gráficos e Painéis</h2>
-        <div className="cards-container">
-          <div className="card">
-            <h3>Area Chart</h3>
-            <AreaChart />
-          </div>
-          <div className="card">
-            <h3>Bar Chart</h3>
-          </div>
-          <div className="card">
-            <h3>Line Chart</h3>
-          </div>
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 /* Estilização principal da página */
 .container {
-  max-width: 80%;
+  max-width: 90%; /* Aumenta o tamanho máximo do contêiner */
   margin: 0 auto;
   padding: 20px;
   font-family: Arial, sans-serif;
@@ -8,7 +8,6 @@
   flex-direction: column;
   align-items: center; /* Centraliza o conteúdo horizontalmente */
 }
-
 /* Título centralizado */
 h1 {
   text-align: center;
@@ -38,17 +37,16 @@ h1 {
   background-color: #0056b3;
 }
 
-/* Tabela centralizada */
 table {
-  width: 100%;
-  max-width: 800px;
+  width: 100%; /* Garante que a tabela ocupe todo o espaço disponível */
+  max-width: none; /* Remove o limite de largura */
   border-collapse: collapse;
   margin-top: 20px; /* Espaçamento entre o título e a tabela */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
-
 /* Cabeçalhos e células da tabela */
-th, td {
+th,
+td {
   padding: 20px;
   text-align: center; /* Centraliza o conteúdo das células */
   border-bottom: 1px solid #ddd;
@@ -97,4 +95,117 @@ tr:hover {
 
 .return-button:hover {
   background-color: #c82333;
+}
+
+.info-button {
+  background-color: #007bff;
+  width: 50px;
+}
+
+/* Estilo do modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fundo semitransparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Sobrepõe outros elementos */
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  position: relative;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+}
+
+.close-button:hover {
+  color: red;
+}
+
+.modal-content h2 {
+  margin-bottom: 20px;
+}
+
+.modal-content p {
+  margin: 10px 0;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+.close-button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+  float: right;
+  font-size: 14px;
+}
+
+.error-message {
+  color: red;
+  font-weight: bold;
+}
+
+table tbody td {
+  position: relative; /* Necessário para posicionar o botão dentro da célula */
+}
+
+.info-button {
+  position: absolute;
+  top: 50%; /* Centraliza verticalmente */
+  right: 10px; /* Define a distância do canto direito */
+  transform: translateY(-50%); /* Ajusta o alinhamento vertical */
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.info-button:hover {
+  background-color: #0056b3; /* Cor ao passar o mouse */
 }

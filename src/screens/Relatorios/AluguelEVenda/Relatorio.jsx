@@ -1,41 +1,50 @@
-/* eslint-disable no-unused-vars */
-import React from "react";
+import { useEffect, useState } from "react";
 import "./Relatorio.css";
-import AreaChart from "./charts/AreaChart";
+import ApiService from "../../../services/apiService";
+import BarChartComponent from "./charts/BarChart";
 
 function Relatorio() {
-  // Exemplo de dados
-  const filmesMaisVendidos = [
-    { nome: "Avatar", quantidade: 150 },
-    { nome: "Vingadores: Ultimato", quantidade: 200 },
-    { nome: "Titanic", quantidade: 180 },
-    { nome: "Star Wars: O Despertar da Força", quantidade: 120 },
-    { nome: "Velozes e Furiosos 7", quantidade: 110 },
-    { nome: "Os Vingadores", quantidade: 170 },
-    { nome: "O Rei Leão", quantidade: 130 },
-    { nome: "Frozen 2", quantidade: 140 },
-    { nome: "Velozes e Furiosos 8", quantidade: 100 },
-    { nome: "Homem de Ferro 3", quantidade: 90 },
-  ];
+  // Estado para armazenar os filmes mais vendidos
+  const [filmesMaisVendidos, setFilmesMaisVendidos] = useState([]);
 
-  //Exemplo de dados
-  const filmesMaisAlugados = [
-    { nome: "Toy Story", quantidade: 300 },
-    { nome: "Harry Potter e a Pedra Filosofal", quantidade: 250 },
-    { nome: "Shrek", quantidade: 220 },
-    { nome: "A Era do Gelo", quantidade: 200 },
-    { nome: "Matrix", quantidade: 180 },
-    { nome: "Homem-Aranha", quantidade: 170 },
-    { nome: "Jurassic Park", quantidade: 160 },
-    { nome: "Madagascar", quantidade: 150 },
-    { nome: "De Volta para o Futuro", quantidade: 140 },
-    { nome: "O Exterminador do Futuro", quantidade: 130 },
-  ];
+  // Função para buscar os dados da API
+  async function getFilmesMaisVendidos() {
+    try {
+      const response = await ApiService.getRelatorioVendas();
+      const data = response.data; // Garante que é um array
+      setFilmesMaisVendidos(data);
+    } catch (error) {
+      console.error("Erro ao buscar filmes vendidos:", error);
+    }
+  }
+
+  useEffect(() => {
+    getFilmesMaisVendidos();
+  }, []);
+
+  const [filmesMaisAlugados, setFilmesMaisAlugados] = useState([]);
+
+  // Função para buscar os dados da API
+  async function getFilmesMaisAlugados() {
+    try {
+      const response = await ApiService.getRelatorioLocacao();
+      const data = response.data; // Garante que é um array
+      console.log("Dados recebidos:", data); // Adicione para verificar os dados recebidos
+      setFilmesMaisAlugados(data);
+    } catch (error) {
+      console.error("Erro ao buscar filmes alugados:", error);
+    }
+  }
+
+  useEffect(() => {
+    getFilmesMaisAlugados();
+  }, []);
 
   return (
     <div className="relatorio-container">
       <h1>Relatório de aluguéis e vendas</h1>
       <div className="relatorio-tabelas">
+        {/* Tabela de filmes mais vendidos */}
         <div className="tabela">
           <h2>Filmes mais vendidos</h2>
           <table>
@@ -46,15 +55,22 @@ function Relatorio() {
               </tr>
             </thead>
             <tbody>
-              {filmesMaisVendidos.map((filme, index) => (
-                <tr key={index}>
-                  <td>{filme.nome}</td>
-                  <td>{filme.quantidade}</td>
+              {filmesMaisVendidos.length > 0 ? (
+                filmesMaisVendidos.map((filme, index) => (
+                  <tr key={index}>
+                    <td>{filme.nomeFilme || "Nome não disponível"}</td>
+                    <td>{filme.quantidade || 0}</td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="2">Nenhum dado disponível</td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
         </div>
+        {/* Tabela de filmes mais alugados */}
         <div className="tabela">
           <h2>Filmes mais alugados</h2>
           <table>
@@ -67,29 +83,23 @@ function Relatorio() {
             <tbody>
               {filmesMaisAlugados.map((filme, index) => (
                 <tr key={index}>
-                  <td>{filme.nome}</td>
+                  <td>{filme.nomeFilme}</td>
                   <td>{filme.quantidade}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
-      </div>
+        {/* Gráfico de barras */}
+        <div className="grafico">
+          <h2>Gráfico de Filmes Mais Vendidos</h2>
+          <BarChartComponent data={filmesMaisVendidos} />
+        </div>
 
-      {/* Segunda seção com os cards */}
-      <div className="dashboard-cards">
-        <h2 className="section-title">Gráficos e Painéis</h2>
-        <div className="cards-container">
-          <div className="card">
-            <h3>Area Chart</h3>
-            <AreaChart />
-          </div>
-          <div className="card">
-            <h3>Bar Chart</h3>
-          </div>
-          <div className="card">
-            <h3>Line Chart</h3>
-          </div>
+        {/* Gráfico de barras */}
+        <div className="grafico">
+          <h2>Gráfico de Filmes Mais Alugados</h2>
+          <BarChartComponent data={filmesMaisAlugados} />
         </div>
       </div>
     </div>
