@@ -46,6 +46,12 @@ function GerenciarUsuarios() {
   const [searchTerm, setSearchTerm] = useState("");
   const [showPopup, setShowPopup] = useState(false); // Controle do popup
   const [selectedUsuario, setSelectedUsuario] = useState(null); // Dados do usuário selecionado para editar
+  const [showFuncionarioPopup, setShowFuncionarioPopup] = useState(false); // Controla o pop-up para adicionar funcionário
+  const [funcionarioData, setFuncionarioData] = useState({
+    idusuario: "",
+    cargo: "",
+    salario: "",
+  }); // Armazena os dados do funcionário
 
   document.title = "Gerencia";
   useEffect(() => {
@@ -70,6 +76,40 @@ function GerenciarUsuarios() {
     fetchUsuarios();
   }, []);
 
+  const handleSaveFuncionario = async () => {
+    if (!funcionarioData.cargo || !funcionarioData.salario) {
+      alert("Por favor, preencha todos os campos.");
+      return;
+    }
+    try {
+      const response = await ApiService.adicionarFuncionario({
+        usuario_idusuario: funcionarioData.idusuario,
+        cargo: funcionarioData.cargo,
+        salario: funcionarioData.salario,
+      });
+
+      if (response && response.status === "success") {
+        alert("Funcionário adicionado com sucesso!");
+        setShowFuncionarioPopup(false); // Fecha o pop-up
+      } else {
+        alert(`Erro: ${response?.message || "Erro desconhecido"}`);
+      }
+    } catch (error) {
+      console.error("Erro ao adicionar funcionário:", error);
+      alert("Erro inesperado ao adicionar funcionário.");
+    }
+  };
+
+  // Cuida do pop-upp de adicionar funcionário
+  const handleAddFuncionarioClick = (usuario) => {
+    setFuncionarioData({
+      idusuario: usuario.idusuario,
+      cargo: "",
+      salario: "",
+    });
+    setShowFuncionarioPopup(true); // Abre o pop-up
+  };
+
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
@@ -79,36 +119,45 @@ function GerenciarUsuarios() {
   );
 
   // Função de adicionar funcionário
-  const handleAddFuncionarioClick = async (usuario) => {
-    const cargoPadrao = "Administrador";  // Cargo padrão
-    const salarioPadrao = 2000;  // Salário padrão
-    
+  /*const handleAddFuncionarioClick = async (usuario) => {
+    const cargoPadrao = "Administrador"; // Cargo padrão
+    const salarioPadrao = 2000; // Salário padrão
+
     try {
       // Certifique-se de que o usuário.idusuario está sendo passado corretamente
       const response = await ApiService.AdicionarFuncionario({
         usuario_idusuario: usuario.idusuario,
         cargo: cargoPadrao,
-        salario: salarioPadrao
+        salario: salarioPadrao,
       });
-  
+
       // Verifique a resposta da API
       if (response && response.status === "success") {
-        alert(`Usuário ${usuario.nome} foi adicionado como funcionário com sucesso!`);
+        alert(
+          `Usuário ${usuario.nome} foi adicionado como funcionário com sucesso!`
+        );
       } else {
-        alert(`Erro ao adicionar funcionário: ${response?.message || "Erro desconhecido"}`);
+        alert(
+          `Erro ao adicionar funcionário: ${
+            response?.message || "Erro desconhecido"
+          }`
+        );
       }
     } catch (error) {
       console.error("Erro ao adicionar funcionário:", error);
       if (error.response) {
         // Exibe detalhes completos da resposta de erro do backend
         console.error("Detalhes do erro:", error.response.data);
-        alert(`Erro ao adicionar funcionário: ${error.response.data.message || "Erro desconhecido"}`);
+        alert(
+          `Erro ao adicionar funcionário: ${
+            error.response.data.message || "Erro desconhecido"
+          }`
+        );
       } else {
         alert("Erro inesperado ao adicionar funcionário.");
       }
     }
-  };
-  
+  };*/
 
   const handlePopupClose = () => {
     setShowPopup(false); // Fecha o popup
@@ -185,7 +234,7 @@ function GerenciarUsuarios() {
                 </span>
               </div>
               <div className="usuario-acoes">
-              <button
+                <button
                   className="btn-funcionario"
                   onClick={() => handleAddFuncionarioClick(usuario)}
                 >
@@ -254,6 +303,55 @@ function GerenciarUsuarios() {
                 Salvar
               </button>
               <button className="btn cancelar" onClick={handlePopupClose}>
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showFuncionarioPopup && (
+        <div className="popup-funcionario">
+          <div className="popup-funcionario-content">
+            <h2>Adicionar Funcionário</h2>
+            <label>ID do Usuário:</label>
+            <input type="text" value={funcionarioData.idusuario} disabled />
+
+            <label>Cargo:</label>
+            <input
+              type="text"
+              value={funcionarioData.cargo}
+              onChange={(e) =>
+                setFuncionarioData({
+                  ...funcionarioData,
+                  cargo: e.target.value,
+                })
+              }
+            />
+
+            <label>Salário:</label>
+            <input
+              type="number"
+              value={funcionarioData.salario}
+              onChange={(e) =>
+                setFuncionarioData({
+                  ...funcionarioData,
+                  salario: e.target.value,
+                })
+              }
+            />
+
+            <div className="popup-actions-funcionario">
+              <button
+                className="btn salvar funcionario"
+                onClick={handleSaveFuncionario}
+              >
+                Salvar
+              </button>
+              <button
+                className="btn cancelar funcionario"
+                onClick={() => setShowFuncionarioPopup(false)}
+              >
                 Cancelar
               </button>
             </div>

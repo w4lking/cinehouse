@@ -501,6 +501,7 @@ class ApiService {
       throw error;
     }
   }
+
   async devolverPedido(idPedido, statusPedido) {
     const url = `${this.server}api/pedido/devolver/${idPedido}/${statusPedido}`;
     try {
@@ -519,6 +520,30 @@ class ApiService {
         "Erro ao devolver o pedido:",
         error.response ? error.response.data : error.message
       );
+      throw error;
+    }
+  }
+
+  async adicionarFuncionario({ usuario_idusuario, salario, cargo }) {
+    const url = `${this.server}api/add/funcionario`;
+
+    try {
+      const response = await axios.post(
+        url,
+        {
+          usuario_idusuario,
+          salario,
+          cargo,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Erro ao adicionar funcionário:", error);
       throw error;
     }
   }

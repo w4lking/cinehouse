@@ -18,7 +18,7 @@ h1 {
 }
 
 /* Botão Voltar fixo no canto superior esquerdo */
-.back-button {
+.botao_voltar {
   position: fixed;
   top: 20px;
   left: 20px;
@@ -33,7 +33,7 @@ h1 {
   transition: background-color 0.3s ease;
 }
 
-.back-button:hover {
+.botao_voltar:hover {
   background-color: #0056b3;
 }
 

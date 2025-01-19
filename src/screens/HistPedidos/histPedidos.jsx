@@ -145,7 +145,7 @@ const HistCompras = () => {
 
   return (
     <div className="container">
-      <button className="back-button" onClick={() => window.history.back()}>
+      <button className="botao_voltar" onClick={() => window.history.back()}>
         Voltar
       </button>
 
