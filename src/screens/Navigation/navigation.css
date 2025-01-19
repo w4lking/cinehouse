@@ -15,7 +15,7 @@ body {
   justify-content: space-between;
   background-color: #2c3e50;
   color: white;
-  padding: 5px 20px;
+  padding: 5px 7px;
 
 }
 
@@ -201,4 +201,45 @@ body {
   color: white;
   background-color: #2c3e50;
   width: 100%;
+}
+
+.cart-icon-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centraliza o ícone e o número */
+}
+
+.cart-icon {
+  font-size: 24px;
+  background: none;  /* Remove qualquer fundo aplicado ao ícone */
+  border: none;
+  cursor: pointer;
+  padding: 5px; /* Ajusta o tamanho da área de clique do ícone */
+  transition: none; /* Remove transições de hover no ícone */
+}
+
+.cart-icon:hover {
+  background-color: transparent; /* Garante que o fundo não mude no hover */
+  box-shadow: none; /* Remove a sombra no hover */
+}
+
+.cart-count {
+  position: absolute;
+  top: -5px; /* Coloca o número um pouco acima do ícone */
+  right: 60px; /* Coloca o número um pouco à direita do ícone */
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px; /* Ajusta o tamanho do círculo e o espaço do número */
+  font-size: 14px; /* Tamanho do número */
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Alinha o número no centro do círculo */
+}
+
+/* Remover hover de outras áreas que possam estar influenciando o carrinho */
+.cart-icon-container:hover .cart-icon {
+  background: none; /* Garante que não tenha fundo no hover */
+  box-shadow: none; /* Garante que não tenha sombra */
 }
