@@ -13,9 +13,10 @@ function App() {
   const [selectedYear, setSelectedYear] = useState(""); // Estado para o filtro de ano
   const [selectedPrice, setSelectedPrice] = useState(""); // Estado para o filtro de preço
   const perfil = sessionStorage.getItem("perfil");
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(1); // quantidade inicial da seleção de filmes no carrinho
   const [isModalOpen, setIsModalOpen] = useState(false); // Controla a visibilidade do modal
   const [selectedMovie, setSelectedMovie] = useState(null); // Armazena os detalhes do filme selecionado
+  // const [cart, setCart] = useState([]); // Estado para armazenar os itens do carrinho
 
   const mapeaGenero = {
     1: "Drama",
@@ -240,27 +241,24 @@ function App() {
       </main>
 
       {/* Modal de detalhes do filme */}
-{isModalOpen && selectedMovie && (
+      {isModalOpen && selectedMovie && (
   <div className="movie-modal-overlay">
     <div className="movie-modal-content-navigation">
       <button className="close-button" onClick={handleCloseModal}>
         Fechar
       </button>
       <h2 className="titulo-filme">{selectedMovie.nomeFilme}</h2>
+      
+      {/* Exibição da sinopse */}
       <p>
-        <strong>Gênero:</strong>{" "}
-        {mapeaGenero[selectedMovie.categoria_idcategoria]}
+        <strong>Sinopse:</strong> {selectedMovie.sinopse}
       </p>
-      <p>
-        <strong>Ano:</strong> {selectedMovie.ano}
-      </p>
-      <p>
-        <strong>Classificação Indicativa:</strong>{" "}
-        {selectedMovie.classificacaoIndicativa === 0
-          ? "Livre"
-          : selectedMovie.classificacaoIndicativa}
-      </p>
-      <img className="img-filme" src={selectedMovie.imagem} alt={selectedMovie.nomeFilme} />
+      
+      <img
+        className="img-filme"
+        src={selectedMovie.imagem}
+        alt={selectedMovie.nomeFilme}
+      />
       <p>
         <strong>Preço Unitário:</strong> R$
         {selectedMovie.precoCompra.toFixed(2)}
@@ -275,23 +273,38 @@ function App() {
       <div className="quantity-controls">
         <button
           className="btn-decrease"
-          onClick={() => setQuantity(quantity > 1 ? quantity - 1 : 1)}   // Impede que a quantidade vá abaixo de 1
+          onClick={() => setQuantity(quantity > 1 ? quantity - 1 : 1)} // Impede que a quantidade vá abaixo de 1
         >
           -
         </button>
         <span className="quantity-display">{quantity}</span>
         <button
           className="btn-increase"
-          onClick={() => setQuantity(quantity < selectedMovie.qtdEstoque ? quantity + 1 : selectedMovie.qtdEstoque)} // Impede que a quantidade ultrapasse o estoque
+          onClick={() =>
+            setQuantity(
+              quantity < selectedMovie.qtdEstoque
+                ? quantity + 1
+                : selectedMovie.qtdEstoque
+            )
+          } // Impede que a quantidade ultrapasse o estoque
         >
           +
         </button>
       </div>
 
-      <button className="btn-add-carrinho" onClick={handleAddToCart} disable={selectedMovie.qtdEstoque === 0}>{selectedMovie.qtdEstoque > 0 ? "Adicionar ao Carrinho" : "Indisponível"}</button>
+      <button
+        className="btn-add-carrinho"
+        onClick={handleAddToCart}
+        disable={selectedMovie.qtdEstoque === 0}
+      >
+        {selectedMovie.qtdEstoque > 0
+          ? "Adicionar ao Carrinho"
+          : "Indisponível"}
+      </button>
     </div>
   </div>
 )}
+
     </div>
   );
 
