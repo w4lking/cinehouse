@@ -7,6 +7,21 @@ class ApiService {
     // this.server = "http://localhost:5000/";
   }
 
+  async loginUser(email, password) {
+    const url = `${this.server}api/user/login`;
+    try {
+      const response = await axios.post(
+        url,
+        { email, password },
+        { headers: { "Content-Type": "application/json" } }
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Erro na chamada de login:", error);
+      throw error;
+    }
+  }
+
   async registerUser(username, cpf, email, birthDate, password) {
     console.log(username, cpf, email, birthDate, password);
     const url = `${this.server}api/register`;

@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Login.css"; // importando estilizacao css
+import "./Login.css";
+import ApiService from "../../services/apiService";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -27,13 +28,29 @@ const Login = () => {
     }
   }, [showAlert]);
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     if (email === "" || password === "") {
       setShowAlert(true);
-    } else {
-      // Lógica de login aqui
-      setShowAlert(false);
+      return;
+    }
+
+    try {
+      const response = await ApiService.loginUser(email, password);
+      console.log("API Response:", response);
+
+      if (response.ok) {
+        sessionStorage.setItem("id", response.idusuario);
+        sessionStorage.setItem("cliente", response.idcliente);
+        sessionStorage.setItem("perfil", response.perfil);
+        sessionStorage.setItem("token", response.token); // Salve o token no armazenamento local
+        navigate("/navigation"); // Redirecione para a página protegida
+      } else {
+        setShowAlert(true);
+      }
+    } catch (error) {
+      console.error("Erro ao fazer login:", error);
+      setShowAlert(true);
     }
   };
 
