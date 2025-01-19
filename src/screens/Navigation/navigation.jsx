@@ -120,6 +120,13 @@ function App() {
               </option>
             ))}
           </select>
+
+          {/* Carrinho */}
+    <button className="cart-button" onClick={() => alert("Carrinho clicado!")}>
+      🛒 {/* Ícone do carrinho */}
+      {/* Exibe a quantidade de itens no carrinho (nesse caso, começando com 0) */}
+      (0)
+    </button> 
         </nav>
       </header>
       <aside className={`sidebar ${menuOpen ? "open" : ""}`}>
