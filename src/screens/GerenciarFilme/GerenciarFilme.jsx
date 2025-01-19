@@ -237,7 +237,7 @@ function GerenciarFilmes() {
       <h1>Gerenciar Filmes</h1>
 
       {/* Barra de pesquisa */}
-      <button className="back-button" onClick={() => window.history.back()}>
+      <button className="back-button-filme" onClick={() => window.history.back()}>
         <i className="fas fa-arrow-left"></i> Voltar
       </button>
 
