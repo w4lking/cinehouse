@@ -1,23 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import './Register.css';
+import React, { useState, useEffect } from "react";
+import "./Register.css";
 import ApiService from "../../services/apiService";
 
-
 const Register = () => {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [cpf, setCpf] = useState('');
-  const [birthDate, setBirthDate] = useState('');
-  const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [cpf, setCpf] = useState("");
+  const [birthDate, setBirthDate] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   useEffect(() => {
-    document.title = 'Registro';
-    document.body.classList.add('register-page');
+    document.title = "Registro";
+    document.body.classList.add("register-page");
 
     return () => {
-      document.body.classList.remove('register-page');
+      document.body.classList.remove("register-page");
     };
   }, []);
 
@@ -25,20 +24,27 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      const response = await ApiService.registerUser(username, cpf, email, birthDate, password);
-      setSuccessMessage(response.message || 'Usuário registrado com sucesso!');
-      setErrorMessage('');
+      const response = await ApiService.registerUser(
+        username,
+        cpf,
+        email,
+        birthDate,
+        password
+      );
+      setSuccessMessage(response.message || "Usuário registrado com sucesso!");
+      setErrorMessage("");
       // Limpa os campos após o sucesso
-      setUsername('');
-      setCpf('');
-      setEmail('');
-      setBirthDate('');
-      setPassword('');
+      setUsername("");
+      setCpf("");
+      setEmail("");
+      setBirthDate("");
+      setPassword("");
     } catch (error) {
       setErrorMessage(
-        error.response?.data?.message || 'Erro ao registrar usuário. Tente novamente.'
+        error.response?.data?.message ||
+          "Erro ao registrar usuário. Tente novamente."
       );
-      setSuccessMessage('');
+      setSuccessMessage("");
     }
   };
 
@@ -54,7 +60,7 @@ const Register = () => {
 
   return (
     <div className="register-container">
-      <h2>Criar Conta</h2>
+      <h2>Crie sua conta</h2>
       {successMessage && <p className="success-message">{successMessage}</p>}
       {errorMessage && <p className="error-message">{errorMessage}</p>}
       <form onSubmit={handleSubmit}>
@@ -65,6 +71,7 @@ const Register = () => {
             id="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            placeholder="Digite seu nome de usuário"
             required
           />
         </div>
@@ -77,11 +84,12 @@ const Register = () => {
             onChange={(e) => setCpf(e.target.value)}
             onBlur={() => {
               if (!validateCpf(cpf)) {
-                setErrorMessage('CPF inválido. Use o formato 000.000.000-00.');
+                setErrorMessage("CPF inválido. Use o formato 000.000.000-00.");
               } else {
-                setErrorMessage('');
+                setErrorMessage("");
               }
             }}
+            placeholder="000.000.000-00"
             required
           />
         </div>
@@ -92,6 +100,7 @@ const Register = () => {
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            placeholder="Digite seu e-mail"
             required
           />
         </div>
@@ -112,13 +121,14 @@ const Register = () => {
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            placeholder="Digite sua senha"
             required
           />
         </div>
         <button type="submit" className="register-button">
           Registrar
         </button>
-        <button onClick={handleGoBack} className="back-button">
+        <button onClick={handleGoBack} className="register-button">
           Voltar
         </button>
       </form>
