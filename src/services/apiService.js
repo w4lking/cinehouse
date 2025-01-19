@@ -2,9 +2,9 @@ import axios from "axios";
 
 class ApiService {
   constructor() {
-    this.server = "https://cinehouse-server.vercel.app/";
+    // this.server = "https://cinehouse-server.vercel.app/";
 
-    // this.server = "http://localhost:5000/";
+    this.server = "http://localhost:5000/";
   }
 
   async loginUser(email, password) {
