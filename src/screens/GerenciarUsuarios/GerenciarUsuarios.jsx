@@ -105,7 +105,7 @@ function GerenciarUsuarios() {
     setFuncionarioData({
       idusuario: usuario.idusuario,
       cargo: "",
-      salario: "",
+      salario: 2000,
     });
     setShowFuncionarioPopup(true); // Abre o pop-up
   };
@@ -318,16 +318,19 @@ function GerenciarUsuarios() {
             <input type="text" value={funcionarioData.idusuario} disabled />
 
             <label>Cargo:</label>
-            <input
-              type="text"
-              value={funcionarioData.cargo}
+            <select
+              value={funcionarioData.cargo || ""}
               onChange={(e) =>
                 setFuncionarioData({
                   ...funcionarioData,
                   cargo: e.target.value,
                 })
               }
-            />
+            >
+              <option value="">Selecione um cargo</option>
+              <option value="Caixa">Caixa</option>
+              <option value="Administrador">Administrador</option>
+            </select>
 
             <label>Salário:</label>
             <input
