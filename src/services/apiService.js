@@ -2,9 +2,9 @@ import axios from "axios";
 
 class ApiService {
   constructor() {
-    this.server = "https://cinehouse-server.vercel.app/";
+    // this.server = "https://cinehouse-server.vercel.app/";
 
-    // this.server = "http://localhost:5000/";
+    this.server = "http://localhost:5000/";
   }
 
   async loginUser(email, password) {
@@ -171,19 +171,6 @@ class ApiService {
     }
   }
 
-  async getCategoria() {
-    const url = `${this.server}api/categoria`;
-    try {
-      const response = await axios.get(url, {
-        headers: { "Content-Type": "application/json" },
-      });
-      console.log("Categorias recebidas:", response.data);
-      setCategorias(response.data.data); // Acesse a propriedade 'data'
-    } catch (error) {
-      console.error("Erro ao buscar as categorias:", error);
-    }
-  }
-
   async adicionarFilme(
     nomeFilme,
     sinopse,
@@ -193,7 +180,7 @@ class ApiService {
     disponivelLocacao,
     classificacaoIndicativa,
     imagem,
-    categoria_idcategoria // Novo campo
+    idcategoria
   ) {
     const url = `${this.server}api/add/filme`;
     try {
@@ -208,7 +195,7 @@ class ApiService {
           disponivelLocacao,
           classificacaoIndicativa,
           imagem,
-          categoria_idcategoria, // Enviar para o backend
+          idcategoria
         },
         {
           headers: {

@@ -4,7 +4,8 @@ import ApiService from "../../services/apiService";
 
 function GerenciarFilmes() {
   const [filmes, setFilmes] = useState([]);
-  const [categorias, setCategorias] = useState([]);
+  const [selectedCategoria, setSelectedCategoria] = useState(""); // Estado para a categoria selecionada
+  const [categorias, setCategorias] = useState([]); // Estado para armazenar categorias
   const [searchTerm, setSearchTerm] = useState("");
   const [showPopup, setShowPopup] = useState(false); // Controle do popup de edição
   const [showAddPopup, setShowAddPopup] = useState(false); // Controle do popup de adicionar filme
@@ -19,9 +20,8 @@ function GerenciarFilmes() {
     disponivelLocacao: false,
     classificacaoIndicativa: "",
     imagem: "",
+    idCategoria: "", // Adiciona o campo `idCategoria` ao estado do novo filme
   });
-
-  const [selectedCategoria, setSelectedCategoria] = useState(""); // ID da categoria selecionada
 
   useEffect(() => {
     const fetchFilmes = async () => {
@@ -43,11 +43,18 @@ function GerenciarFilmes() {
   useEffect(() => {
     const fetchCategorias = async () => {
       try {
-        const categoriasData = await ApiService.getCategoria();
-        console.log("Categorias recebidas no componente:", categoriasData);
-        setCategorias(categoriasData); // Certifique-se de que isso corresponde ao formato esperado
+        const response = await ApiService.getCategoria(); // Fazendo a chamada para buscar categorias
+        if (response && response.status === "success") {
+          console.log("Categorias:", response.data);
+          setCategorias(response.data);
+        } else {
+          console.error(
+            "Erro: resposta inesperada da API de categorias",
+            response.data
+          );
+        }
       } catch (error) {
-        console.error("Erro ao carregar categorias:", error);
+        console.error("Erro ao buscar as categorias:", error);
       }
     };
 
@@ -57,11 +64,6 @@ function GerenciarFilmes() {
   document.title = "Gerenciar Filmes";
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
-  };
-
-  const formatDateToDisplay = (dateString) => {
-    const [year, month, day] = dateString.split("-");
-    return `${day}/${month}/${year}`;
   };
 
   function formatDateToISO(dateString) {
@@ -162,7 +164,7 @@ function GerenciarFilmes() {
         newFilme.disponivelLocacao,
         newFilme.classificacaoIndicativa,
         newFilme.imagem,
-        selectedCategoria // Enviar o ID da categoria selecionada
+        selectedCategoria
       );
 
       if (
@@ -170,10 +172,7 @@ function GerenciarFilmes() {
         (response.status === "ok" || response.status === "success")
       ) {
         alert("Filme adicionado com sucesso!");
-
-        // Atualizar a lista de filmes sem recarregar a página
-        setFilmes((prevFilmes) => [...prevFilmes, response.data]);
-
+        window.location.reload();
         // Fechar popup e resetar estado
         handleAddPopupClose();
       } else {
@@ -403,16 +402,16 @@ function GerenciarFilmes() {
               onChange={(e) => setSelectedCategoria(e.target.value)}
             >
               <option value="">Selecione uma Categoria</option>
-              {Array.isArray(categorias) &&
-                categorias.map((categoria) => (
-                  <option
-                    key={categoria.idcategoria}
-                    value={categoria.idcategoria}
-                  >
-                    {categoria.nome}
-                  </option>
-                ))}
+              {categorias.map((categoria) => (
+                <option
+                  key={categoria.idcategoria}
+                  value={categoria.idcategoria}
+                >
+                  {categoria.nome}
+                </option>
+              ))}
             </select>
+
             <label>Data de Lançamento:</label>
             <input
               type="date"
