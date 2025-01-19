@@ -102,6 +102,31 @@ function App() {
     setSelectedMovie(null); // Limpa os detalhes do filme
   };
 
+  // adicionar carrinho localStorage
+  const handleAddToCart = () => {
+    // Verifica se o carrinho já existe no localStorage
+    let cart = JSON.parse(localStorage.getItem("cart")) || []; // Se não existe, inicializa um carrinho vazio
+  
+    // Cria o objeto do filme que será adicionado ao carrinho
+    const movieToAdd = {
+      id: selectedMovie.idfilme,
+      nome: selectedMovie.nomeFilme,
+      preco: selectedMovie.precoCompra,
+      quantidade: quantity, // Quantidade selecionada
+      imagem: selectedMovie.imagem,
+    };
+  
+    // Adiciona o filme ao carrinho
+    cart.push(movieToAdd);
+  
+    // Salva o carrinho no localStorage
+    localStorage.setItem("cart", JSON.stringify(cart));
+  
+    // Mensagem de confirmação
+    alert(`${selectedMovie.nomeFilme} foi adicionado ao carrinho!`);
+  };
+  
+
   return (
     <div className="app">
       <header className="main-header">
@@ -263,7 +288,7 @@ function App() {
         </button>
       </div>
 
-      <button className="btn-add-carrinho" disable={selectedMovie.qtdEstoque === 0}>{selectedMovie.qtdEstoque > 0 ? "Adicionar ao Carrinho" : "Indisponível"}</button>
+      <button className="btn-add-carrinho" onClick={handleAddToCart} disable={selectedMovie.qtdEstoque === 0}>{selectedMovie.qtdEstoque > 0 ? "Adicionar ao Carrinho" : "Indisponível"}</button>
     </div>
   </div>
 )}
