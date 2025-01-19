@@ -357,3 +357,30 @@ body {
   object-fit: cover;
   border-bottom: 2px solid #e0e0e0;
 }
+.movie-modal-content-navigation {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centraliza o conteúdo dentro do modal */
+  justify-content: center; /* Alinha o conteúdo ao centro verticalmente */
+  padding: 20px;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centraliza os botões horizontalmente */
+  margin: 10px 0;
+}
+
+.quantity-controls button {
+  background-color: #34495e;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  cursor: pointer;
+  color:white;
+}
+
+.quantity-display {
+  margin: 0 10px;
+  font-size: 1.2em;
+}
