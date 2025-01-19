@@ -118,7 +118,6 @@
 }
 
 /* GerenciarUsuarios.css */
-
 .gerenciar-usuarios-container {
   padding: 20px;
 }
@@ -242,4 +241,19 @@ select {
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 16px;
+}
+
+.btn-funcionario-alterar-funcionario {
+  background-color: gray;
+  color: white;
+}
+
+.btn-funcionario-adicionar-funcionario {
+  background-color: blue;
+  color: white;
+}
+
+.popup-actions-funcionario .btn.salvar:hover {
+  background-color: #388e3c;
+  transform: scale(1.05);
 }

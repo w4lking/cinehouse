@@ -53,6 +53,12 @@ function GerenciarUsuarios() {
     salario: "",
   }); // Armazena os dados do funcionário
 
+  // Estados
+  const [isEditFuncionarioOpen, setIsEditFuncionarioOpen] = useState(false);
+  const [selectedFuncionario, setSelectedFuncionario] = useState(null);
+  const [cargo, setCargo] = useState("");
+  const [salario, setSalario] = useState("");
+
   document.title = "Gerencia";
   useEffect(() => {
     const fetchUsuarios = async () => {
@@ -75,14 +81,6 @@ function GerenciarUsuarios() {
 
     fetchUsuarios();
   }, []);
-
-const handleEditClick = (usuario) => {
-    setSelectedUsuario({
-      ...usuario,
-      dataNasc: usuario.dataNasc || "",
-    });
-    setShowPopup(true); // Abre o popup de edição
-  };
 
   const handleSaveFuncionario = async () => {
     if (!funcionarioData.cargo || !funcionarioData.salario) {
@@ -171,6 +169,69 @@ const handleEditClick = (usuario) => {
     setShowPopup(false); // Fecha o popup
   };
 
+  const handleEditClick = (usuario) => {
+    setSelectedUsuario({
+      ...usuario,
+      dataNasc: usuario.dataNasc || "",
+    });
+    setShowPopup(true); // Abre o popup de edição
+  };
+
+  const handleSaveAlteracaoFuncionario = async (e) => {
+    e.preventDefault();
+
+    if (!selectedFuncionario) {
+      alert("Nenhum usuário selecionado.");
+      return;
+    }
+
+    try {
+      // Prepara os dados para enviar à API
+      const funcionarioParaSalvar = {
+        ...selectedFuncionario,
+        dataNasc: selectedFuncionario.dataNasc.includes("/")
+          ? formatDateToISO(selectedFuncionario.dataNasc) // Converte a data para ISO, se necessário
+          : selectedFuncionario.dataNasc,
+      };
+
+      console.log("Dados do funcionário para salvar:", funcionarioParaSalvar); // Log para depuração
+
+      // Chama a API para atualizar o funcionário
+      const response = await ApiService.alterarFuncionario(
+        cargo,
+        salario,
+        funcionarioParaSalvar.idFuncionario
+      );
+
+      console.log("Resposta da API:", response); // Log da resposta da API
+
+      if (
+        response &&
+        (response.status === "ok" || response.status === "success")
+      ) {
+        alert("Funcionário atualizado com sucesso!");
+        setUsuarios((prevUsuarios) =>
+          prevUsuarios.map((usuario) =>
+            usuario.idusuario === funcionarioParaSalvar.idusuario
+              ? { ...usuario, ...funcionarioParaSalvar }
+              : usuario
+          )
+        );
+
+        setIsEditFuncionarioOpen(false); // Fecha o popup após salvar
+      } else {
+        alert(
+          `Erro ao atualizar o funcionário: ${
+            response.message || "Erro desconhecido"
+          }`
+        );
+      }
+    } catch (error) {
+      console.error("Erro ao salvar alterações:", error);
+      alert("Erro inesperado ao atualizar o funcionário.");
+    }
+  };
+
   const handleSaveChanges = async () => {
     try {
       // Prepara os dados para enviar à API
@@ -180,7 +241,7 @@ const handleEditClick = (usuario) => {
           ? formatDateToISO(selectedUsuario.dataNasc) // Converte a data para ISO, se necessário
           : selectedUsuario.dataNasc,
       };
-
+      console.log("Dados do usuário para salvar:", usuarioParaSalvar); // Log para depuração
       // Chama a API para atualizar o usuário
       const response = await ApiService.alterarUsuario(
         usuarioParaSalvar.idusuario,
@@ -216,6 +277,22 @@ const handleEditClick = (usuario) => {
     }
   };
 
+  // Abrir o pop-up alterar funcionario
+  const handleEditFuncionarioClick = (usuario) => {
+    setSelectedFuncionario(usuario); // Define o funcionário selecionado
+    setCargo(usuario.cargo || ""); // Preenche com o cargo atual (se disponível)
+    setSalario(usuario.salario || ""); // Preenche com o salário atual (se disponível)
+    setIsEditFuncionarioOpen(true); // Abre o pop-up
+  };
+
+  // Fechar o pop-up alterar funcionário
+  const handleClosePopup = () => {
+    setIsEditFuncionarioOpen(false);
+    setSelectedFuncionario(null);
+    setCargo("");
+    setSalario("");
+  };
+
   return (
     <div className="gerenciar-usuarios-container">
       <h1>GERENCIAR USUÁRIOS</h1>
@@ -242,12 +319,22 @@ const handleEditClick = (usuario) => {
                 </span>
               </div>
               <div className="usuario-acoes">
-                <button
-                  className="btn-funcionario"
-                  onClick={() => handleAddFuncionarioClick(usuario)}
-                >
-                  Adicionar Funcionario
-                </button>
+                {/* Verifica se o usuário já é funcionário */}
+                {usuario.idFuncionario ? (
+                  <button
+                    className="btn-funcionario-alterar-funcionario"
+                    onClick={() => handleEditFuncionarioClick(usuario)}
+                  >
+                    Alterar Funcionario
+                  </button>
+                ) : (
+                  <button
+                    className="btn-funcionario-adicionar-funcionario"
+                    onClick={() => handleAddFuncionarioClick(usuario)}
+                  >
+                    Adicionar Funcionario
+                  </button>
+                )}
                 <button
                   className="btn alterar"
                   onClick={() => handleEditClick(usuario)}
@@ -318,9 +405,10 @@ const handleEditClick = (usuario) => {
         </div>
       )}
 
+      {/* Popup para adicionar funcionário */}
       {showFuncionarioPopup && (
-        <div className="popup-funcionario">
-          <div className="popup-funcionario-content">
+        <div className="popup">
+          <div className="popup-content">
             <h2>Adicionar Funcionário</h2>
             <label>ID do Usuário:</label>
             <input type="text" value={funcionarioData.idusuario} disabled />
@@ -352,11 +440,8 @@ const handleEditClick = (usuario) => {
               }
             />
 
-            <div className="popup-actions-funcionario">
-              <button
-                className="btn salvar funcionario"
-                onClick={handleSaveFuncionario}
-              >
+            <div className="popup-actions">
+              <button className="btn salvar" onClick={handleSaveFuncionario}>
                 Salvar
               </button>
               <button
@@ -366,6 +451,50 @@ const handleEditClick = (usuario) => {
                 Cancelar
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {isEditFuncionarioOpen && (
+        <div className="popup">
+          <div className="popup-content">
+            <h2>Alterar Funcionário</h2>
+            <form onSubmit={handleSaveAlteracaoFuncionario}>
+              <div className="form-group-funcionario">
+                <label htmlFor="cargo">Cargo</label>
+                <select
+                  id="cargo"
+                  value={cargo}
+                  onChange={(e) => setCargo(e.target.value)}
+                >
+                  <option value="">Selecione o cargo</option>
+                  <option value="caixa">Caixa</option>
+                  <option value="administrador">Administrador</option>
+                </select>
+              </div>
+              <div className="form-group-funcionario">
+                <label htmlFor="salario">Salário</label>
+                <input
+                  type="number"
+                  id="salario"
+                  value={salario}
+                  onChange={(e) => setSalario(e.target.value)}
+                  placeholder="Digite o salário"
+                />
+              </div>
+              <div className="popup-actions">
+                <button type="submit" className="btn salvar">
+                  Salvar
+                </button>
+                <button
+                  type="button"
+                  onClick={handleClosePopup}
+                  className="btn cancelar"
+                >
+                  Cancelar
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       )}
