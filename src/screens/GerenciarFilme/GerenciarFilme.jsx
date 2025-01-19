@@ -20,7 +20,6 @@ function GerenciarFilmes() {
     disponivelLocacao: false,
     classificacaoIndicativa: "",
     imagem: "",
-    idCategoria: "", // Adiciona o campo `idCategoria` ao estado do novo filme
   });
 
   useEffect(() => {
@@ -76,12 +75,19 @@ function GerenciarFilmes() {
   );
 
   const handleEditClick = (filme) => {
+    const categoriaAtual = categorias.find(
+      (categoria) => categoria.idcategoria === filme.categoria_idcategoria
+    ); // Localiza a categoria atual pelo ID
+
     setSelectedFilme({
       ...filme,
       dataLancamento: new Date(filme.dataLancamento)
         .toISOString()
         .split("T")[0], // Converte para yyyy-mm-dd
     });
+
+    setSelectedCategoria(categoriaAtual?.nome || "");
+    console.log("Categoria atual desse filme:", categoriaAtual?.nome);
     setShowPopup(true);
   };
 
@@ -115,7 +121,13 @@ function GerenciarFilmes() {
         disponivelLocacao: selectedFilme.disponivelLocacao ? 1 : 0, // Define 1 ou 0 baseado no estado atual
       };
 
-      // Chama a API para atualizar o filme
+      // Verifique se `idcategoria` está definido antes de salvar
+      if (!filmeParaSalvar.idcategoria) {
+        alert("Por favor, selecione uma categoria válida antes de salvar.");
+        return;
+      }
+
+      // Chama a API para atualizar o filme, passando o ID da categoria
       const response = await ApiService.alterarFilme(
         filmeParaSalvar.idfilme,
         filmeParaSalvar.nomeFilme,
@@ -125,7 +137,8 @@ function GerenciarFilmes() {
         filmeParaSalvar.qtdEstoque,
         filmeParaSalvar.disponivelLocacao,
         filmeParaSalvar.classificacaoIndicativa,
-        filmeParaSalvar.imagem
+        filmeParaSalvar.imagem,
+        filmeParaSalvar.idcategoria // Envia o ID da categoria
       );
 
       if (
@@ -275,8 +288,9 @@ function GerenciarFilmes() {
           <div className="popup-content">
             <h2>Editar Filme</h2>
             <label>ID Filme:</label>
-            <input
+            <input 
               type="text"
+              disabled={true}
               value={selectedFilme.idfilme}
               onChange={(e) =>
                 setSelectedFilme({ ...selectedFilme, idfilme: e.target.value })
@@ -301,6 +315,35 @@ function GerenciarFilmes() {
                 setSelectedFilme({ ...selectedFilme, sinopse: e.target.value })
               }
             />
+            <label>Categoria:</label>
+            <select
+              value={selectedCategoria} // Vincula ao ID da categoria
+              onChange={(e) => {
+                const novaCategoria = categorias.find(
+                  (categoria) =>
+                    categoria.idcategoria.toString() === e.target.value
+                );
+                setSelectedCategoria(novaCategoria?.nome || ""); // Atualiza o nome da categoria
+                setSelectedFilme({
+                  ...selectedFilme,
+                  idcategoria: novaCategoria?.idcategoria || "", // Atualiza o ID da categoria no filme
+                });
+              }}
+            >
+              {/* Exibe a categoria atual como primeira opção */}
+              <option value={selectedFilme.idcategoria || ""}>
+                {selectedCategoria || "Selecione uma Categoria"}
+              </option>
+              {categorias.map((categoria) => (
+                <option
+                  key={categoria.idcategoria}
+                  value={categoria.idcategoria}
+                >
+                  {categoria.nome}
+                </option>
+              ))}
+            </select>
+
             <label>Data de Lançamento:</label>
             <input
               type="date"
@@ -411,7 +454,6 @@ function GerenciarFilmes() {
                 </option>
               ))}
             </select>
-
             <label>Data de Lançamento:</label>
             <input
               type="date"

@@ -220,7 +220,8 @@ class ApiService {
     qtdEstoque,
     disponivelLocacao,
     classificacaoIndicativa,
-    imagem
+    imagem,
+    idcategoria
   ) {
     const url = `${this.server}api/update/filme/${idFilme}`;
     try {
@@ -235,6 +236,7 @@ class ApiService {
           disponivelLocacao,
           classificacaoIndicativa,
           imagem,
+          idcategoria
         },
         {
           headers: {
@@ -354,7 +356,8 @@ class ApiService {
     qtdEstoque,
     disponivelLocacao,
     classificacaoIndicativa,
-    imagem
+    imagem,
+    idcategoria
   ) {
     const url = `${this.server}api/update/filme/${idFilme}`;
     try {
@@ -369,6 +372,7 @@ class ApiService {
           disponivelLocacao,
           classificacaoIndicativa,
           imagem,
+          idcategoria
         },
         {
           headers: {
