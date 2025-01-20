@@ -172,8 +172,9 @@ function App() {
           <span className="material-icons">☰</span>
         </button>
         <ul>
-          <li onClick={handlePerfil}>Perfil</li>
-          <li>Filmes</li>
+          {perfil === "cliente" && (
+            <li onClick={handlePerfil}>Perfil</li>
+          )}
           {/* Condicional para exibir "Gerenciar Relatórios" apenas para perfis autorizados */}
           {perfil === "funcionario" && (
             <li onClick={handleAdm}>Gerenciar Relatórios</li>
