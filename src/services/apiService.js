@@ -210,47 +210,6 @@ class ApiService {
     }
   }
 
-  // api para editar filme
-  async alterarFilme(
-    idFilme,
-    nomeFilme,
-    sinopse,
-    dataLancamento,
-    precoCompra,
-    qtdEstoque,
-    disponivelLocacao,
-    classificacaoIndicativa,
-    imagem,
-    idcategoria
-  ) {
-    const url = `${this.server}api/update/filme/${idFilme}`;
-    try {
-      const response = await axios.put(
-        url,
-        {
-          nomeFilme,
-          sinopse,
-          dataLancamento,
-          precoCompra,
-          qtdEstoque,
-          disponivelLocacao,
-          classificacaoIndicativa,
-          imagem,
-          idcategoria,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      return response.data;
-    } catch (error) {
-      console.error("Erro ao alterar o filme:", error);
-      throw error;
-    }
-  }
-
   async deletarUsuario(idUsuario) {
     const url = `${this.server}api/delete/user/${idUsuario}`;
     try {
@@ -535,20 +494,6 @@ class ApiService {
       return response.data;
     } catch (error) {
       console.error("Erro ao adicionar funcionário:", error);
-      throw error;
-    }
-  }
-
-  async alterarFuncionario(cargo, salario, idusuario) {
-    const url = `${this.server}api/update/funcionario/${idusuario}`;
-    try {
-      const response = await axios.put(
-        url,
-        { cargo, salario },
-        { headers: { "Content-Type": "application/json" } }
-      );
-      return response.data;
-    } catch (error) {
       throw error;
     }
   }
