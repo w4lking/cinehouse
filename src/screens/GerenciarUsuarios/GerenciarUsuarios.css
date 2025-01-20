@@ -257,3 +257,22 @@ select {
   background-color: #388e3c;
   transform: scale(1.05);
 }
+
+.back-button-gerenciar {
+  position: fixed; /* Fixa o botão na posição especificada, independentemente do scroll */
+  top: 10px; /* Ajusta a distância do botão em relação ao topo */
+  left: 10px; /* Ajusta a distância do botão em relação ao lado esquerdo */
+  padding: 10px 15px; /* Ajusta o tamanho interno do botão */
+  background-color: #007bff; /* Cor de fundo */
+  color: white; /* Cor do texto */
+  border: none; /* Remove a borda padrão */
+  border-radius: 5px; /* Arredonda os cantos do botão */
+  cursor: pointer; /* Muda o cursor ao passar o mouse */
+  font-size: 16px; /* Ajusta o tamanho da fonte */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Adiciona uma sombra sutil */
+  transition: background-color 0.3s ease; /* Suaviza a transição da cor */
+}
+
+.back-button-gerenciar:hover {
+  background-color: #0056b3; /* Muda a cor de fundo ao passar o mouse */
+}

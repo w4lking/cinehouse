@@ -16,7 +16,6 @@ body {
   background-color: #2c3e50;
   color: white;
   padding: 5px 7px;
-
 }
 
 .menu-container {
@@ -37,7 +36,7 @@ body {
   margin: 0 auto;
   text-align: center;
   font-size: 24px;
-  color:white;
+  color: white;
 }
 
 .nav-links {
@@ -51,7 +50,6 @@ body {
   border: 1px solid #ccc;
   border-radius: 4px;
 }
-
 
 .nav-links a {
   color: white;
@@ -72,7 +70,7 @@ body {
   border-radius: 5px;
   outline: none;
   background-color: #2c3e50;
-  color:white;
+  color: white;
   width: 250px;
   margin-top: 20px;
 }
@@ -178,8 +176,6 @@ body {
   background-color: #34495e;
 }
 
-
-
 .movies-grid {
   display: flex;
   flex-wrap: wrap;
@@ -246,7 +242,7 @@ body {
   margin-left: 10px;
   border-radius: 5px;
   border: 1px solid #ccc;
-  color:white;
+  color: white;
   background-color: #2c3e50;
 }
 
@@ -255,7 +251,8 @@ body {
   margin-top: 20px;
 }
 
-.year-filter, .price-filter {
+.year-filter,
+.price-filter {
   padding: 5px 10px;
   font-size: 1rem;
   margin-bottom: 10px;
@@ -268,7 +265,7 @@ body {
 
 .cart-button {
   background-color: transparent;
-  color:white;
+  color: white;
   border: none;
   font-size: 1.2rem; /* Reduzi o tamanho do ícone */
   cursor: pointer;
@@ -279,7 +276,7 @@ body {
   outline: none;
 }
 
-.close-button-navigation{
+.close-button-navigation {
   background-color: #2c3e50;
   color: white;
 }
@@ -308,7 +305,7 @@ body {
   max-height: 80%; /* Altura máxima */
   overflow-y: auto; /* Permite rolagem vertical se necessário */
   text-align: center;
-  color:black;
+  color: black;
 }
 
 /* Estilo do botão de fechar */
@@ -324,15 +321,15 @@ body {
 
 /* Ajuste da imagem dentro do modal */
 .movie-modal-content img {
-  max-width: 100%;  /* Garantir que a imagem nunca ultrapasse o tamanho do contêiner */
-  height: auto;     /* Manter a proporção da imagem */
+  max-width: 100%; /* Garantir que a imagem nunca ultrapasse o tamanho do contêiner */
+  height: auto; /* Manter a proporção da imagem */
   border-radius: 8px; /* Opcional, para arredondar os cantos da imagem */
-  max-height: 300px;  /* Tamanho máximo para a altura da imagem */
-  object-fit: cover;  /* Garante que a imagem cubra o espaço sem distorção */
+  max-height: 300px; /* Tamanho máximo para a altura da imagem */
+  object-fit: cover; /* Garante que a imagem cubra o espaço sem distorção */
   margin-bottom: 20px; /* Espaçamento inferior entre a imagem e o texto */
 }
 
-.btn-add-carrinho{
+.btn-add-carrinho {
   background-color: #2c3e50;
   color: white;
   padding: 10px 20px;
@@ -343,15 +340,15 @@ body {
   transition: background-color 0.3s;
 }
 
-.btn-add-carrinho:hover{
+.btn-add-carrinho:hover {
   background-color: #34495e;
 }
 
-.titulo-filme{
-  color:black;
+.titulo-filme {
+  color: black;
 }
 
-.img-filme{
+.img-filme {
   width: 50%;
   height: 300px;
   object-fit: cover;
@@ -377,7 +374,7 @@ body {
   border: 1px solid #ccc;
   padding: 5px 10px;
   cursor: pointer;
-  color:white;
+  color: white;
 }
 
 .quantity-display {
