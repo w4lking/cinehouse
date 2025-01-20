@@ -30,6 +30,12 @@ function RelatorioDevolucao() {
   return (
     <div className="relatorio-container">
       <h1>Relatório de devoluções</h1>
+      <button
+        className="back-button-relatorio-dev"
+        onClick={() => window.history.back()}
+      >
+        <i className="fas fa-arrow-left"></i> Voltar
+      </button>
       <div className="relatorio-tabelas">
         <div className="tabela">
           <h2>Filmes devolvidos</h2>

@@ -42,8 +42,8 @@ const handleDeleteClick = async (idUsuario) => {
 };
 
 function GerenciarUsuarios() {
-  const [usuarios, setUsuarios] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [usuarios, setUsuarios] = useState([]); // Lista de usuários
+  const [searchTerm, setSearchTerm] = useState(""); // Controle da busca
   const [showPopup, setShowPopup] = useState(false); // Controle do popup
   const [selectedUsuario, setSelectedUsuario] = useState(null); // Dados do usuário selecionado para editar
   const [showFuncionarioPopup, setShowFuncionarioPopup] = useState(false); // Controla o pop-up para adicionar funcionário
@@ -53,7 +53,7 @@ function GerenciarUsuarios() {
     salario: "",
   }); // Armazena os dados do funcionário
 
-  // Estados
+  // Estados para o pop-up de alterar funcionário
   const [isEditFuncionarioOpen, setIsEditFuncionarioOpen] = useState(false);
   const [selectedFuncionario, setSelectedFuncionario] = useState(null);
   const [cargo, setCargo] = useState("");
@@ -177,9 +177,7 @@ function GerenciarUsuarios() {
     setShowPopup(true); // Abre o popup de edição
   };
 
-  const handleSaveAlteracaoFuncionario = async (e) => {
-    e.preventDefault();
-
+  const handleSaveAlteracaoFuncionario = async () => {
     if (!selectedFuncionario) {
       alert("Nenhum usuário selecionado.");
       return;
@@ -204,7 +202,6 @@ function GerenciarUsuarios() {
       );
 
       console.log("Resposta da API:", response); // Log da resposta da API
-
       if (
         response &&
         (response.status === "ok" || response.status === "success")
@@ -217,7 +214,6 @@ function GerenciarUsuarios() {
               : usuario
           )
         );
-
         setIsEditFuncionarioOpen(false); // Fecha o popup após salvar
       } else {
         alert(
@@ -296,6 +292,13 @@ function GerenciarUsuarios() {
   return (
     <div className="gerenciar-usuarios-container">
       <h1>GERENCIAR USUÁRIOS</h1>
+
+      <button
+        className="back-button-gerenciar"
+        onClick={() => window.history.back()}
+      >
+        <i className="fas fa-arrow-left"></i> Voltar
+      </button>
 
       {/* Barra de pesquisa */}
       <div className="search-bar-usuario">

@@ -43,6 +43,12 @@ function Relatorio() {
   return (
     <div className="relatorio-container">
       <h1>Relatório de aluguéis e vendas</h1>
+      <button
+        className="back-button-relatorio"
+        onClick={() => window.history.back()}
+      >
+        <i className="fas fa-arrow-left"></i> Voltar
+      </button>
       <div className="relatorio-tabelas">
         {/* Tabela de filmes mais vendidos */}
         <div className="tabela">
