@@ -172,8 +172,9 @@ function App() {
           <span className="material-icons">☰</span>
         </button>
         <ul>
-          <li onClick={handlePerfil}>Perfil</li>
-          <li>Filmes</li>
+          {perfil === "cliente" && (
+            <li onClick={handlePerfil}>Perfil</li>
+          )}
           {/* Condicional para exibir "Gerenciar Relatórios" apenas para perfis autorizados */}
           {perfil === "funcionario" && (
             <li onClick={handleAdm}>Gerenciar Relatórios</li>
@@ -295,7 +296,7 @@ function App() {
       <button
         className="btn-add-carrinho"
         onClick={handleAddToCart}
-        disable={selectedMovie.qtdEstoque === 0}
+        disabled={selectedMovie.qtdEstoque === 0}
       >
         {selectedMovie.qtdEstoque > 0
           ? "Adicionar ao Carrinho"
