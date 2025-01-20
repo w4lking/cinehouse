@@ -295,7 +295,7 @@ function App() {
       <button
         className="btn-add-carrinho"
         onClick={handleAddToCart}
-        disable={selectedMovie.qtdEstoque === 0}
+        disabled={selectedMovie.qtdEstoque === 0}
       >
         {selectedMovie.qtdEstoque > 0
           ? "Adicionar ao Carrinho"
