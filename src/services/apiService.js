@@ -346,51 +346,7 @@ class ApiService {
     }
   }
 
-  async deletarUsuario(idUsuario) {
-    const url = `${this.server}api/delete/user/${idUsuario}`;
-    try {
-      const response = await axios.delete(url, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      return response.data;
-    } catch (error) {
-      if (error.response) {
-        console.error(
-          "Erro de resposta ao deletar usuário:",
-          error.response.data
-        );
-        return error.response.data;
-      } else {
-        console.error("Erro ao deletar usuário:", error.message);
-        throw error;
-      }
-    }
-  }
 
-  async alterarUsuario(idUsuario, username, email, birthDate) {
-    const url = `${this.server}api/update/user/${idUsuario}`;
-    try {
-      const response = await axios.put(
-        url,
-        {
-          username,
-          email,
-          birthDate,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      return response.data;
-    } catch (error) {
-      console.error("Erro ao alterar o usuário:", error);
-      throw error;
-    }
-  }
 
   async devolverPedido(idPedido, statusPedido, qtdEstoque) {
     const url = `${this.server}api/pedido/devolver/qtdEstoque${idPedido}/${statusPedido}/${qtdEstoque}`;
@@ -452,27 +408,6 @@ class ApiService {
     }
   }
 
-  async devolverPedido(idPedido, statusPedido) {
-    const url = `${this.server}api/pedido/devolver/${idPedido}/${statusPedido}`;
-    try {
-      const response = await axios.put(
-        url,
-        {},
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      return response.data;
-    } catch (error) {
-      console.error(
-        "Erro ao devolver o pedido:",
-        error.response ? error.response.data : error.message
-      );
-      throw error;
-    }
-  }
 
   async adicionarFuncionario({ usuario_idusuario, salario, cargo }) {
     const url = `${this.server}api/add/funcionario`;
