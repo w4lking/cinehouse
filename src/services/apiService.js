@@ -217,6 +217,29 @@ class ApiService {
     }
   }
 
+  async alterarUsuario(idUsuario, username, email, birthDate) {
+    const url = `${this.server}api/update/user/${idUsuario}`;
+    try {
+      const response = await axios.put(
+        url,
+        {
+          username,
+          email,
+          birthDate,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Erro ao alterar o usuário:", error);
+      throw error;
+    }
+  }
+
   async getRelatorioLocacao() {
     const url = `${this.server}api/relatorio/locacao`;
 
@@ -307,29 +330,6 @@ class ApiService {
     }
   }
 
-  async alterarUsuario(idUsuario, username, email, birthDate) {
-    const url = `${this.server}api/update/user/${idUsuario}`;
-    try {
-      const response = await axios.put(
-        url,
-        {
-          username,
-          email,
-          birthDate,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      return response.data;
-    } catch (error) {
-      console.error("Erro ao alterar o usuário:", error);
-      throw error;
-    }
-  }
-
   async devolverPedido(idPedido, statusPedido, qtdEstoque) {
     const url = `${this.server}api/pedido/devolver/qtdEstoque${idPedido}/${statusPedido}/${qtdEstoque}`;
     try {
@@ -384,28 +384,6 @@ class ApiService {
     } catch (error) {
       console.error(
         "Erro ao estender o pedido:",
-        error.response ? error.response.data : error.message
-      );
-      throw error;
-    }
-  }
-
-  async devolverPedido(idPedido, statusPedido) {
-    const url = `${this.server}api/pedido/devolver/${idPedido}/${statusPedido}`;
-    try {
-      const response = await axios.put(
-        url,
-        {},
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      return response.data;
-    } catch (error) {
-      console.error(
-        "Erro ao devolver o pedido:",
         error.response ? error.response.data : error.message
       );
       throw error;
