@@ -79,22 +79,6 @@ class ApiService {
     }
   }
 
-  async getPedidos() {
-    const url = `${this.server}api/pedido`;
-    try {
-      const response = await axios.get(url, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      console.log(response.data);
-      return response.data;
-    } catch (error) {
-      console.error("Erro ao buscar os pedidos:", error);
-      throw error;
-    }
-  }
-
   async getHistorico() {
     // Atualiza a URL para o endpoint de pedidos
     const url = `${this.server}api/pedido`;
@@ -233,29 +217,6 @@ class ApiService {
     }
   }
 
-  async alterarUsuario(idUsuario, username, email, birthDate) {
-    const url = `${this.server}api/update/user/${idUsuario}`;
-    try {
-      const response = await axios.put(
-        url,
-        {
-          username,
-          email,
-          birthDate,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      return response.data;
-    } catch (error) {
-      console.error("Erro ao alterar o usuário:", error);
-      throw error;
-    }
-  }
-
   async getRelatorioLocacao() {
     const url = `${this.server}api/relatorio/locacao`;
 
@@ -343,29 +304,6 @@ class ApiService {
     } catch (error) {
       console.error("Erro ao alterar o filme:", error);
       throw error;
-    }
-  }
-
-  async deletarUsuario(idUsuario) {
-    const url = `${this.server}api/delete/user/${idUsuario}`;
-    try {
-      const response = await axios.delete(url, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      return response.data;
-    } catch (error) {
-      if (error.response) {
-        console.error(
-          "Erro de resposta ao deletar usuário:",
-          error.response.data
-        );
-        return error.response.data;
-      } else {
-        console.error("Erro ao deletar usuário:", error.message);
-        throw error;
-      }
     }
   }
 
@@ -527,9 +465,6 @@ class ApiService {
       throw error;
     }
   }
-
-
-  
 }
 
 export default new ApiService();

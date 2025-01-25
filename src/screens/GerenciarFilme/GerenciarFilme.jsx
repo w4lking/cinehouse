@@ -237,7 +237,10 @@ function GerenciarFilmes() {
       <h1>Gerenciar Filmes</h1>
 
       {/* Barra de pesquisa */}
-      <button className="back-button-filme" onClick={() => window.history.back()}>
+      <button
+        className="back-button-filme"
+        onClick={() => window.history.back()}
+      >
         <i className="fas fa-arrow-left"></i> Voltar
       </button>
 
@@ -304,15 +307,20 @@ function GerenciarFilmes() {
         <div className="popup">
           <div className="popup-content">
             <h2>Editar Filme</h2>
-            <label>ID Filme:</label>
-            <input
-              type="text"
-              disabled={true}
-              value={selectedFilme.idfilme}
-              onChange={(e) =>
-                setSelectedFilme({ ...selectedFilme, idfilme: e.target.value })
-              }
-            />
+            <label>
+              <input
+                type="text"
+                disabled={true}
+                value={selectedFilme.idfilme}
+                onChange={(e) =>
+                  setSelectedFilme({
+                    ...selectedFilme,
+                    idfilme: e.target.value,
+                  })
+                }
+              />
+              ID Filme:
+            </label>
             <label>Nome do Filme:</label>
             <input
               type="text"
