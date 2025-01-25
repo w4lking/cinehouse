@@ -79,22 +79,6 @@ class ApiService {
     }
   }
 
-  async getPedidos() {
-    const url = `${this.server}api/pedido`;
-    try {
-      const response = await axios.get(url, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      console.log(response.data);
-      return response.data;
-    } catch (error) {
-      console.error("Erro ao buscar os pedidos:", error);
-      throw error;
-    }
-  }
-
   async getHistorico() {
     // Atualiza a URL para o endpoint de pedidos
     const url = `${this.server}api/pedido`;
