@@ -308,6 +308,7 @@ function GerenciarFilmes() {
           <div className="popup-content">
             <h2>Editar Filme</h2>
             <label>
+              ID Filme:
               <input
                 type="text"
                 disabled={true}
@@ -319,7 +320,6 @@ function GerenciarFilmes() {
                   })
                 }
               />
-              ID Filme:
             </label>
             <label>Nome do Filme:</label>
             <input
