@@ -328,8 +328,6 @@ class ApiService {
     }
   }
 
-
-
   async devolverPedido(idPedido, statusPedido, qtdEstoque) {
     const url = `${this.server}api/pedido/devolver/qtdEstoque${idPedido}/${statusPedido}/${qtdEstoque}`;
     try {
@@ -390,7 +388,6 @@ class ApiService {
     }
   }
 
-
   async adicionarFuncionario({ usuario_idusuario, salario, cargo }) {
     const url = `${this.server}api/add/funcionario`;
 
@@ -444,9 +441,6 @@ class ApiService {
       throw error;
     }
   }
-
-
-  
 }
 
 export default new ApiService();
