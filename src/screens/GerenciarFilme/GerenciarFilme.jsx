@@ -334,43 +334,49 @@ function GerenciarFilmes() {
                 }
               />
             </label>
-            <label>Sinopse:</label>
-            <textarea
-              type="text"
-              value={selectedFilme.sinopse}
-              onChange={(e) =>
-                setSelectedFilme({ ...selectedFilme, sinopse: e.target.value })
-              }
-            />
-            <label>Categoria:</label>
-            <select
-              value={selectedCategoria} // Vincula ao ID da categoria
-              onChange={(e) => {
-                const novaCategoria = categorias.find(
-                  (categoria) =>
-                    categoria.idcategoria.toString() === e.target.value
-                );
-                setSelectedCategoria(novaCategoria?.nome || ""); // Atualiza o nome da categoria
-                setSelectedFilme({
-                  ...selectedFilme,
-                  idcategoria: novaCategoria?.idcategoria || "", // Atualiza o ID da categoria no filme
-                });
-              }}
-            >
-              {/* Exibe a categoria atual como primeira opção */}
-              <option value={selectedFilme.idcategoria || ""}>
-                {selectedCategoria || "Selecione uma Categoria"}
-              </option>
-              {categorias.map((categoria) => (
-                <option
-                  key={categoria.idcategoria}
-                  value={categoria.idcategoria}
-                >
-                  {categoria.nome}
+            <label>
+              Sinopse:{" "}
+              <textarea
+                type="text"
+                value={selectedFilme.sinopse}
+                onChange={(e) =>
+                  setSelectedFilme({
+                    ...selectedFilme,
+                    sinopse: e.target.value,
+                  })
+                }
+              />
+            </label>
+            <label>
+              Categoria:
+              <select
+                value={selectedCategoria} // Vincula ao ID da categoria
+                onChange={(e) => {
+                  const novaCategoria = categorias.find(
+                    (categoria) =>
+                      categoria.idcategoria.toString() === e.target.value
+                  );
+                  setSelectedCategoria(novaCategoria?.nome || ""); // Atualiza o nome da categoria
+                  setSelectedFilme({
+                    ...selectedFilme,
+                    idcategoria: novaCategoria?.idcategoria || "", // Atualiza o ID da categoria no filme
+                  });
+                }}
+              >
+                {/* Exibe a categoria atual como primeira opção */}
+                <option value={selectedFilme.idcategoria || ""}>
+                  {selectedCategoria || "Selecione uma Categoria"}
                 </option>
-              ))}
-            </select>
-
+                {categorias.map((categoria) => (
+                  <option
+                    key={categoria.idcategoria}
+                    value={categoria.idcategoria}
+                  >
+                    {categoria.nome}
+                  </option>
+                ))}
+              </select>
+            </label>
             <label>Data de Lançamento:</label>
             <input
               type="date"
