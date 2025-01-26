@@ -348,7 +348,7 @@ function GerenciarFilmes() {
               />
             </label>
             <label>
-              Categoria:{""}
+              Categoria:{" "}
               <select
                 value={selectedCategoria} // Vincula ao ID da categoria
                 onChange={(e) => {
