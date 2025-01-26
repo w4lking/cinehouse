@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./navigation.css";
 import ApiService from "../../services/apiService";
+import PropTypes from "prop-types";
 
 function App() {
   const navigate = useNavigate();
@@ -107,7 +108,7 @@ function App() {
   const handleAddToCart = () => {
     // Verifica se o carrinho já existe no localStorage
     let cart = JSON.parse(localStorage.getItem("cart")) || []; // Se não existe, inicializa um carrinho vazio
-  
+
     // Cria o objeto do filme que será adicionado ao carrinho
     const movieToAdd = {
       id: selectedMovie.idfilme,
@@ -116,17 +117,26 @@ function App() {
       quantidade: quantity, // Quantidade selecionada
       imagem: selectedMovie.imagem,
     };
-  
+
     // Adiciona o filme ao carrinho
     cart.push(movieToAdd);
-  
+
     // Salva o carrinho no localStorage
     localStorage.setItem("cart", JSON.stringify(cart));
-  
+
     // Mensagem de confirmação
     alert(`${selectedMovie.nomeFilme} foi adicionado ao carrinho!`);
   };
-  
+
+  MovieContainer.propTypes = {
+    title: PropTypes.string,
+    year: PropTypes.number,
+    genre: PropTypes.string,
+    classification: PropTypes.number,
+    image: PropTypes.string,
+    filme: PropTypes.string,
+    handleOpenModal: PropTypes.func,
+  };
 
   return (
     <div className="app">
@@ -134,7 +144,7 @@ function App() {
         <h1 className="logo">CineHouse</h1>
         <nav className="nav-links">
           {/* Barra de Busca */}
-          <input 
+          <input
             type="text"
             placeholder="Buscar..."
             className="search-bar-filme"
@@ -172,9 +182,7 @@ function App() {
           <span className="material-icons">☰</span>
         </button>
         <ul>
-          {perfil === "cliente" && (
-            <li onClick={handlePerfil}>Perfil</li>
-          )}
+          {perfil === "cliente" && <li onClick={handlePerfil}>Perfil</li>}
           {/* Condicional para exibir "Gerenciar Relatórios" apenas para perfis autorizados */}
           {perfil === "funcionario" && (
             <li onClick={handleAdm}>Gerenciar Relatórios</li>
@@ -243,69 +251,68 @@ function App() {
 
       {/* Modal de detalhes do filme */}
       {isModalOpen && selectedMovie && (
-  <div className="movie-modal-overlay">
-    <div className="movie-modal-content-navigation">
-      <button className="close-button" onClick={handleCloseModal}>
-        Fechar
-      </button>
-      <h2 className="titulo-filme">{selectedMovie.nomeFilme}</h2>
-      
-      {/* Exibição da sinopse */}
-      <p>
-        <strong>Sinopse:</strong> {selectedMovie.sinopse}
-      </p>
-      
-      <img
-        className="img-filme"
-        src={selectedMovie.imagem}
-        alt={selectedMovie.nomeFilme}
-      />
-      <p>
-        <strong>Preço Unitário:</strong> R$
-        {selectedMovie.precoCompra.toFixed(2)}
-      </p>
-      <p>
-        Preço locação (3 dias): R${" "}
-        {(selectedMovie.precoCompra / 2).toFixed(2)}{" "}
-      </p>
-      <p>Quantidade disponível: {selectedMovie.qtdEstoque}</p>
+        <div className="movie-modal-overlay">
+          <div className="movie-modal-content-navigation">
+            <button className="close-button" onClick={handleCloseModal}>
+              Fechar
+            </button>
+            <h2 className="titulo-filme">{selectedMovie.nomeFilme}</h2>
 
-      {/* Controle de quantidade */}
-      <div className="quantity-controls">
-        <button
-          className="btn-decrease"
-          onClick={() => setQuantity(quantity > 1 ? quantity - 1 : 1)} // Impede que a quantidade vá abaixo de 1
-        >
-          -
-        </button>
-        <span className="quantity-display">{quantity}</span>
-        <button
-          className="btn-increase"
-          onClick={() =>
-            setQuantity(
-              quantity < selectedMovie.qtdEstoque
-                ? quantity + 1
-                : selectedMovie.qtdEstoque
-            )
-          } // Impede que a quantidade ultrapasse o estoque
-        >
-          +
-        </button>
-      </div>
+            {/* Exibição da sinopse */}
+            <p>
+              <strong>Sinopse:</strong> {selectedMovie.sinopse}
+            </p>
 
-      <button
-        className="btn-add-carrinho"
-        onClick={handleAddToCart}
-        disabled={selectedMovie.qtdEstoque === 0}
-      >
-        {selectedMovie.qtdEstoque > 0
-          ? "Adicionar ao Carrinho"
-          : "Indisponível"}
-      </button>
-    </div>
-  </div>
-)}
+            <img
+              className="img-filme"
+              src={selectedMovie.imagem}
+              alt={selectedMovie.nomeFilme}
+            />
+            <p>
+              <strong>Preço Unitário:</strong> R$
+              {selectedMovie.precoCompra.toFixed(2)}
+            </p>
+            <p>
+              Preço locação (3 dias): R${" "}
+              {(selectedMovie.precoCompra / 2).toFixed(2)}{" "}
+            </p>
+            <p>Quantidade disponível: {selectedMovie.qtdEstoque}</p>
 
+            {/* Controle de quantidade */}
+            <div className="quantity-controls">
+              <button
+                className="btn-decrease"
+                onClick={() => setQuantity(quantity > 1 ? quantity - 1 : 1)} // Impede que a quantidade vá abaixo de 1
+              >
+                -
+              </button>
+              <span className="quantity-display">{quantity}</span>
+              <button
+                className="btn-increase"
+                onClick={() =>
+                  setQuantity(
+                    quantity < selectedMovie.qtdEstoque
+                      ? quantity + 1
+                      : selectedMovie.qtdEstoque
+                  )
+                } // Impede que a quantidade ultrapasse o estoque
+              >
+                +
+              </button>
+            </div>
+
+            <button
+              className="btn-add-carrinho"
+              onClick={handleAddToCart}
+              disabled={selectedMovie.qtdEstoque === 0}
+            >
+              {selectedMovie.qtdEstoque > 0
+                ? "Adicionar ao Carrinho"
+                : "Indisponível"}
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 
