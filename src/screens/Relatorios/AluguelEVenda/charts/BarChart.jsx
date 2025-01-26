@@ -28,8 +28,8 @@ const BarChartComponent = ({ data }) => {
   );
 };
 
-BarChartComponent.PropTypes = {
-  data: PropTypes.number.isRequired,
+BarChartComponent.propTypes = {
+  data: PropTypes.number,
 };
 
 export default BarChartComponent;
