@@ -237,10 +237,7 @@ function GerenciarFilmes() {
       <h1>Gerenciar Filmes</h1>
 
       {/* Barra de pesquisa */}
-      <button
-        className="back-button-filme"
-        onClick={() => window.history.back()}
-      >
+      <button className="back-button-filme" onClick={() => window.history.back()}>
         <i className="fas fa-arrow-left"></i> Voltar
       </button>
 
@@ -307,151 +304,126 @@ function GerenciarFilmes() {
         <div className="popup">
           <div className="popup-content">
             <h2>Editar Filme</h2>
-            <label>
-              ID Filme:{" "}
-              <input
-                type="text"
-                disabled={true}
-                value={selectedFilme.idfilme}
-                onChange={(e) =>
-                  setSelectedFilme({
-                    ...selectedFilme,
-                    idfilme: e.target.value,
-                  })
-                }
-              />
-            </label>
-            <label>
-              Nome do Filme:{" "}
-              <input
-                type="text"
-                value={selectedFilme.nomeFilme}
-                onChange={(e) =>
-                  setSelectedFilme({
-                    ...selectedFilme,
-                    nomeFilme: e.target.value,
-                  })
-                }
-              />
-            </label>
-            <label>
-              Sinopse:{" "}
-              <textarea
-                type="text"
-                value={selectedFilme.sinopse}
-                onChange={(e) =>
-                  setSelectedFilme({
-                    ...selectedFilme,
-                    sinopse: e.target.value,
-                  })
-                }
-              />
-            </label>
-            <label>
-              Categoria:{" "}
-              <select
-                value={selectedCategoria} // Vincula ao ID da categoria
-                onChange={(e) => {
-                  const novaCategoria = categorias.find(
-                    (categoria) =>
-                      categoria.idcategoria.toString() === e.target.value
-                  );
-                  setSelectedCategoria(novaCategoria?.nome || ""); // Atualiza o nome da categoria
-                  setSelectedFilme({
-                    ...selectedFilme,
-                    idcategoria: novaCategoria?.idcategoria || "", // Atualiza o ID da categoria no filme
-                  });
-                }}
-              >
-                {/* Exibe a categoria atual como primeira opção */}
-                <option value={selectedFilme.idcategoria || ""}>
-                  {selectedCategoria || "Selecione uma Categoria"}
+            <label>ID Filme:</label>
+            <input
+              type="text"
+              disabled={true}
+              value={selectedFilme.idfilme}
+              onChange={(e) =>
+                setSelectedFilme({ ...selectedFilme, idfilme: e.target.value })
+              }
+            />
+            <label>Nome do Filme:</label>
+            <input
+              type="text"
+              value={selectedFilme.nomeFilme}
+              onChange={(e) =>
+                setSelectedFilme({
+                  ...selectedFilme,
+                  nomeFilme: e.target.value,
+                })
+              }
+            />
+            <label>Sinopse:</label>
+            <textarea
+              type="text"
+              value={selectedFilme.sinopse}
+              onChange={(e) =>
+                setSelectedFilme({ ...selectedFilme, sinopse: e.target.value })
+              }
+            />
+            <label>Categoria:</label>
+            <select
+              value={selectedCategoria} // Vincula ao ID da categoria
+              onChange={(e) => {
+                const novaCategoria = categorias.find(
+                  (categoria) =>
+                    categoria.idcategoria.toString() === e.target.value
+                );
+                setSelectedCategoria(novaCategoria?.nome || ""); // Atualiza o nome da categoria
+                setSelectedFilme({
+                  ...selectedFilme,
+                  idcategoria: novaCategoria?.idcategoria || "", // Atualiza o ID da categoria no filme
+                });
+              }}
+            >
+              {/* Exibe a categoria atual como primeira opção */}
+              <option value={selectedFilme.idcategoria || ""}>
+                {selectedCategoria || "Selecione uma Categoria"}
+              </option>
+              {categorias.map((categoria) => (
+                <option
+                  key={categoria.idcategoria}
+                  value={categoria.idcategoria}
+                >
+                  {categoria.nome}
                 </option>
-                {categorias.map((categoria) => (
-                  <option
-                    key={categoria.idcategoria}
-                    value={categoria.idcategoria}
-                  >
-                    {categoria.nome}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <label>
-              Data de Lançamento:{" "}
-              <input
-                type="date"
-                value={selectedFilme.dataLancamento}
-                onChange={(e) =>
-                  setSelectedFilme({
-                    ...selectedFilme,
-                    dataLancamento: e.target.value,
-                  })
-                }
-              />
-            </label>
-            <label>
-              Preço de Compra:{" "}
-              <input
-                type="number"
-                value={selectedFilme.precoCompra}
-                onChange={(e) =>
-                  setSelectedFilme({
-                    ...selectedFilme,
-                    precoCompra: e.target.value,
-                  })
-                }
-              />
-            </label>
-            <label>
-              Quantidade em Estoque:{" "}
-              <input
-                type="number"
-                value={selectedFilme.qtdEstoque}
-                onChange={(e) =>
-                  setSelectedFilme({
-                    ...selectedFilme,
-                    qtdEstoque: e.target.value,
-                  })
-                }
-              />
-            </label>
-            <label>
-              Disponível para Locação:{" "}
-              <input
-                type="checkbox"
-                checked={selectedFilme.disponivelLocacao}
-                onChange={(e) =>
-                  setSelectedFilme({
-                    ...selectedFilme,
-                    disponivelLocacao: e.target.checked,
-                  })
-                }
-              />
-            </label>
-            <label>
-              Classificação Indicativa:{" "}
-              <input
-                type="text"
-                value={selectedFilme.classificacaoIndicativa}
-                onChange={(e) =>
-                  setSelectedFilme({
-                    ...selectedFilme,
-                    classificacaoIndicativa: e.target.value,
-                  })
-                }
-              />
-            </label>
-            <label>
-              Imagem:{" "}
-              <input
-                type="text"
-                value={selectedFilme.imagem}
-                onChange={(e) =>
-                  setSelectedFilme({ ...selectedFilme, imagem: e.target.value })
-                }
-              />
-            </label>
+              ))}
+            </select>
+
+            <label>Data de Lançamento:</label>
+            <input
+              type="date"
+              value={selectedFilme.dataLancamento}
+              onChange={(e) =>
+                setSelectedFilme({
+                  ...selectedFilme,
+                  dataLancamento: e.target.value,
+                })
+              }
+            />
+            <label>Preço de Compra:</label>
+            <input
+              type="number"
+              value={selectedFilme.precoCompra}
+              onChange={(e) =>
+                setSelectedFilme({
+                  ...selectedFilme,
+                  precoCompra: e.target.value,
+                })
+              }
+            />
+            <label>Quantidade em Estoque:</label>
+            <input
+              type="number"
+              value={selectedFilme.qtdEstoque}
+              onChange={(e) =>
+                setSelectedFilme({
+                  ...selectedFilme,
+                  qtdEstoque: e.target.value,
+                })
+              }
+            />
+            <label>Disponível para Locação:</label>
+            <input
+              type="checkbox"
+              checked={selectedFilme.disponivelLocacao}
+              onChange={(e) =>
+                setSelectedFilme({
+                  ...selectedFilme,
+                  disponivelLocacao: e.target.checked,
+                })
+              }
+            />
+            <label>Classificação Indicativa:</label>
+            <input
+              type="text"
+              value={selectedFilme.classificacaoIndicativa}
+              onChange={(e) =>
+                setSelectedFilme({
+                  ...selectedFilme,
+                  classificacaoIndicativa: e.target.value,
+                })
+              }
+            />
+            <label>Imagem:</label>
+            <input
+              type="text"
+              value={selectedFilme.imagem}
+              onChange={(e) =>
+                setSelectedFilme({ ...selectedFilme, imagem: e.target.value })
+              }
+            />
             <div className="popup-actions">
               <button className="btn salvar" onClick={handleSaveChanges}>
                 Salvar
@@ -469,108 +441,90 @@ function GerenciarFilmes() {
         <div className="popup">
           <div className="popup-content">
             <h2>Adicionar Filme</h2>
-            <label>
-              Nome do Filme:{" "}
-              <input
-                type="text"
-                value={newFilme.nomeFilme}
-                onChange={(e) =>
-                  setNewFilme({ ...newFilme, nomeFilme: e.target.value })
-                }
-              />
-            </label>
-            <label>
-              Sinopse:{" "}
-              <textarea
-                value={newFilme.sinopse}
-                onChange={(e) =>
-                  setNewFilme({ ...newFilme, sinopse: e.target.value })
-                }
-              />
-            </label>
-            <label>
-              Categoria:{" "}
-              <select
-                value={selectedCategoria}
-                onChange={(e) => setSelectedCategoria(e.target.value)}
-              >
-                <option value="">Selecione uma Categoria</option>
-                {categorias.map((categoria) => (
-                  <option
-                    key={categoria.idcategoria}
-                    value={categoria.idcategoria}
-                  >
-                    {categoria.nome}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <label>
-              Data de Lançamento:{" "}
-              <input
-                type="date"
-                value={newFilme.dataLancamento}
-                onChange={(e) =>
-                  setNewFilme({ ...newFilme, dataLancamento: e.target.value })
-                }
-              />
-            </label>
-            <label>
-              Preço de Compra:{" "}
-              <input
-                type="number"
-                value={newFilme.precoCompra}
-                onChange={(e) =>
-                  setNewFilme({ ...newFilme, precoCompra: e.target.value })
-                }
-              />
-            </label>
-            <label>
-              Quantidade em Estoque:{" "}
-              <input
-                type="number"
-                value={newFilme.qtdEstoque}
-                onChange={(e) =>
-                  setNewFilme({ ...newFilme, qtdEstoque: e.target.value })
-                }
-              />
-            </label>
-            <label>
-              Disponível para Locação:{" "}
-              <input
-                type="checkbox"
-                checked={newFilme.disponivelLocacao}
-                onChange={(e) =>
-                  setNewFilme({
-                    ...newFilme,
-                    disponivelLocacao: e.target.checked,
-                  })
-                }
-              />
-            </label>
-            <label>
-              Classificação Indicativa:{" "}
-              <input
-                type="text"
-                value={newFilme.classificacaoIndicativa}
-                onChange={(e) =>
-                  setNewFilme({
-                    ...newFilme,
-                    classificacaoIndicativa: e.target.value,
-                  })
-                }
-              />
-            </label>
-            <label>
-              Imagem:{" "}
-              <input
-                type="text"
-                value={newFilme.imagem}
-                onChange={(e) =>
-                  setNewFilme({ ...newFilme, imagem: e.target.value })
-                }
-              />
-            </label>
+            <label>Nome do Filme:</label>
+            <input
+              type="text"
+              value={newFilme.nomeFilme}
+              onChange={(e) =>
+                setNewFilme({ ...newFilme, nomeFilme: e.target.value })
+              }
+            />
+            <label>Sinopse:</label>
+            <textarea
+              value={newFilme.sinopse}
+              onChange={(e) =>
+                setNewFilme({ ...newFilme, sinopse: e.target.value })
+              }
+            />
+            <label>Categoria:</label>
+            <select
+              value={selectedCategoria}
+              onChange={(e) => setSelectedCategoria(e.target.value)}
+            >
+              <option value="">Selecione uma Categoria</option>
+              {categorias.map((categoria) => (
+                <option
+                  key={categoria.idcategoria}
+                  value={categoria.idcategoria}
+                >
+                  {categoria.nome}
+                </option>
+              ))}
+            </select>
+            <label>Data de Lançamento:</label>
+            <input
+              type="date"
+              value={newFilme.dataLancamento}
+              onChange={(e) =>
+                setNewFilme({ ...newFilme, dataLancamento: e.target.value })
+              }
+            />
+            <label>Preço de Compra:</label>
+            <input
+              type="number"
+              value={newFilme.precoCompra}
+              onChange={(e) =>
+                setNewFilme({ ...newFilme, precoCompra: e.target.value })
+              }
+            />
+            <label>Quantidade em Estoque:</label>
+            <input
+              type="number"
+              value={newFilme.qtdEstoque}
+              onChange={(e) =>
+                setNewFilme({ ...newFilme, qtdEstoque: e.target.value })
+              }
+            />
+            <label>Disponível para Locação:</label>
+            <input
+              type="checkbox"
+              checked={newFilme.disponivelLocacao}
+              onChange={(e) =>
+                setNewFilme({
+                  ...newFilme,
+                  disponivelLocacao: e.target.checked,
+                })
+              }
+            />
+            <label>Classificação Indicativa:</label>
+            <input
+              type="text"
+              value={newFilme.classificacaoIndicativa}
+              onChange={(e) =>
+                setNewFilme({
+                  ...newFilme,
+                  classificacaoIndicativa: e.target.value,
+                })
+              }
+            />
+            <label>Imagem:</label>
+            <input
+              type="text"
+              value={newFilme.imagem}
+              onChange={(e) =>
+                setNewFilme({ ...newFilme, imagem: e.target.value })
+              }
+            />
             <div className="popup-actions">
               <button className="btn salvar" onClick={handleAddFilme}>
                 Adicionar
