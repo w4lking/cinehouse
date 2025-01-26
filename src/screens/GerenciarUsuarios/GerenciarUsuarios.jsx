@@ -428,21 +428,22 @@ function GerenciarUsuarios() {
               ID do Usuário:{" "}
               <input type="text" value={funcionarioData.idusuario} disabled />
             </label>
-            <label>Cargo:</label>
-            <select
-              value={funcionarioData.cargo || ""}
-              onChange={(e) =>
-                setFuncionarioData({
-                  ...funcionarioData,
-                  cargo: e.target.value,
-                })
-              }
-            >
-              <option value="">Selecione um cargo</option>
-              <option value="Caixa">Caixa</option>
-              <option value="Administrador">Administrador</option>
-            </select>
-
+            <label>
+              Cargo:{" "}
+              <select
+                value={funcionarioData.cargo || ""}
+                onChange={(e) =>
+                  setFuncionarioData({
+                    ...funcionarioData,
+                    cargo: e.target.value,
+                  })
+                }
+              >
+                <option value="">Selecione um cargo</option>
+                <option value="Caixa">Caixa</option>
+                <option value="Administrador">Administrador</option>
+              </select>
+            </label>
             <label>
               Salário:{" "}
               <input
