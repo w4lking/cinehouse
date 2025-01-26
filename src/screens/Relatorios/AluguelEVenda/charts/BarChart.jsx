@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {
   BarChart,
   Bar,
@@ -26,5 +27,9 @@ const BarChartComponent = ({ data }) => {
     </BarChart>
   );
 };
+
+//BarChartComponent.PropTypes = {
+//data: PropTypes.number.isRequired,
+//};
 
 export default BarChartComponent;
