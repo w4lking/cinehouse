@@ -348,7 +348,7 @@ function GerenciarFilmes() {
               />
             </label>
             <label>
-              Categoria:
+              Categoria:{""}
               <select
                 value={selectedCategoria} // Vincula ao ID da categoria
                 onChange={(e) => {
@@ -378,7 +378,7 @@ function GerenciarFilmes() {
               </select>
             </label>
             <label>
-              Data de Lançamento:
+              Data de Lançamento:{" "}
               <input
                 type="date"
                 value={selectedFilme.dataLancamento}
