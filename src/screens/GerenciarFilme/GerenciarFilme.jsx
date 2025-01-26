@@ -308,7 +308,7 @@ function GerenciarFilmes() {
           <div className="popup-content">
             <h2>Editar Filme</h2>
             <label>
-              ID Filme:
+              ID Filme:{" "}
               <input
                 type="text"
                 disabled={true}
@@ -321,17 +321,19 @@ function GerenciarFilmes() {
                 }
               />
             </label>
-            <label>Nome do Filme:</label>
-            <input
-              type="text"
-              value={selectedFilme.nomeFilme}
-              onChange={(e) =>
-                setSelectedFilme({
-                  ...selectedFilme,
-                  nomeFilme: e.target.value,
-                })
-              }
-            />
+            <label>
+              Nome do Filme:{" "}
+              <input
+                type="text"
+                value={selectedFilme.nomeFilme}
+                onChange={(e) =>
+                  setSelectedFilme({
+                    ...selectedFilme,
+                    nomeFilme: e.target.value,
+                  })
+                }
+              />
+            </label>
             <label>Sinopse:</label>
             <textarea
               type="text"
