@@ -43,8 +43,8 @@ const Login = () => {
         sessionStorage.setItem("id", response.idusuario);
         sessionStorage.setItem("cliente", response.idcliente);
         sessionStorage.setItem("perfil", response.perfil);
-        sessionStorage.setItem("token", response.token); 
-        navigate("/navigation"); 
+        sessionStorage.setItem("token", response.token);
+        navigate("/navigation");
       } else {
         setShowAlert(true);
       }
@@ -93,14 +93,15 @@ const Login = () => {
             placeholder="Digite sua senha"
             required
           />
-          <a
-            href="#"
+          <button
+            type="button"
             onClick={handleForgotPassword}
             className="forgot-password-link"
           >
             Esqueceu sua senha?
-          </a>
+          </button>
         </div>
+
         <div className="button-group-entrar">
           <button type="submit" className="btn1">
             Entrar
