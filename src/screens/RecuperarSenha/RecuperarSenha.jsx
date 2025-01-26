@@ -58,7 +58,7 @@ const RecuperarSenha = () => {
               className="recuperar-senha-formulario"
             >
               <label className="recuperar-senha-rotulo">
-                Nova Senha:
+                Nova Senha:{" "}
                 <input
                   type="password"
                   value={senha}
@@ -68,7 +68,7 @@ const RecuperarSenha = () => {
                 />
               </label>
               <label className="recuperar-senha-rotulo">
-                Confirme a Senha:
+                Confirme a Senha:{" "}
                 <input
                   type="password"
                   value={confirmarSenha}
