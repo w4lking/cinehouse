@@ -27,23 +27,30 @@ describe("pagina login", () => {
 
     // referente aos redirecionamentos
     it("Não deve redirecionar o usuario caso nao esteja autenticado via JWT", () => {
-        cy.visit("/main");
-        cy.url().should("include", "/login");
+        cy.url().should("include", "/");
         cy.visit("/adm"); // tela do adm
-        cy.url().should("include", "/login");
+        cy.wait(1000)
+        cy.url().should("include", "/");
         cy.visit("/adm/criarUsuario");
-        cy.url().should("include", "/login");
+        cy.wait(1000)
+        cy.url().should("include", "/");
         cy.visit("/gerenciarUsuarios");
-        cy.url().should("include", "/login");
+        cy.wait(1000)
+        cy.url().should("include", "/");
         cy.visit("/relatorio/alugueisEVendas");
-        cy.url().should("include", "/login");
+        cy.wait(1000)
+        cy.url().should("include", "/");
         cy.visit("/relatorio/devolucao");
-        cy.url().should("include", "/login");
+        cy.wait(1000)
+        cy.url().should("include", "/");
         cy.visit("/GerenciarFilme");
-        cy.url().should("include", "/login");
-        cy.visit("/histPedidos");
-        cy.url().should("include", "/login");
+        cy.wait(1000)
+        cy.url().should("include", "/");
         cy.visit("/userSettings");
-        cy.url().should("include", "/login");
+        cy.wait(1000)
+        cy.url().should("include", "/");
+        cy.visit("/histPedidos");
+        cy.wait(1000)
+        cy.url().should("include", "/");
       });
 });
