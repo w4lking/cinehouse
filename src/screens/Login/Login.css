@@ -79,17 +79,20 @@ input:focus {
 }
 
 .forgot-password-link {
-  display: block;
+  background: none;
+  border: none;
+  padding-top: 10px;
+  color: #007bff;
   text-align: right;
-  margin-top: 8px;
-  font-size: 12px;
-  color: #00b7ff;
   cursor: pointer;
+  float: right;
+  font-size: 14px;
 }
 
 .forgot-password-link:hover {
   text-decoration: underline;
 }
+
 
 /* Alert box */
 .alert {

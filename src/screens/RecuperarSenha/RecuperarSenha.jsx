@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import "./RecuperarSenha.css";
 import ApiService from "../../services/apiService";
@@ -58,7 +58,7 @@ const RecuperarSenha = () => {
               className="recuperar-senha-formulario"
             >
               <label className="recuperar-senha-rotulo">
-                Nova Senha:
+                Nova Senha:{" "}
                 <input
                   type="password"
                   value={senha}
@@ -68,7 +68,7 @@ const RecuperarSenha = () => {
                 />
               </label>
               <label className="recuperar-senha-rotulo">
-                Confirme a Senha:
+                Confirme a Senha:{" "}
                 <input
                   type="password"
                   value={confirmarSenha}

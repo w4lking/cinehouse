@@ -363,38 +363,49 @@ function GerenciarUsuarios() {
         <div className="popup">
           <div className="popup-content">
             <h2>Editar Usuário</h2>
-            <label>ID:</label>
-            <input type="text" value={selectedUsuario.idusuario} disabled />
-            <label>Nome:</label>
-            <input
-              type="text"
-              value={selectedUsuario.nome}
-              onChange={(e) =>
-                setSelectedUsuario({ ...selectedUsuario, nome: e.target.value })
-              }
-            />
-            <label>Email:</label>
-            <input
-              type="text"
-              value={selectedUsuario.email}
-              onChange={(e) =>
-                setSelectedUsuario({
-                  ...selectedUsuario,
-                  email: e.target.value,
-                })
-              }
-            />
-            <label>Data Nascimento:</label>
-            <input
-              type="date"
-              value={selectedUsuario.dataNasc}
-              onChange={(e) =>
-                setSelectedUsuario({
-                  ...selectedUsuario,
-                  dataNasc: e.target.value,
-                })
-              }
-            />
+            <label>
+              ID:{" "}
+              <input type="text" value={selectedUsuario.idusuario} disabled />
+            </label>
+            <label>
+              Nome:{" "}
+              <input
+                type="text"
+                value={selectedUsuario.nome}
+                onChange={(e) =>
+                  setSelectedUsuario({
+                    ...selectedUsuario,
+                    nome: e.target.value,
+                  })
+                }
+              />
+            </label>
+            <label>
+              Email:{" "}
+              <input
+                type="text"
+                value={selectedUsuario.email}
+                onChange={(e) =>
+                  setSelectedUsuario({
+                    ...selectedUsuario,
+                    email: e.target.value,
+                  })
+                }
+              />
+            </label>
+            <label>
+              Data Nascimento:{" "}
+              <input
+                type="date"
+                value={selectedUsuario.dataNasc}
+                onChange={(e) =>
+                  setSelectedUsuario({
+                    ...selectedUsuario,
+                    dataNasc: e.target.value,
+                  })
+                }
+              />
+            </label>
             {/* Adicione mais campos conforme necessário */}
             <div className="popup-actions">
               <button className="btn salvar" onClick={handleSaveChanges}>
@@ -413,35 +424,39 @@ function GerenciarUsuarios() {
         <div className="popup">
           <div className="popup-content">
             <h2>Adicionar Funcionário</h2>
-            <label>ID do Usuário:</label>
-            <input type="text" value={funcionarioData.idusuario} disabled />
-
-            <label>Cargo:</label>
-            <select
-              value={funcionarioData.cargo || ""}
-              onChange={(e) =>
-                setFuncionarioData({
-                  ...funcionarioData,
-                  cargo: e.target.value,
-                })
-              }
-            >
-              <option value="">Selecione um cargo</option>
-              <option value="Caixa">Caixa</option>
-              <option value="Administrador">Administrador</option>
-            </select>
-
-            <label>Salário:</label>
-            <input
-              type="number"
-              value={funcionarioData.salario}
-              onChange={(e) =>
-                setFuncionarioData({
-                  ...funcionarioData,
-                  salario: e.target.value,
-                })
-              }
-            />
+            <label>
+              ID do Usuário:{" "}
+              <input type="text" value={funcionarioData.idusuario} disabled />
+            </label>
+            <label>
+              Cargo:{" "}
+              <select
+                value={funcionarioData.cargo || ""}
+                onChange={(e) =>
+                  setFuncionarioData({
+                    ...funcionarioData,
+                    cargo: e.target.value,
+                  })
+                }
+              >
+                <option value="">Selecione um cargo</option>
+                <option value="Caixa">Caixa</option>
+                <option value="Administrador">Administrador</option>
+              </select>
+            </label>
+            <label>
+              Salário:{" "}
+              <input
+                type="number"
+                value={funcionarioData.salario}
+                onChange={(e) =>
+                  setFuncionarioData({
+                    ...funcionarioData,
+                    salario: e.target.value,
+                  })
+                }
+              />
+            </label>
 
             <div className="popup-actions">
               <button className="btn salvar" onClick={handleSaveFuncionario}>
@@ -464,26 +479,30 @@ function GerenciarUsuarios() {
             <h2>Alterar Funcionário</h2>
             <form onSubmit={handleSaveAlteracaoFuncionario}>
               <div className="form-group-funcionario">
-                <label htmlFor="cargo">Cargo</label>
-                <select
-                  id="cargo"
-                  value={cargo}
-                  onChange={(e) => setCargo(e.target.value)}
-                >
-                  <option value="">Selecione o cargo</option>
-                  <option value="caixa">Caixa</option>
-                  <option value="administrador">Administrador</option>
-                </select>
+                <label htmlFor="cargo">
+                  Cargo{" "}
+                  <select
+                    id="cargo"
+                    value={cargo}
+                    onChange={(e) => setCargo(e.target.value)}
+                  >
+                    <option value="">Selecione o cargo</option>
+                    <option value="caixa">Caixa</option>
+                    <option value="administrador">Administrador</option>
+                  </select>
+                </label>
               </div>
               <div className="form-group-funcionario">
-                <label htmlFor="salario">Salário</label>
-                <input
-                  type="number"
-                  id="salario"
-                  value={salario}
-                  onChange={(e) => setSalario(e.target.value)}
-                  placeholder="Digite o salário"
-                />
+                <label htmlFor="salario">
+                  Salário{" "}
+                  <input
+                    type="number"
+                    id="salario"
+                    value={salario}
+                    onChange={(e) => setSalario(e.target.value)}
+                    placeholder="Digite o salário"
+                  />
+                </label>
               </div>
               <div className="popup-actions">
                 <button type="submit" className="btn salvar">

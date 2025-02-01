@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {
   BarChart,
   Bar,
@@ -25,6 +26,10 @@ const BarChartComponent = ({ data }) => {
       <Bar dataKey="quantidade" fill="#8884d8" />
     </BarChart>
   );
+};
+
+BarChartComponent.propTypes = {
+  data: PropTypes.number,
 };
 
 export default BarChartComponent;
