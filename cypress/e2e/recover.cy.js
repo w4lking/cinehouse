@@ -8,6 +8,7 @@ describe ("pagina de recuperar senha", () => {
         cy.get('input[id="email"]').type(" ");
         cy.wait(1000);
         cy.get('button[type="submit"]').click();
+        cy.url().should("include", "/recover");
         cy.wait(4000);
     });
 
@@ -16,6 +17,7 @@ describe ("pagina de recuperar senha", () => {
         cy.get('input[id="email"]').type("walkerlayon.com");
         cy.wait(1000);
         cy.get('button[type="submit"]').click();
+        cy.url().should("include", "/recover");
         cy.wait(4000);
     });
 
@@ -23,6 +25,7 @@ describe ("pagina de recuperar senha", () => {
         cy.wait(1000);
         cy.get('input[id="email"]').type("walkerlayon@gmail.com");
         cy.get('button[type="submit"]').click();
+        cy.url().should("include", "/recover");
         cy.wait(4000);
     });
 
