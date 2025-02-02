@@ -1,4 +1,4 @@
-describe("pagina navigation", () => {
+describe("pagina Adm Cadastrar Usuario", () => {
     // Este bloco configura o login antes de cada teste
     beforeEach(() => {
         cy.visit("/");
