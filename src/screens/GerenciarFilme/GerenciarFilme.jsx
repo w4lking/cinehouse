@@ -323,7 +323,7 @@ function GerenciarFilmes() {
             </label>
             <label>
               Nome do Filme:{" "}
-              <input
+              <input className="input-nome-filme"
                 type="text"
                 value={selectedFilme.nomeFilme}
                 onChange={(e) =>
@@ -336,7 +336,7 @@ function GerenciarFilmes() {
             </label>
             <label>
               Sinopse:{" "}
-              <textarea
+              <textarea className="input-sinopse"
                 type="text"
                 value={selectedFilme.sinopse}
                 onChange={(e) =>
@@ -349,7 +349,7 @@ function GerenciarFilmes() {
             </label>
             <label>
               Categoria:{" "}
-              <select
+              <select className="input-categoria"
                 value={selectedCategoria} // Vincula ao ID da categoria
                 onChange={(e) => {
                   const novaCategoria = categorias.find(
@@ -380,7 +380,7 @@ function GerenciarFilmes() {
             </label>
             <label>
               Data de Lançamento:{" "}
-              <input
+              <input className="input-data-lancamento"
                 type="date"
                 value={selectedFilme.dataLancamento}
                 onChange={(e) =>
@@ -393,7 +393,7 @@ function GerenciarFilmes() {
             </label>
             <label>
               Preço de Compra:{" "}
-              <input
+              <input className="input-preco-compra"
                 type="number"
                 value={selectedFilme.precoCompra}
                 onChange={(e) =>
@@ -406,7 +406,7 @@ function GerenciarFilmes() {
             </label>
             <label>
               Quantidade em Estoque:{" "}
-              <input
+              <input className="input-qtd-estoque"
                 type="number"
                 value={selectedFilme.qtdEstoque}
                 onChange={(e) =>
@@ -419,7 +419,7 @@ function GerenciarFilmes() {
             </label>
             <label>
               Disponível para Locação:{" "}
-              <input
+              <input className="input-disponivel-locacao"
                 type="checkbox"
                 checked={selectedFilme.disponivelLocacao}
                 onChange={(e) =>
@@ -432,7 +432,7 @@ function GerenciarFilmes() {
             </label>
             <label>
               Classificação Indicativa:{" "}
-              <input
+              <input className="input-classificacao-indicativa"
                 type="text"
                 value={selectedFilme.classificacaoIndicativa}
                 onChange={(e) =>
@@ -445,7 +445,7 @@ function GerenciarFilmes() {
             </label>
             <label>
               Imagem:{" "}
-              <input
+              <input className="input-imagem"
                 type="text"
                 value={selectedFilme.imagem}
                 onChange={(e) =>
@@ -472,7 +472,7 @@ function GerenciarFilmes() {
             <h2>Adicionar Filme</h2>
             <label>
               Nome do Filme:{" "}
-              <input
+              <input id="nome"
                 type="text"
                 value={newFilme.nomeFilme}
                 onChange={(e) =>
@@ -482,7 +482,7 @@ function GerenciarFilmes() {
             </label>
             <label>
               Sinopse:{" "}
-              <textarea
+              <textarea id="sinopse"
                 value={newFilme.sinopse}
                 onChange={(e) =>
                   setNewFilme({ ...newFilme, sinopse: e.target.value })
@@ -491,7 +491,7 @@ function GerenciarFilmes() {
             </label>
             <label>
               Categoria:{" "}
-              <select
+              <select id="categoria"
                 value={selectedCategoria}
                 onChange={(e) => setSelectedCategoria(e.target.value)}
               >
@@ -508,7 +508,7 @@ function GerenciarFilmes() {
             </label>
             <label>
               Data de Lançamento:{" "}
-              <input
+              <input id="data-lancamento"
                 type="date"
                 value={newFilme.dataLancamento}
                 onChange={(e) =>
@@ -518,7 +518,7 @@ function GerenciarFilmes() {
             </label>
             <label>
               Preço de Compra:{" "}
-              <input
+              <input id="preco-compra"
                 type="number"
                 value={newFilme.precoCompra}
                 onChange={(e) =>
@@ -528,7 +528,7 @@ function GerenciarFilmes() {
             </label>
             <label>
               Quantidade em Estoque:{" "}
-              <input
+              <input id="qtd-estoque"
                 type="number"
                 value={newFilme.qtdEstoque}
                 onChange={(e) =>
@@ -538,7 +538,7 @@ function GerenciarFilmes() {
             </label>
             <label>
               Disponível para Locação:{" "}
-              <input
+              <input id="disponivel-locacao"
                 type="checkbox"
                 checked={newFilme.disponivelLocacao}
                 onChange={(e) =>
@@ -551,7 +551,7 @@ function GerenciarFilmes() {
             </label>
             <label>
               Classificação Indicativa:{" "}
-              <input
+              <input id="classificacao-indicativa"
                 type="text"
                 value={newFilme.classificacaoIndicativa}
                 onChange={(e) =>
@@ -564,7 +564,7 @@ function GerenciarFilmes() {
             </label>
             <label>
               Imagem:{" "}
-              <input
+              <input id="imagem"
                 type="text"
                 value={newFilme.imagem}
                 onChange={(e) =>
@@ -572,8 +572,8 @@ function GerenciarFilmes() {
                 }
               />
             </label>
-            <div className="popup-actions">
-              <button className="btn salvar" onClick={handleAddFilme}>
+            <div id="popup-actions">
+              <button className="btn salvar" id="btn salvar" onClick={handleAddFilme}>
                 Adicionar
               </button>
               <button className="btn cancelar" onClick={handleAddPopupClose}>
