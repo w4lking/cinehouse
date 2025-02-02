@@ -51,7 +51,11 @@ const Admin = () => {
             <i className="fas fa-chart-line card-icon"></i> Gerar Relatórios
           </div>
           <div className="card-body">
-            <button onClick={handleRelatorioVenda}>
+            <button
+              onClick={handleRelatorioVenda}
+              type="button"
+              className="relatorios-vendas-cypress"
+            >
               <i className="fas fa-file-alt"></i> Relatório de Vendas/Aluguéis
             </button>
             <button onClick={handleRelatorioDevolucao}>

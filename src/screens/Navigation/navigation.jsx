@@ -185,7 +185,11 @@ function App() {
           {perfil === "cliente" && <li onClick={handlePerfil}>Perfil</li>}
           {/* Condicional para exibir "Gerenciar Relatórios" apenas para perfis autorizados */}
           {perfil === "funcionario" && (
-            <li onClick={handleAdm}>Gerenciar Relatórios</li>
+            <li>
+              <button className="relatorio" onClick={handleAdm}>
+                Gerenciar Relatórios
+              </button>
+            </li>
           )}
           <li onClick={handleSair}>Sair</li>
         </ul>
