@@ -369,7 +369,7 @@ function GerenciarUsuarios() {
             </label>
             <label>
               Nome:{" "}
-              <input
+              <input className="input-nome"
                 type="text"
                 value={selectedUsuario.nome}
                 onChange={(e) =>
@@ -382,7 +382,7 @@ function GerenciarUsuarios() {
             </label>
             <label>
               Email:{" "}
-              <input
+              <input className="input-email"
                 type="text"
                 value={selectedUsuario.email}
                 onChange={(e) =>
@@ -395,7 +395,7 @@ function GerenciarUsuarios() {
             </label>
             <label>
               Data Nascimento:{" "}
-              <input
+              <input className="input-dataNasc"
                 type="date"
                 value={selectedUsuario.dataNasc}
                 onChange={(e) =>
