@@ -323,7 +323,8 @@ function GerenciarFilmes() {
             </label>
             <label>
               Nome do Filme:{" "}
-              <input className="input-nome-filme"
+              <input
+                className="input-nome-filme"
                 type="text"
                 value={selectedFilme.nomeFilme}
                 onChange={(e) =>
@@ -336,7 +337,8 @@ function GerenciarFilmes() {
             </label>
             <label>
               Sinopse:{" "}
-              <textarea className="input-sinopse"
+              <textarea
+                className="input-sinopse"
                 type="text"
                 value={selectedFilme.sinopse}
                 onChange={(e) =>
@@ -349,7 +351,8 @@ function GerenciarFilmes() {
             </label>
             <label>
               Categoria:{" "}
-              <select className="input-categoria"
+              <select
+                className="input-categoria"
                 value={selectedCategoria} // Vincula ao ID da categoria
                 onChange={(e) => {
                   const novaCategoria = categorias.find(
@@ -362,7 +365,6 @@ function GerenciarFilmes() {
                     idcategoria: novaCategoria?.idcategoria || "", // Atualiza o ID da categoria no filme
                   });
                 }}
-                className="categoria-selector"
               >
                 {/* Exibe a categoria atual como primeira opção */}
                 <option value={selectedFilme.idcategoria || ""}>
@@ -380,7 +382,8 @@ function GerenciarFilmes() {
             </label>
             <label>
               Data de Lançamento:{" "}
-              <input className="input-data-lancamento"
+              <input
+                className="input-data-lancamento"
                 type="date"
                 value={selectedFilme.dataLancamento}
                 onChange={(e) =>
@@ -393,7 +396,8 @@ function GerenciarFilmes() {
             </label>
             <label>
               Preço de Compra:{" "}
-              <input className="input-preco-compra"
+              <input
+                className="input-preco-compra"
                 type="number"
                 value={selectedFilme.precoCompra}
                 onChange={(e) =>
@@ -406,7 +410,8 @@ function GerenciarFilmes() {
             </label>
             <label>
               Quantidade em Estoque:{" "}
-              <input className="input-qtd-estoque"
+              <input
+                className="input-qtd-estoque"
                 type="number"
                 value={selectedFilme.qtdEstoque}
                 onChange={(e) =>
@@ -419,7 +424,8 @@ function GerenciarFilmes() {
             </label>
             <label>
               Disponível para Locação:{" "}
-              <input className="input-disponivel-locacao"
+              <input
+                className="input-disponivel-locacao"
                 type="checkbox"
                 checked={selectedFilme.disponivelLocacao}
                 onChange={(e) =>
@@ -432,7 +438,8 @@ function GerenciarFilmes() {
             </label>
             <label>
               Classificação Indicativa:{" "}
-              <input className="input-classificacao-indicativa"
+              <input
+                className="input-classificacao-indicativa"
                 type="text"
                 value={selectedFilme.classificacaoIndicativa}
                 onChange={(e) =>
@@ -445,7 +452,8 @@ function GerenciarFilmes() {
             </label>
             <label>
               Imagem:{" "}
-              <input className="input-imagem"
+              <input
+                className="input-imagem"
                 type="text"
                 value={selectedFilme.imagem}
                 onChange={(e) =>
@@ -472,7 +480,8 @@ function GerenciarFilmes() {
             <h2>Adicionar Filme</h2>
             <label>
               Nome do Filme:{" "}
-              <input id="nome"
+              <input
+                id="nome"
                 type="text"
                 value={newFilme.nomeFilme}
                 onChange={(e) =>
@@ -482,7 +491,8 @@ function GerenciarFilmes() {
             </label>
             <label>
               Sinopse:{" "}
-              <textarea id="sinopse"
+              <textarea
+                id="sinopse"
                 value={newFilme.sinopse}
                 onChange={(e) =>
                   setNewFilme({ ...newFilme, sinopse: e.target.value })
@@ -491,7 +501,8 @@ function GerenciarFilmes() {
             </label>
             <label>
               Categoria:{" "}
-              <select id="categoria"
+              <select
+                id="categoria"
                 value={selectedCategoria}
                 onChange={(e) => setSelectedCategoria(e.target.value)}
               >
@@ -508,7 +519,8 @@ function GerenciarFilmes() {
             </label>
             <label>
               Data de Lançamento:{" "}
-              <input id="data-lancamento"
+              <input
+                id="data-lancamento"
                 type="date"
                 value={newFilme.dataLancamento}
                 onChange={(e) =>
@@ -518,7 +530,8 @@ function GerenciarFilmes() {
             </label>
             <label>
               Preço de Compra:{" "}
-              <input id="preco-compra"
+              <input
+                id="preco-compra"
                 type="number"
                 value={newFilme.precoCompra}
                 onChange={(e) =>
@@ -528,7 +541,8 @@ function GerenciarFilmes() {
             </label>
             <label>
               Quantidade em Estoque:{" "}
-              <input id="qtd-estoque"
+              <input
+                id="qtd-estoque"
                 type="number"
                 value={newFilme.qtdEstoque}
                 onChange={(e) =>
@@ -538,7 +552,8 @@ function GerenciarFilmes() {
             </label>
             <label>
               Disponível para Locação:{" "}
-              <input id="disponivel-locacao"
+              <input
+                id="disponivel-locacao"
                 type="checkbox"
                 checked={newFilme.disponivelLocacao}
                 onChange={(e) =>
@@ -551,7 +566,8 @@ function GerenciarFilmes() {
             </label>
             <label>
               Classificação Indicativa:{" "}
-              <input id="classificacao-indicativa"
+              <input
+                id="classificacao-indicativa"
                 type="text"
                 value={newFilme.classificacaoIndicativa}
                 onChange={(e) =>
@@ -564,7 +580,8 @@ function GerenciarFilmes() {
             </label>
             <label>
               Imagem:{" "}
-              <input id="imagem"
+              <input
+                id="imagem"
                 type="text"
                 value={newFilme.imagem}
                 onChange={(e) =>
@@ -573,7 +590,11 @@ function GerenciarFilmes() {
               />
             </label>
             <div id="popup-actions">
-              <button className="btn salvar" id="btn salvar" onClick={handleAddFilme}>
+              <button
+                className="btn salvar"
+                id="btn salvar"
+                onClick={handleAddFilme}
+              >
                 Adicionar
               </button>
               <button className="btn cancelar" onClick={handleAddPopupClose}>
