@@ -124,47 +124,6 @@ function GerenciarUsuarios() {
     usuario.nome.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // Função de adicionar funcionário
-  /*const handleAddFuncionarioClick = async (usuario) => {
-    const cargoPadrao = "Administrador"; // Cargo padrão
-    const salarioPadrao = 2000; // Salário padrão
-
-    try {
-      // Certifique-se de que o usuário.idusuario está sendo passado corretamente
-      const response = await ApiService.AdicionarFuncionario({
-        usuario_idusuario: usuario.idusuario,
-        cargo: cargoPadrao,
-        salario: salarioPadrao,
-      });
-
-      // Verifique a resposta da API
-      if (response && response.status === "success") {
-        alert(
-          `Usuário ${usuario.nome} foi adicionado como funcionário com sucesso!`
-        );
-      } else {
-        alert(
-          `Erro ao adicionar funcionário: ${
-            response?.message || "Erro desconhecido"
-          }`
-        );
-      }
-    } catch (error) {
-      console.error("Erro ao adicionar funcionário:", error);
-      if (error.response) {
-        // Exibe detalhes completos da resposta de erro do backend
-        console.error("Detalhes do erro:", error.response.data);
-        alert(
-          `Erro ao adicionar funcionário: ${
-            error.response.data.message || "Erro desconhecido"
-          }`
-        );
-      } else {
-        alert("Erro inesperado ao adicionar funcionário.");
-      }
-    }
-  };*/
-
   const handlePopupClose = () => {
     setShowPopup(false); // Fecha o popup
   };
@@ -369,7 +328,8 @@ function GerenciarUsuarios() {
             </label>
             <label>
               Nome:{" "}
-              <input className="input-nome"
+              <input
+                className="input-nome"
                 type="text"
                 value={selectedUsuario.nome}
                 onChange={(e) =>
@@ -382,7 +342,8 @@ function GerenciarUsuarios() {
             </label>
             <label>
               Email:{" "}
-              <input className="input-email"
+              <input
+                className="input-email"
                 type="text"
                 value={selectedUsuario.email}
                 onChange={(e) =>
@@ -395,7 +356,8 @@ function GerenciarUsuarios() {
             </label>
             <label>
               Data Nascimento:{" "}
-              <input className="input-dataNasc"
+              <input
+                className="input-dataNasc"
                 type="date"
                 value={selectedUsuario.dataNasc}
                 onChange={(e) =>
