@@ -362,6 +362,7 @@ function GerenciarFilmes() {
                     idcategoria: novaCategoria?.idcategoria || "", // Atualiza o ID da categoria no filme
                   });
                 }}
+                className="categoria-selector"
               >
                 {/* Exibe a categoria atual como primeira opção */}
                 <option value={selectedFilme.idcategoria || ""}>

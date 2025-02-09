@@ -39,7 +39,8 @@ function CreateUser() {
       setPassword("");
     } catch (error) {
       setErrorMessage(
-        error.response?.data?.message || "Erro ao criar usuário. Tente novamente."
+        error.response?.data?.message ||
+          "Erro ao criar usuário. Tente novamente."
       );
       setSuccessMessage("");
     }
@@ -104,7 +105,11 @@ function CreateUser() {
             <button type="submit" className="btn btn-primary">
               Criar usuário
             </button>
-            <button type="button" className="btn btn-secondary" onClick={handleGoBack}>
+            <button
+              type="button"
+              className="btn btn-secondary"
+              onClick={handleGoBack}
+            >
               Voltar
             </button>
           </div>
