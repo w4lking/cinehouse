@@ -12,8 +12,6 @@ describe("Testes para página de adm", () => {
     cy.wait(800);
     cy.visit("/adm");
 
-    //cy.get('button[type="button"]').click();
-
     cy.visit("/relatorio/alugueisEVendas");
     cy.wait(5000);
   });
@@ -22,8 +20,6 @@ describe("Testes para página de adm", () => {
     cy.get('button[class="close-button-navigation"]').click();
     cy.wait(800);
     cy.visit("/adm");
-
-    //cy.get('button[type="button"]').click();
 
     cy.visit("/relatorio/devolucao");
   });
