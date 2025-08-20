@@ -58,7 +58,7 @@ describe ("pagina cadastro", () => {
         cy.wait(1000);
         cy.get('input[id="username"]').type("User Teste");
         cy.wait(1000);
-        cy.get('input[id="cpf"]').type("123.456.789-00");
+        cy.get('input[id="cpf"]').type("890.140.010-37");
         cy.wait(1000);
         cy.get('input[id="email"]').type("teste@gmail.com");
         cy.wait(1000);
@@ -75,7 +75,7 @@ describe ("pagina cadastro", () => {
         cy.wait(1000);
         cy.get('input[id="username"]').type("User Teste");
         cy.wait(1000);
-        cy.get('input[id="cpf"]').type("123.456.789-00");
+        cy.get('input[id="cpf"]').type("890.140.010-37");
         cy.wait(1000);
         cy.get('input[id="email"]').type("teste@gmail.com");
         cy.wait(1000);

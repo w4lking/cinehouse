@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Login.css";
+
+import "./Login.module.css";
 import ApiService from "../../services/apiService";
 
 const Login = () => {
