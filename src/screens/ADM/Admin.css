@@ -1,11 +1,6 @@
 /* Admin.css */
 
-body {
-  font-family: 'Poppins', sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #fdfdfd; /* Fundo mais claro */
-}
+
 
 .admin-container {
   max-width: 1200px;

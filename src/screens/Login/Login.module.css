@@ -1,153 +1,68 @@
-/* Background animations */
-body.login-page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url('https://source.unsplash.com/1600x900/?cinema,movie');
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: center;
-  animation: move-bg 20s infinite alternate;
-}
-
-@keyframes move-bg {
-  0% {
-    background-position: center;
-  }
-  50% {
-    background-position: left top;
-  }
-  100% {
-    background-position: right bottom;
-  }
-}
-
-/* Login container */
-.login-container {
-  width: 400px;
-  padding: 30px;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+.formWrapper {
+  /* ... estilos do container ... */
+  padding: 2rem;
   color: white;
   text-align: center;
 }
 
-/* Title */
-.h2-login {
-  margin-bottom: 20px;
-  font-size: 28px;
-  font-weight: bold;
-  color: #ffffff;
+.logo {
+  width: 100px;
+  margin-bottom: 2rem;
 }
 
-/* Form inputs */
-.form-group {
-  margin-bottom: 20px;
-  position: relative;
+/* Nova classe para estilizar os TextFields */
+.textField {
+  margin-bottom: 1rem !important;
 }
 
-body.login-page label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: bold;
-  color: #ffffff;
-  text-align: left;
+
+.textField :global(.MuiInputBase-input) {
+  color: #fff;
+  background-color: #464646;
+  border-radius: 6px;
 }
 
-input {
-  width: 100%;
-  padding: 12px;
-  border: none;
-  border-radius: 5px;
-  box-sizing: border-box;
-  font-size: 16px;
-  color: #333;
-  background-color: #f2f2f2;
-  outline: none;
-  transition: box-shadow 0.3s;
+.textField :global(.MuiInputLabel-root) {
+  color: #aaa;
 }
 
-input:focus {
-  box-shadow: 0 0 8px #00b7ff;
+.textField :global(.Mui-focused) {
+  color: #ffffff !important; /* Cor do label quando focado */
 }
 
-.forgot-password-link {
-  background: none;
-  border: none;
-  padding-top: 10px;
-  color: #007bff;
-  text-align: right;
-  cursor: pointer;
-  float: right;
-  font-size: 14px;
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
 }
 
-.forgot-password-link:hover {
+.forgotPasswordLink {
+  color: #aaa;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+.forgotPasswordLink:hover {
   text-decoration: underline;
 }
 
-
-/* Alert box */
-.alert {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  padding: 15px;
-  background-color: #ff4c4c;
-  color: white;
-  border-radius: 5px;
-  font-weight: bold;
-  z-index: 1000;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  animation: fade-in 0.5s ease-out forwards, fade-out 2s 1.5s ease-out forwards;
+.submitButton {
+  padding: 14px !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  background-color: #300000 !important; /* Cor da Netflix */
+  margin-bottom: 1rem !important;
 }
 
-@keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+.submitButton:hover {
+  background-color: #580101 !important; /* Cor da Netflix */
 }
 
-@keyframes fade-out {
-  to {
-    opacity: 0;
-  }
+.footerNote {
+  color: #aaa;
 }
 
-/* Buttons */
-.button-group-entrar {
-  margin-top: 20px;
-}
-
-.btn1 {
-  width: 100%;
-  padding: 10px 20px;
-  background: linear-gradient(to right, #007bff, #00b7ff);
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background 0.3s, transform 0.2s;
-}
-
-.btn1:hover {
-  background: linear-gradient(to right, #0056b3, #0088cc);
-  transform: scale(1.05);
-}
-
-/* Button animation */
-.btn1:active {
-  transform: scale(0.95);
+.footerNote a {
+  color: #fff;
+  font-weight: 500;
+  text-decoration: none;
 }

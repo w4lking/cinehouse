@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Login from "./screens/Login/index.jsx";
+import LoginPage from "./screens/Login/Index.jsx";
 import Recover from "./screens/Recover/Recover";
 import Register from "./screens/Register/Register";
 import Navigation from "./screens/Navigation/navigation";
@@ -20,7 +20,6 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="/navigation" element={<Navigation />} />
-        <Route path="/login" element={<Login />} />
         <Route path="/recover" element={<Recover />} />
         <Route path="/register" element={<Register />} />
         <Route path="/userSettings" element={<UserSettings />} />
@@ -32,7 +31,7 @@ const App = () => {
         <Route path="/gerenciarFilme" element={<GerenciarFilme />} />
         <Route path="/adm/criarUsuario" element={<CriarUsuario />} />
         <Route path="/recuperarSenha" element={<RecuperarSenha />} />
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<LoginPage />} />
       </Routes>
     </Router>
   );

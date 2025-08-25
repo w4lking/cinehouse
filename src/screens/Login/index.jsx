@@ -1,121 +1,58 @@
-/* eslint-disable no-unused-vars */
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 
-import "./Login.module.css";
-import ApiService from "../../services/apiService";
+import { useEffect } from 'react';
+import { Link } from "react-router-dom";
+import { TextField, Button, InputAdornment, IconButton } from "@mui/material";
 
-const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [showAlert, setShowAlert] = useState(false);
-  const navigate = useNavigate();
+import { useLogin } from "../../components/hooks/Login/useLogin.js";
+import AuthLayout from "../../components/layout/AuthLayout/index.jsx";
 
-  useEffect(() => {
-    document.title = "Login"; // hook para alterar titulo da aba
-    document.body.classList.add("login-page");
+import styles from './Login.module.css'; 
 
-    return () => {
-      document.body.classList.remove("login-page");
-    };
-  }, []);
+function LoginPage() {
+    const { email, setEmail, password, setPassword, error, isLoading, handleLogin } = useLogin();
 
-  useEffect(() => {
-    if (showAlert) {
-      const timer = setTimeout(() => {
-        setShowAlert(false);
-      }, 2000);
-      return () => clearTimeout(timer);
-    }
-  }, [showAlert]);
+    useEffect(() => {
+        document.title = "Login | CineHouse";
+    }, []);
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    if (email === "" || password === "") {
-      setShowAlert(true);
-      return;
-    }
+    return (
+        <AuthLayout>
+            <div className={styles.formWrapper}>
+                <img className={styles.logo} src="./src/assets/images/CineHouseLogo.png" alt="CineHouse Logo" />
+                <form onSubmit={handleLogin}>
+                    <TextField 
+                        className={styles.textField} 
+                        variant="outlined"
+                        fullWidth 
+                        label="Email" 
+                        type="email" 
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                    />
+                    <TextField 
+                        className={styles.textField}
+                        variant="outlined"
+                        fullWidth 
+                        label="Senha" 
+                        type="password" 
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
+                    <div className={styles.actions}>
+                        <Link to="/recover" className={styles.forgotPasswordLink}>Esqueceu a senha?</Link>
+                    </div>
+                    <Button type="submit" className={styles.submitButton} disabled={isLoading} variant="contained" fullWidth>
+                        {isLoading ? "Entrando..." : "Entrar"}
+                    </Button>
+                    <div className={styles.footerNote}>
+                        Ainda não possui uma conta? <Link to="/register">Criar Conta</Link>
+                    </div>
+                </form>
+            </div>
+        </AuthLayout>
+    );
+}
 
-    try {
-      const response = await ApiService.loginUser(email, password);
-      console.log("API Response:", response);
-
-      if (response.ok) {
-        sessionStorage.setItem("id", response.idusuario);
-        sessionStorage.setItem("cliente", response.idcliente);
-        sessionStorage.setItem("perfil", response.perfil);
-        sessionStorage.setItem("token", response.token);
-        navigate("/navigation");
-      } else {
-        setShowAlert(true);
-      }
-    } catch (error) {
-      console.error("Erro ao fazer login:", error);
-      setShowAlert(true);
-    }
-  };
-
-  const handleCreateAccount = () => {
-    navigate("/register");
-  };
-
-  const handleForgotPassword = (e) => {
-    e.preventDefault();
-    navigate("/recover");
-  };
-
-  return (
-    <div className="login-container">
-      <h2 className="h2-login">Bem-vindo ao CineHouse</h2>
-      {showAlert && (
-        <div className="alert">
-          Houve um erro. Suas credenciais podem estar incorretas.
-        </div>
-      )}
-      <form onSubmit={handleLogin}>
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Digite seu e-mail"
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Senha</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Digite sua senha"
-            required
-          />
-          <button
-            type="button"
-            onClick={handleForgotPassword}
-            className="forgot-password-link"
-          >
-            Esqueceu sua senha?
-          </button>
-        </div>
-
-        <div className="button-group-entrar">
-          <button type="submit" className="btn1">
-            Entrar
-          </button>
-        </div>
-        <div className="button-group-entrar">
-          <button onClick={handleCreateAccount} className="btn1">
-            Criar Conta
-          </button>
-        </div>
-      </form>
-    </div>
-  );
-};
-
-export default Login;
+export default LoginPage;
