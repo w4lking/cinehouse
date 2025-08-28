@@ -1,0 +1,63 @@
+.formWrapper {
+  padding: 2rem;
+  color: white;
+  text-align: center;
+}
+
+.logo {
+  width: 100px;
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.textField {
+  margin-bottom: 1rem !important;
+}
+
+.textField :global(.MuiFilledInput-root) {
+  background-color: rgba(70, 70, 70, 0.7) !important;
+  border-radius: 6px;
+}
+
+.textField :global(.MuiInputBase-input) {
+  color: #fff;
+}
+
+.textField :global(.MuiInputLabel-root) {
+  color: #aaa;
+}
+
+.textField :global(.Mui-focused) {
+  color: #ffffff !important;
+}
+
+.submitButton {
+  padding: 14px !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  background-color: #E50914 !important;
+  margin-top: 1rem !important;
+  margin-bottom: 1rem !important;
+}
+
+.submitButton:hover {
+  background-color: #f6121d !important;
+}
+
+.footerNote {
+  color: #aaa;
+  margin-top: 1rem;
+}
+
+.footerNote a {
+  color: #fff;
+  font-weight: 500;
+  text-decoration: none;
+}
