@@ -23,7 +23,7 @@
 }
 
 .textField :global(.MuiInputLabel-root) {
-  color: #aaa;
+  color: #ffffff;
 }
 
 .textField :global(.Mui-focused) {

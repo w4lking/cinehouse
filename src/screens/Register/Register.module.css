@@ -27,11 +27,13 @@
 }
 
 .textField :global(.MuiInputBase-input) {
-  color: #fff;
+  color: #ffffff;
+  background-color: #464646;
+  border-radius: 6px;
 }
 
 .textField :global(.MuiInputLabel-root) {
-  color: #aaa;
+  color: #ffffff;
 }
 
 .textField :global(.Mui-focused) {
@@ -42,13 +44,12 @@
   padding: 14px !important;
   font-weight: 600 !important;
   text-transform: none !important;
-  background-color: #E50914 !important;
-  margin-top: 1rem !important;
+  background-color: #300000 !important; /* Cor da Netflix */
   margin-bottom: 1rem !important;
 }
 
 .submitButton:hover {
-  background-color: #f6121d !important;
+  background-color: #580101 !important; /* Cor da Netflix */
 }
 
 .footerNote {

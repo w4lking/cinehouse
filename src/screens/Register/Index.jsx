@@ -34,7 +34,7 @@ function RegisterPage() {
         <form onSubmit={handleSubmit}>
           <TextField
             className={styles.textField}
-            variant="filled"
+            variant="outlined"
             fullWidth
             label="Nome de Usuário"
             value={username}
@@ -43,7 +43,18 @@ function RegisterPage() {
           />
           <TextField
             className={styles.textField}
-            variant="filled"
+            variant="outlined"
+            fullWidth
+            label="CPF"
+            type="text"
+            value={cpf}
+            onChange={(e) => setCpf(e.target.value)}
+            placeholder="000.000.000-00"
+            required
+          />
+          <TextField
+            className={styles.textField}
+            variant="outlined"
             fullWidth
             label="E-mail"
             type="email"
@@ -53,17 +64,7 @@ function RegisterPage() {
           />
           <TextField
             className={styles.textField}
-            variant="filled"
-            fullWidth
-            label="CPF"
-            value={cpf}
-            onChange={(e) => setCpf(e.target.value)}
-            placeholder="000.000.000-00"
-            required
-          />
-          <TextField
-            className={styles.textField}
-            variant="filled"
+            variant="outlined"
             fullWidth
             type="date"
             value={birthDate}
@@ -73,7 +74,7 @@ function RegisterPage() {
           />
           <TextField
             className={styles.textField}
-            variant="filled"
+            variant="outlined"
             fullWidth
             label="Senha"
             type="password"

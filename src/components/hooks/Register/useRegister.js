@@ -7,8 +7,8 @@ const validateCpf = (cpf) => {
 
 export function useRegister() {
   const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
   const [cpf, setCpf] = useState("");
+  const [email, setEmail] = useState("");
   const [birthDate, setBirthDate] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -28,12 +28,19 @@ export function useRegister() {
     }
 
     try {
-      const response = await ApiService.registerUser({ username, cpf, email, birthDate, password });
+      // A CORREÇÃO ESTÁ AQUI:
+      // Agora estamos a enviar os argumentos separadamente, como a função espera.
+      const response = await ApiService.registerUser(
+        username,
+        cpf,
+        email,
+        birthDate,
+        password
+      );
       setSuccess(response.message || "Usuário registrado com sucesso!");
-      // Limpa os campos
       setUsername("");
-      setEmail("");
       setCpf("");
+      setEmail("");
       setBirthDate("");
       setPassword("");
     } catch (err) {
@@ -45,8 +52,8 @@ export function useRegister() {
 
   return {
     username, setUsername,
-    email, setEmail,
     cpf, setCpf,
+    email, setEmail,
     birthDate, setBirthDate,
     password, setPassword,
     error,
