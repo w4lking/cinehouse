@@ -1,5 +1,4 @@
 .formWrapper {
-  /* ... estilos do container ... */
   padding: 2rem;
   color: white;
   text-align: center;
@@ -10,14 +9,25 @@
   margin-bottom: 2rem;
 }
 
-/* Nova classe para estilizar os TextFields */
+.title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
 .textField {
   margin-bottom: 1rem !important;
 }
 
+.textField :global(.MuiFilledInput-root) {
+  background-color: rgba(70, 70, 70, 0.7) !important;
+  border-radius: 6px;
+}
 
 .textField :global(.MuiInputBase-input) {
-  color: #fff;
+  color: #ffffff;
   background-color: #464646;
   border-radius: 6px;
 }
@@ -27,22 +37,7 @@
 }
 
 .textField :global(.Mui-focused) {
-  color: #ffffff !important; /* Cor do label quando focado */
-}
-
-.actions {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 1rem;
-}
-
-.forgotPasswordLink {
-  color: #aaa;
-  text-decoration: none;
-  font-size: 0.9rem;
-}
-.forgotPasswordLink:hover {
-  text-decoration: underline;
+  color: #ffffff !important;
 }
 
 .submitButton {
@@ -59,6 +54,7 @@
 
 .footerNote {
   color: #aaa;
+  margin-top: 1rem;
 }
 
 .footerNote a {

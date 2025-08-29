@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-// import { Grow } from '@mui/material'; 
+// import { Grow } from '@mui/material'; // para as animações mais tarde
 
 import styles from './AuthFormContainer.module.css';
 

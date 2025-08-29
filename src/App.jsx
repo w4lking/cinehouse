@@ -3,7 +3,7 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import LoginPage from "./screens/Login/Index.jsx";
 import Recover from "./screens/Recover/Recover";
-import Register from "./screens/Register/Register";
+import Register from "./screens/Register/index.jsx";
 import Navigation from "./screens/Navigation/navigation";
 import UserSettings from "./screens/UserSettings/UserSettings";
 import Admin from "./screens/ADM/Admin";
