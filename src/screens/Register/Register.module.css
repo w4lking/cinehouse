@@ -62,3 +62,14 @@
   font-weight: 500;
   text-decoration: none;
 }
+
+
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #464646 inset !important; /* A cor do seu input */
+  -webkit-text-fill-color: #fff !important; /* Cor do texto */
+  transition: background-color 5000s ease-in-out 0s; /* Truque para atrasar a mudança de cor do browser */
+}

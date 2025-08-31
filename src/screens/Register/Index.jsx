@@ -34,7 +34,7 @@ function RegisterPage() {
         <form onSubmit={handleSubmit}>
           <TextField
             className={styles.textField}
-            variant="outlined"
+            variant="filled"
             fullWidth
             label="Nome de Usuário"
             value={username}
@@ -43,7 +43,7 @@ function RegisterPage() {
           />
           <TextField
             className={styles.textField}
-            variant="outlined"
+            variant="filled"
             fullWidth
             label="CPF"
             type="text"
@@ -54,7 +54,7 @@ function RegisterPage() {
           />
           <TextField
             className={styles.textField}
-            variant="outlined"
+            variant="filled"
             fullWidth
             label="E-mail"
             type="email"
@@ -74,7 +74,7 @@ function RegisterPage() {
           />
           <TextField
             className={styles.textField}
-            variant="outlined"
+            variant="filled"
             fullWidth
             label="Senha"
             type="password"

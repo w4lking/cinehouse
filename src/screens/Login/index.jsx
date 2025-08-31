@@ -22,7 +22,7 @@ function LoginPage() {
                 <form onSubmit={handleLogin}>
                     <TextField 
                         className={styles.textField} 
-                        variant="outlined"
+                        variant="filled"
                         fullWidth 
                         label="Email" 
                         type="email" 
@@ -32,7 +32,7 @@ function LoginPage() {
                     />
                     <TextField 
                         className={styles.textField}
-                        variant="outlined"
+                        variant="filled"
                         fullWidth 
                         label="Senha" 
                         type="password" 

@@ -13,3 +13,6 @@ body h1{
     font-style: oblique;
     font-family: 'Montserrat', sans-serif; 
 }
+
+/* Sobrescreve o estilo de autofill dos navegadores WebKit (Chrome, Safari) */
+
