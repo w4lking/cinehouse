@@ -3,13 +3,13 @@
 }
 
 .textField :global(.MuiFilledInput-root) {
-  background-color: rgba(70, 70, 70, 0.7) !important;
+  background-color: rgba(70, 70, 70, 0.9) !important;
   border-radius: 6px;
 }
 
 .textField :global(.MuiInputBase-input) {
   color: #ffffff;
-  background-color: #464646;
+  /* ❌ remover background-color daqui */
   border-radius: 6px;
 }
 
@@ -21,12 +21,17 @@
   color: #ffffff !important;
 }
 
+/* Ícone olho */
+.textField :global(.MuiIconButton-root) {
+  color: #ffffff;
+}
 
+/* Corrigir autofill */
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 30px #464646 inset !important; 
-  -webkit-text-fill-color: #fff !important; 
-  transition: background-color 5000s ease-in-out 0s; 
+  -webkit-box-shadow: 0 0 0 30px rgba(70, 70, 70, 0.9) inset !important;
+  -webkit-text-fill-color: #fff !important;
+  transition: background-color 5000s ease-in-out 0s;
 }
