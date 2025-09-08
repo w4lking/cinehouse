@@ -10,39 +10,23 @@
   margin-bottom: 2rem;
 }
 
-/* Nova classe para estilizar os TextFields */
-.textField {
-  margin-bottom: 1rem !important;
-}
-
-
-.textField :global(.MuiInputBase-input) {
-  color: #fff;
-  background-color: #464646;
-  border-radius: 6px;
-}
-
-.textField :global(.MuiInputLabel-root) {
-  color: #ffffff;
-}
-
-.textField :global(.Mui-focused) {
-  color: #ffffff !important; /* Cor do label quando focado */
-}
-
 .actions {
   display: flex;
   justify-content: flex-end;
   margin-bottom: 1rem;
 }
 
+
 .forgotPasswordLink {
-  color: #aaa;
-  text-decoration: none;
   font-size: 0.9rem;
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+  font-family: 'Montserrat', sans-serif;
 }
 .forgotPasswordLink:hover {
   text-decoration: underline;
+  color: #494949;
 }
 
 .submitButton {
@@ -61,8 +45,28 @@
   color: #aaa;
 }
 
+.footerNote p {
+  color: #fff;
+  font-weight: 300;
+  text-decoration: none;
+  font-family: 'Montserrat', sans-serif;
+}
+
 .footerNote a {
   color: #fff;
-  font-weight: 500;
   text-decoration: none;
+  font-weight: 500;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
 }
+
+.footerNote a:hover {
+  color: #494949;
+  font-weight: 500;
+  font-family: 'Montserrat', sans-serif;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+
+

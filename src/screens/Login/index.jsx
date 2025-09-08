@@ -1,11 +1,12 @@
 
 import { useEffect } from 'react';
 import { Link } from "react-router-dom";
-import { TextField, Button, InputAdornment, IconButton } from "@mui/material";
+import { Button } from "@mui/material";
 
 import { useLogin } from "../../components/hooks/Login/useLogin.js";
 import AuthLayout from "../../components/layout/AuthLayout/index.jsx";
 
+import InputField from "../../components/common/Inputs/InputField/Index.jsx"; 
 import styles from './Login.module.css'; 
 
 function LoginPage() {
@@ -20,22 +21,16 @@ function LoginPage() {
             <div className={styles.formWrapper}>
                 <img className={styles.logo} src="./src/assets/images/CineHouseLogo.png" alt="CineHouse Logo" />
                 <form onSubmit={handleLogin}>
-                    <TextField 
-                        className={styles.textField} 
-                        variant="outlined"
-                        fullWidth 
-                        label="Email" 
-                        type="email" 
+                    <InputField
+                        label="Email"
+                        type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
                     />
-                    <TextField 
-                        className={styles.textField}
-                        variant="outlined"
-                        fullWidth 
-                        label="Senha" 
-                        type="password" 
+                    <InputField
+                        label="Senha"
+                        type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
@@ -47,7 +42,7 @@ function LoginPage() {
                         {isLoading ? "Entrando..." : "Entrar"}
                     </Button>
                     <div className={styles.footerNote}>
-                        Ainda não possui uma conta? <Link to="/register">Criar Conta</Link>
+                        <p>Ainda não possui uma conta? <Link to="/register">Criar Conta</Link></p>
                     </div>
                 </form>
             </div>

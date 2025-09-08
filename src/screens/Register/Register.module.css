@@ -17,29 +17,6 @@
   text-align: left;
 }
 
-.textField {
-  margin-bottom: 1rem !important;
-}
-
-.textField :global(.MuiFilledInput-root) {
-  background-color: rgba(70, 70, 70, 0.7) !important;
-  border-radius: 6px;
-}
-
-.textField :global(.MuiInputBase-input) {
-  color: #ffffff;
-  background-color: #464646;
-  border-radius: 6px;
-}
-
-.textField :global(.MuiInputLabel-root) {
-  color: #ffffff;
-}
-
-.textField :global(.Mui-focused) {
-  color: #ffffff !important;
-}
-
 .submitButton {
   padding: 14px !important;
   font-weight: 600 !important;
@@ -52,13 +29,27 @@
   background-color: #580101 !important; /* Cor da Netflix */
 }
 
-.footerNote {
-  color: #aaa;
-  margin-top: 1rem;
+.footerNote p {
+  color: #fff;
+  font-weight: 300;
+  text-decoration: none;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .footerNote a {
   color: #fff;
-  font-weight: 500;
   text-decoration: none;
+  font-weight: 500;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
 }
+
+.footerNote a:hover {
+  color: #494949;
+  font-weight: 500;
+  font-family: 'Montserrat', sans-serif;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+
