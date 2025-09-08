@@ -17,29 +17,6 @@
   text-align: left;
 }
 
-.textField {
-  margin-bottom: 1rem !important;
-}
-
-.textField :global(.MuiFilledInput-root) {
-  background-color: rgba(70, 70, 70, 0.7) !important;
-  border-radius: 6px;
-}
-
-.textField :global(.MuiInputBase-input) {
-  color: #ffffff;
-  background-color: #464646;
-  border-radius: 6px;
-}
-
-.textField :global(.MuiInputLabel-root) {
-  color: #ffffff;
-}
-
-.textField :global(.Mui-focused) {
-  color: #ffffff !important;
-}
-
 .submitButton {
   padding: 14px !important;
   font-weight: 600 !important;
@@ -52,24 +29,27 @@
   background-color: #580101 !important; /* Cor da Netflix */
 }
 
-.footerNote {
-  color: #aaa;
-  margin-top: 1rem;
+.footerNote p {
+  color: #fff;
+  font-weight: 300;
+  text-decoration: none;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .footerNote a {
   color: #fff;
-  font-weight: 500;
   text-decoration: none;
+  font-weight: 500;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+}
+
+.footerNote a:hover {
+  color: #494949;
+  font-weight: 500;
+  font-family: 'Montserrat', sans-serif;
+  text-decoration: underline;
+  font-weight: bold;
 }
 
 
-
-input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
-input:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 30px #464646 inset !important; /* A cor do seu input */
-  -webkit-text-fill-color: #fff !important; /* Cor do texto */
-  transition: background-color 5000s ease-in-out 0s; /* Truque para atrasar a mudança de cor do browser */
-}

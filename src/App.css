@@ -9,10 +9,17 @@ body {
   background-color: #000000; 
 }
 
-body h1{
+body h1 p{
     font-style: oblique;
     font-family: 'Montserrat', sans-serif; 
 }
+
+body p{
+    font-style: oblique;
+    font-family: 'Montserrat', sans-serif; 
+}
+
+
 
 /* Sobrescreve o estilo de autofill dos navegadores WebKit (Chrome, Safari) */
 
