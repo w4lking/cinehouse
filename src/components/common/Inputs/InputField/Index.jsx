@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { TextField, InputAdornment, IconButton } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
@@ -10,7 +11,6 @@ function InputField({ type = "text", ...rest }) {
     setShowPassword((prev) => !prev);
   };
 
-  // Se for senha, adiciona o botão do olho no final
   const isPassword = type === "password";
 
   return (
@@ -37,7 +37,7 @@ function InputField({ type = "text", ...rest }) {
             }
           : {}
       }
-      {...rest} // Repassa label, value, onChange, etc.
+      {...rest} 
     />
   );
 }

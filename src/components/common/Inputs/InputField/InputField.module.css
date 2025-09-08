@@ -9,7 +9,6 @@
 
 .textField :global(.MuiInputBase-input) {
   color: #ffffff;
-  /* ❌ remover background-color daqui */
   border-radius: 6px;
 }
 
