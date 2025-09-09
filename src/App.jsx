@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import LoginPage from "./screens/Login/Index.jsx";
-import Recover from "./screens/Recover/Recover";
+import LoginPage from "./screens/Login/index.jsx";
+import Recover from "./screens/Recover/index.jsx";
 import Register from "./screens/Register/index.jsx";
 import Navigation from "./screens/Navigation/navigation";
 import UserSettings from "./screens/UserSettings/UserSettings";
