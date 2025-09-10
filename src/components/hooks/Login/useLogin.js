@@ -9,6 +9,7 @@ export function useLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -19,6 +20,13 @@ export function useLogin() {
     }
   }, [error]);
 
+  useEffect(() => {
+    if (successMessage) {
+      const timer = setTimeout(() => setSuccessMessage(""), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [successMessage]);
+
   const handleLogin = async (e) => {
     e.preventDefault();
     if (!email || !password) {
@@ -28,16 +36,18 @@ export function useLogin() {
 
     setIsLoading(true);
     setError("");
+    setSuccessMessage("");
 
     try {
       const response = await ApiService.loginUser(email, password);
 
       if (response.ok) {
         // ... salvar os outros dados necessários
-        // sessionStorage.setItem("id", response.idusuario);
-        // sessionStorage.setItem("cliente", response.idcliente);
-        // sessionStorage.setItem("perfil", response.perfil);
+        sessionStorage.setItem("id", response.idusuario);
+        sessionStorage.setItem("cliente", response.idcliente);
+        sessionStorage.setItem("perfil", response.perfil);
         sessionStorage.setItem("token", response.token);
+        setSuccessMessage("Login bem-sucedido! Redirecionando...");
         navigate("/navigation");
       } else {
         setError(response.message || "Credenciais incorretas. Tente novamente.");
@@ -54,6 +64,8 @@ export function useLogin() {
     setEmail,
     password,
     setPassword,
+    successMessage,
+    setSuccessMessage,
     error,
     isLoading,
     handleLogin,

@@ -6,9 +6,10 @@ import { useRecover } from "../../components/hooks/Recover/useRecover.js";
 // Importa os componentes do Material-UI
 import { Button } from "@mui/material";
 
+import Alert from "../../components/common/Alert/index.jsx";
 import InputField from "../../components/common/Inputs/InputField/Index.jsx";
 import AuthLayout from "../../components/layout/AuthLayout/index.jsx";
-// import Alert from "../../components/common/Alert";
+
 
 function RecoverPassPage() {
   const {
@@ -33,7 +34,7 @@ function RecoverPassPage() {
           Digite seu e-mail abaixo e enviaremos instruções para redefinir sua senha.
         </p>
 
-        {/* {message && <Alert type={isError ? 'error' : 'success'} message={message} />} */}
+        {message && <Alert type={isError ? 'error' : 'success'} message={message} />}
         
         <form onSubmit={handleRecover}>
           <InputField
