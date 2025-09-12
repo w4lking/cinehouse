@@ -38,7 +38,7 @@ export function useLogin() {
         // sessionStorage.setItem("cliente", response.idcliente);
         // sessionStorage.setItem("perfil", response.perfil);
         sessionStorage.setItem("token", response.token);
-        navigate("/navigation");
+        navigate("/home");
       } else {
         setError(response.message || "Credenciais incorretas. Tente novamente.");
       }

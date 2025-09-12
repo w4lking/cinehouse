@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import LoginPage from "./screens/Login/Index.jsx";
 import Recover from "./screens/Recover/Recover";
 import Register from "./screens/Register/index.jsx";
-import Navigation from "./screens/Navigation/navigation";
+import Home from "./screens/Home/index.jsx";
 import UserSettings from "./screens/UserSettings/UserSettings";
 import Admin from "./screens/ADM/Admin";
 import Relatorio from "./screens/Relatorios/AluguelEVenda/Relatorio";
@@ -19,7 +19,7 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/navigation" element={<Navigation />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/recover" element={<Recover />} />
         <Route path="/register" element={<Register />} />
         <Route path="/userSettings" element={<UserSettings />} />

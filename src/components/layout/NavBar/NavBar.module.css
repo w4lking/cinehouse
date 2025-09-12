@@ -1,0 +1,91 @@
+
+.mainHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #141414; 
+  color: white;
+  border-bottom: 1px solid #222;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* -- Logo -- */
+.logo {
+  margin: 0;
+  padding: 0;
+  line-height: 1; 
+}
+
+.logo img {
+  height: 40px; 
+  width: auto;
+}
+
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* -- Estilos dos Formulários (Busca e Filtro) -- */
+.searchBar,
+.filterSelect {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  border: 1px solid #333;
+  background-color: #222;
+  color: #f0f0f0;
+  font-size: 0.9rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.searchBar::placeholder {
+  color: #888;
+}
+
+.searchBar:focus,
+.filterSelect:focus {
+  outline: none;
+  border-color: #E50914;
+  box-shadow: 0 0 0 2px rgba(229, 9, 20, 0.5);
+}
+
+.cartButton {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color 0.2s;
+}
+
+.cartButton:hover {
+  color: #E50914;
+}
+
+
+/* -- Responsividade -- */
+@media (max-width: 768px) {
+  .mainHeader {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .navLinks {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .searchBar {
+    flex-grow: 1; /* Faz a barra de busca ocupar o espaço disponível */
+  }
+}
