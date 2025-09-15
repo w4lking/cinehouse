@@ -48,7 +48,7 @@ export function useLogin() {
         sessionStorage.setItem("perfil", response.perfil);
         sessionStorage.setItem("token", response.token);
         setSuccessMessage("Login bem-sucedido! Redirecionando...");
-        navigate("/navigation");
+        navigate("/home");
       } else {
         setError(response.message || "Credenciais incorretas. Tente novamente.");
       }
