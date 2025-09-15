@@ -14,6 +14,7 @@ export function useAuth() {
     sessionStorage.clear();
     navigate("/");
   };
-
+  
   return { userProfile, handleLogout };
 }
+

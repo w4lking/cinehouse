@@ -13,7 +13,7 @@ function MovieCard({ movie, onClick }) {
         <div className={styles.movieContainer} onClick={onClick}>
             <img src={movie.imagem} alt={movie.nomeFilme} className={styles.movieImage} />
             <div className={styles.movieInfo}>
-                <h4>{movie.nomeFilme}</h4>
+                <h4 className={styles.movieTitle}>{movie.nomeFilme}</h4>
                 <p>{movie.ano}, {genreText}</p>
                 <p>Classificação: {classificationText}</p>
             </div>
