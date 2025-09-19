@@ -33,7 +33,7 @@
   padding: 14px !important;
   font-weight: 600 !important;
   text-transform: none !important;
-  background-color: #E50914 !important;
+  background-color: #300000  !important;
   margin-top: 1rem !important;
   margin-bottom: 1rem !important;
 }
@@ -43,11 +43,14 @@
 }
 
 
-.footerNote p {
+.footerNote{
+  margin-top: 0.2rem;
+  font-size: 0.9rem;
   color: #fff;
-  font-weight: 300;
-  text-decoration: none;
   font-family: 'Montserrat', sans-serif;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
 .footerNote a {

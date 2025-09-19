@@ -52,7 +52,7 @@ function RecoverPassPage() {
           </Button>
           
           <div className={styles.footerNote}>
-            Lembrou da senha? <Link to="/">Fazer Login</Link>
+            <p>Lembrou da senha?</p> <Link to="/">Fazer Login</Link>
           </div>
         </form>
       </div>

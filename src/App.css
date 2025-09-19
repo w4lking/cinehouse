@@ -2,24 +2,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 
-html,
-body {
+* {
   margin: 0;
   padding: 0;
-  background-color: #000000; 
 }
 
-body h1 p{
-    font-style: oblique;
+/* 2. Garante que os elementos principais ocupem todo o espaço */
+html, body, #root {
+  height: 100%;
+  width: 100%;
+}
+
+body h1, body p, body a, body h2, body h3, body h4, body h5, body h6{
     font-family: 'Montserrat', sans-serif; 
 }
 
 body p{
-    font-style: oblique;
     font-family: 'Montserrat', sans-serif; 
 }
 
 
-
-/* Sobrescreve o estilo de autofill dos navegadores WebKit (Chrome, Safari) */
 

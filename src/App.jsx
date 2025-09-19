@@ -14,6 +14,7 @@ import RelatorioDevolucao from "./screens/Relatorios/Devolucoes/Relatorio";
 import CriarUsuario from "./screens/CriarUsuario/CriarUsuario";
 import GerenciarFilme from "./screens/GerenciarFilme/GerenciarFilme";
 import RecuperarSenha from "./screens/RecuperarSenha/RecuperarSenha.jsx"
+import './App.css'; // Importando o CSS global
 
 const App = () => {
   return (
