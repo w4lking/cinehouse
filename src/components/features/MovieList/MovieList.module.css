@@ -1,16 +1,9 @@
-/* Ficheiro: MovieList.module.css */
 
-/* -- Grelha Responsiva de Filmes -- */
 .moviesGrid {
   display: grid;
-  /* MÁGICA DA RESPONSIVIDADE:
-     - Cria o máximo de colunas que couberem.
-     - Cada coluna terá no mínimo 220px de largura.
-     - O espaço extra será distribuído igualmente entre elas (1fr).
-     Isto torna a grelha fluida sem precisar de media queries.
-  */
+
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 2rem; /* Espaçamento entre os cartões */
+  gap: 2rem; 
 }
 
 /* Estilo para a mensagem de "Nenhum filme encontrado" */
@@ -18,5 +11,5 @@
   color: #ccc;
   font-size: 1.2rem;
   text-align: center;
-  grid-column: 1 / -1; /* Faz a mensagem ocupar a grelha inteira */
+  grid-column: 1 / -1; 
 }

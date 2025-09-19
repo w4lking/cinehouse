@@ -1,0 +1,166 @@
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 1rem;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modalContent {
+  background-color: #181818;
+  color: #f0f0f0;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  animation: scaleUp 0.3s ease;
+}
+
+@keyframes scaleUp {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.closeButton {
+  position: absolute;
+  top: 0.8rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: #aaa;
+  font-size: 2.5rem;
+  cursor: pointer;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.closeButton:hover {
+  color: #fff;
+}
+
+.modalBody {
+  display: flex;
+  padding: 2.5rem;
+  gap: 2rem;
+}
+
+.imageContainer {
+  flex-basis: 300px;
+  flex-shrink: 0;
+}
+.imageContainer img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.infoContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.synopsis, .price, .stock {
+  margin: 0 0 1rem 0;
+  line-height: 1.6;
+  color: #ccc;
+}
+.synopsis strong, .price strong {
+  color: #fff;
+}
+
+.actions {
+  margin-top: auto;
+  padding-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  border-top: 1px solid #282828;
+}
+
+.quantityControls {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.quantityControls span {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.quantityControls button {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: 1px solid #555;
+  background-color: #333;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.quantityControls button:hover {
+  background-color: #444;
+}
+
+.addToCartButton {
+  padding: 0.8rem 1.5rem;
+  background-color: #E50914;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.addToCartButton:hover {
+  background-color: #f6121d;
+}
+.addToCartButton:disabled {
+  background-color: #555;
+  cursor: not-allowed;
+}
+
+
+/* --- Responsividade --- */
+@media (max-width: 768px) {
+  .modalBody {
+    flex-direction: column;
+    padding: 2rem 1.5rem;
+  }
+  .imageContainer {
+    flex-basis: auto;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  .title {
+    font-size: 2rem;
+  }
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

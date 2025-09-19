@@ -21,19 +21,16 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block; /* Remove qualquer espaço extra abaixo da imagem */
+  display: block; 
 }
 
-/* -- Camada de Informação (Overlay) -- */
 .movieInfo {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 1.5rem 1rem 1rem 1rem; /* Mais padding no topo para o gradiente */
+  padding: 1.5rem 1rem 1rem 1rem; 
   color: #fff;
-  
-  /* Gradiente para garantir a legibilidade do texto */
   background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 100%);
   backdrop-filter: blur(2px);
   opacity: 0;
@@ -41,7 +38,6 @@
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-/* Mostra a informação */
 .movieContainer:hover .movieInfo {
   opacity: 1;
   transform: translateY(0);
