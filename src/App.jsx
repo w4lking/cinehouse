@@ -6,7 +6,7 @@ import Recover from "./screens/Recover/index.jsx";
 import Register from "./screens/Register/index.jsx";
 import Home from "./screens/Home/index.jsx";
 import UserSettings from "./screens/UserSettings/UserSettings";
-import Admin from "./screens/ADM/Admin";
+import Admin from "./screens/ADM/index.jsx";
 import Relatorio from "./screens/Relatorios/AluguelEVenda/Relatorio";
 import HistPedidos from "./screens/HistPedidos/histPedidos";
 import GerenciarUsuarios from "./screens/GerenciarUsuarios/GerenciarUsuarios";
