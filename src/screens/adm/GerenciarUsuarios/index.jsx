@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./GerenciarUsuarios.css";
-import ApiService from "../../services/apiService";
+import ApiService from "../../../services/apiService";
 
 // Funções para conversão de datas
 function formatDateToDisplay(dateString) {

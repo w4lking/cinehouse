@@ -6,13 +6,13 @@ import Recover from "./screens/Recover/index.jsx";
 import Register from "./screens/Register/index.jsx";
 import Home from "./screens/Home/index.jsx";
 import UserSettings from "./screens/UserSettings/UserSettings";
-import Admin from "./screens/ADM/index.jsx";
+import Admin from "./screens/AdminDashboardPage/index.jsx";
 import Relatorio from "./screens/Relatorios/AluguelEVenda/Relatorio";
 import HistPedidos from "./screens/HistPedidos/histPedidos";
-import GerenciarUsuarios from "./screens/GerenciarUsuarios/GerenciarUsuarios";
+import GerenciarUsuarios from "./screens/adm/GerenciarUsuarios/index.jsx";
 import RelatorioDevolucao from "./screens/Relatorios/Devolucoes/Relatorio";
-import CriarUsuario from "./screens/CriarUsuario/CriarUsuario";
-import GerenciarFilme from "./screens/GerenciarFilme/GerenciarFilme";
+import CriarUsuario from "./screens/adm/CriarUsuario/index.jsx";
+import GerenciarFilme from "./screens/adm/GerenciarFilme/index.jsx";
 import RecuperarSenha from "./screens/RecuperarSenha/RecuperarSenha.jsx"
 import './App.css'; // Importando o CSS global
 
