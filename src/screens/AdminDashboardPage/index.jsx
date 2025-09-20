@@ -1,7 +1,7 @@
+
 import AdminLayout from '../../components/layout/AdminLayout';
 import ActionCard from '../../components/layout/admin/ActionCard';
 
-import App from '../../App.jsx';
 
 // Ícones para os cards
 import GroupIcon from '@mui/icons-material/Group';

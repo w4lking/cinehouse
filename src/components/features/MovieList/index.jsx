@@ -1,5 +1,5 @@
 
-import MovieCard from '../../layout/MovieCard/index.jsx';
+import MovieCard from '../MovieCard/index.jsx';
 
 import styles from './MovieList.module.css';
 

@@ -1,5 +1,6 @@
+
 import styles from './MovieCard.module.css';
-// mover para features, pois estou na branch
+
 const genreMap = {
     1: "Drama", 2: "Ação", 3: "Comédia", 4: "Suspense",
     5: "Aventura", 6: "Terror", 7: "Mistério", 8: "Crime",
