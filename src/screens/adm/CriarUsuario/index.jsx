@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./CriarUsuario.css";
-import ApiService from "../../services/apiService";
+import ApiService from "../../../services/apiService";
 
 function CreateUser() {
   const [username, setUsername] = useState("");

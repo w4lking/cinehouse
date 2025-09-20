@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./GerenciarFilme.css";
-import ApiService from "../../services/apiService";
+import ApiService from "../../../services/apiService";
 
 function GerenciarFilmes() {
   const [filmes, setFilmes] = useState([]);
