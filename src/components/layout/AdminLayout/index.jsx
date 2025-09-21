@@ -1,17 +1,19 @@
+
 import { NavLink } from 'react-router-dom';
-import styles from './AdminLayout.module.css';
-// Recomendo usar ícones do Material-UI para consistência
+import { ADMIN_ROUTES } from '../../../config/adminRoutes'; // 1. Importa as rotas
+
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import GroupIcon from '@mui/icons-material/Group';
-import TheatersIcon from '@mui/icons-material/Theaters';
-import AssessmentIcon from '@mui/icons-material/Assessment';
+// import TheatersIcon from '@mui/icons-material/Theaters';
+import HomeIcon from '@mui/icons-material/Home';
+// import AssessmentIcon from '@mui/icons-material/Assessment';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
+import styles from './AdminLayout.module.css';
+
 function AdminLayout({ children }) {
-  // Lógica para logout pode ser movida para um hook useAuth
   const handleLogout = () => {
     sessionStorage.clear();
-    // Idealmente, o navigate viria de um hook ou prop
     window.location.href = '/'; 
   };
 
@@ -20,22 +22,22 @@ function AdminLayout({ children }) {
       <aside className={styles.sidebar}>
         <h1 className={styles.logo}>CineHouse ADM</h1>
         <nav className={styles.nav}>
-          <NavLink to="/adm/dashboard" className={({ isActive }) => isActive ? styles.activeLink : styles.navLink}>
+          <NavLink to={ADMIN_ROUTES.DASHBOARD} className={({ isActive }) => isActive ? styles.activeLink : styles.navLink}>
             <DashboardIcon />
             <span>Dashboard</span>
           </NavLink>
-          <NavLink to="/adm/gerenciar-usuarios" className={({ isActive }) => isActive ? styles.activeLink : styles.navLink}>
+          <NavLink to={ADMIN_ROUTES.MANAGE_USERS} className={({ isActive }) => isActive ? styles.activeLink : styles.navLink}>
             <GroupIcon />
             <span>Utilizadores</span>
           </NavLink>
-          <NavLink to="/adm/gerenciar-filmes" className={({ isActive }) => isActive ? styles.activeLink : styles.navLink}>
-            <TheatersIcon />
-            <span>Filmes</span>
+          <NavLink to={ADMIN_ROUTES.HOME} className={({ isActive }) => isActive ? styles.activeLink : styles.navLink}>
+            <HomeIcon />
+            <span>Home</span>
           </NavLink>
-          <NavLink to="/adm/relatorios" className={({ isActive }) => isActive ? styles.activeLink : styles.navLink}>
+          {/* <NavLink to={ADMIN_ROUTES.REPORTS} className={({ isActive }) => isActive ? styles.activeLink : styles.navLink}>
             <AssessmentIcon />
             <span>Relatórios</span>
-          </NavLink>
+          </NavLink> */}
         </nav>
         <button onClick={handleLogout} className={`${styles.navLink} ${styles.logoutButton}`}>
           <ExitToAppIcon />

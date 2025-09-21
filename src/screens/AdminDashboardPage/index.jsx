@@ -1,9 +1,9 @@
+
 import AdminLayout from '../../components/layout/AdminLayout';
-import ActionCard from '../../components/layout/admin/ActionCard';
+import ActionCard from '../../components/layout/admin/ActionCard/index.jsx';
+import { ADMIN_ROUTES } from '../../config/adminRoutes.js'; // 1. Importa as rotas
 
-import App from '../../App.jsx';
-
-// Ícones para os cards
+// Ícones
 import GroupIcon from '@mui/icons-material/Group';
 import AssessmentIcon from '@mui/icons-material/Assessment';
 import TheatersIcon from '@mui/icons-material/Theaters';
@@ -15,18 +15,18 @@ import SettingsIcon from '@mui/icons-material/Settings';
 
 import styles from './AdminDashboardPage.module.css';
 
+// 2. Usa as rotas importadas em vez de texto
 const userActions = [
-  { label: 'Adicionar Utilizador', path: '/adm/criar-usuario', icon: <PersonAddIcon /> },
-  { label: 'Visualizar Utilizadores', path: '/adm/gerenciar-usuarios', icon: <ManageAccountsIcon /> },
+  { label: 'Adicionar Utilizador', path: ADMIN_ROUTES.CREATE_USER, icon: <PersonAddIcon /> },
+  { label: 'Visualizar Utilizadores', path: ADMIN_ROUTES.MANAGE_USERS, icon: <ManageAccountsIcon /> },
 ];
 const reportActions = [
-  { label: 'Relatório de Vendas/Aluguéis', path: '/adm/relatorio/vendas', icon: <ReceiptLongIcon /> },
-  { label: 'Relatório de Devoluções', path: '/adm/relatorio/devolucoes', icon: <AssignmentReturnIcon /> },
+  { label: 'Relatório de Vendas/Aluguéis', path: ADMIN_ROUTES.REPORTS_SALES, icon: <ReceiptLongIcon /> },
+  { label: 'Relatório de Devoluções', path: ADMIN_ROUTES.REPORTS_RETURNS, icon: <AssignmentReturnIcon /> },
 ];
 const movieActions = [
-  { label: 'Acessar Gestão', path: '/adm/gerenciar-filmes', icon: <SettingsIcon /> },
+  { label: 'Acessar Gestão', path: ADMIN_ROUTES.MANAGE_MOVIES, icon: <SettingsIcon /> },
 ];
-
 
 function AdminDashboardPage() {
   return (
