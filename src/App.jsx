@@ -1,6 +1,6 @@
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { ADMIN_ROUTES } from './config/adminRoutes'; // 1. Importa as rotas
+import { ADMIN_ROUTES } from './config/adminRoutes'; 
 import { USER_ROUTES } from './config/userRoutes'; 
 import { PUBLIC_ROUTES} from './config/publicRoutes';
 
@@ -19,6 +19,7 @@ import CriarUsuario from "./screens/adm/CriarUsuario/index.jsx";
 import GerenciarFilme from "./screens/adm/GerenciarFilme/index.jsx";
 import RecuperarSenha from "./screens/RecuperarSenha/RecuperarSenha.jsx"
 
+import './App.css';
 
 const App = () => {
   return (
@@ -42,9 +43,6 @@ const App = () => {
         <Route path={USER_ROUTES.SETTINGS} element={<UserSettings />} />
         <Route path={USER_ROUTES.ORDER_HISTORY} element={<HistPedidos />} />
         <Route path={USER_ROUTES.RECOVER_PASSWORD} element={<RecuperarSenha />} />
-
-        
-        {/* ... resto das suas rotas */}
       </Routes>
     </Router>
   );
