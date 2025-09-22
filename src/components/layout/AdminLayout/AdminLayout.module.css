@@ -1,3 +1,4 @@
+
 .adminLayout {
   display: flex;
   min-height: 100vh;
@@ -39,6 +40,12 @@
   color: #a0aec0;
   font-weight: 500;
   transition: background-color 0.2s, color 0.2s;
+}
+
+.content {
+  flex-grow: 1;
+  padding: 2rem;
+  background-color: #edf2f7;
 }
 
 .navLink:hover {

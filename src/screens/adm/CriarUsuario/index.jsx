@@ -1,123 +1,87 @@
+import { useNavigate } from "react-router-dom";
+import { useCreateUser } from "../../../components/hooks/Create/User/useCreateUser.js";
 
-import React, { useState, useEffect } from "react";
-import "./CriarUsuario.css";
-import ApiService from "../../../services/apiService";
+// Importando componentes
+import AdminLayout from "../../../components/layout/AdminLayout/index.jsx";
+import InputField from "../../../components/common/Inputs/InputField/Index.jsx";
+import Alert from "../../../components/common/Alert/index.jsx";
+import ActionCard from '../../../components/layout/admin/ActionCard/index.jsx';
+import { Button } from "@mui/material";
 
-function CreateUser() {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [birthDate, setBirthDate] = useState("");
-  const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
+import styles from './CreateUserPage.module.css';
 
-  useEffect(() => {
-    document.title = "Criar Usuário";
-    document.body.classList.add("create-user-page");
-
-    return () => {
-      document.body.classList.remove("create-user-page");
-    };
-  }, []);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      const response = await ApiService.registerUser(
-        username,
-        "",
-        email,
-        birthDate,
-        password
-      );
-      setSuccessMessage(response.message || "Usuário criado com sucesso!");
-      setErrorMessage("");
-      // Limpa os campos após o sucesso
-      setUsername("");
-      setEmail("");
-      setBirthDate("");
-      setPassword("");
-    } catch (error) {
-      setErrorMessage(
-        error.response?.data?.message ||
-          "Erro ao criar usuário. Tente novamente."
-      );
-      setSuccessMessage("");
-    }
-  };
-
-  const handleGoBack = (e) => {
-    e.preventDefault();
-    window.history.back();
-  };
+function CreateUserPage() {
+  const navigate = useNavigate();
+  const {
+    username, setUsername,
+    email, setEmail,
+    birthDate, setBirthDate,
+    password, setPassword,
+    error,
+    success,
+    isLoading,
+    handleSubmit,
+  } = useCreateUser();
 
   return (
-    <div className="container">
-      <div className="form-box">
-        <h2>Adicionar Usuário</h2>
-        {successMessage && <p className="success-message">{successMessage}</p>}
-        {errorMessage && <p className="error-message">{errorMessage}</p>}
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="name">Nome</label>
-            <input
-              type="text"
-              id="name"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder="Digite o nome do usuário"
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="email">E-mail</label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Digite o email do usuário"
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="birthDate">Data de Nascimento</label>
-            <input
-              type="date"
-              id="birthDate"
-              value={birthDate}
-              onChange={(e) => setBirthDate(e.target.value)}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="password">Senha</label>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Digite a senha do usuário"
-              required
-            />
-          </div>
-          <div className="button-group">
-            <button type="submit" className="btn btn-primary">
-              Criar usuário
-            </button>
-            <button
-              type="button"
-              className="btn btn-secondary"
-              onClick={handleGoBack}
-            >
-              Voltar
-            </button>
-          </div>
-        </form>
+    <AdminLayout>
+      <div className={styles.container}>
+        <div className={styles.header}>
+          <Button variant="outlined" onClick={() => navigate(-1)}>
+            Voltar
+          </Button>
+        </div>
+
+        <div className={styles.formWrapper}>
+          <ActionCard title="Adicionar Novo Usuário" icon={null}>
+            {success && <Alert type="success" message={success} />}
+            {error && <Alert type="error" message={error} />}
+
+            <form onSubmit={handleSubmit}>
+              <InputField className={styles.inputField}
+                label="Nome de Usuário"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+              />
+              <InputField className={styles.inputField}
+                label="E-mail"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+              <InputField className={styles.inputField}
+                label="Data de Nascimento"
+                type="date"
+                value={birthDate}
+                onChange={(e) => setBirthDate(e.target.value)}
+                InputLabelProps={{ shrink: true }}
+                required
+              />
+              <InputField className={styles.inputField}
+                label="Senha"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                iconProps={{ sx: { color: '#1e88e5', backgroundColor: 'transparent', border: 'none' }, disableRipple: true, 'aria-label': 'toggle password' }}
+                iconClassName={styles.customIcon}
+              />
+              <Button className={styles.buttonGroup}
+                type="submit"
+                variant="outlined"
+                disabled={isLoading}
+                fullWidth
+              >
+                {isLoading ? "Criando..." : "Criar Usuário"}
+              </Button>
+            </form>
+          </ActionCard>
+        </div>
       </div>
-    </div>
+    </AdminLayout>
   );
 }
 
-export default CreateUser;
+export default CreateUserPage;
+

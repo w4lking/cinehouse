@@ -19,7 +19,7 @@ function SideBar({ userProfile, onLogout, selectedYear, onYearChange, years, sel
         {userProfile === "funcionario" && (
           <li>
             <button className={styles.relatorio} onClick={() => handleNavigate("/adm")}>
-              Gerenciar Relatórios
+              Dashboard
             </button>
           </li>
         )}
