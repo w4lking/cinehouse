@@ -2,7 +2,7 @@
 import { useNavigate } from 'react-router-dom';
 import styles from './ActionCard.module.css';
 
-function ActionCard({ title, icon, actions = [] }) {
+function ActionCard({ title, icon, actions = [], children }) {
   const navigate = useNavigate();
 
   return (
@@ -12,12 +12,13 @@ function ActionCard({ title, icon, actions = [] }) {
         <h3>{title}</h3>
       </div>
       <div className={styles.cardBody}>
-        {actions.map((action) => (
+        {actions.length > 0 && actions.map((action) => (
           <button key={action.label} onClick={() => navigate(action.path)}>
             {action.icon}
             {action.label}
           </button>
         ))}
+        {children}
       </div>
     </div>
   );

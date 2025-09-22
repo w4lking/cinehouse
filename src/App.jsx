@@ -19,6 +19,7 @@ import CriarUsuario from "./screens/adm/CriarUsuario/index.jsx";
 import GerenciarFilme from "./screens/adm/GerenciarFilme/index.jsx";
 import RecuperarSenha from "./screens/RecuperarSenha/RecuperarSenha.jsx"
 
+import './App.css';
 
 const App = () => {
   return (

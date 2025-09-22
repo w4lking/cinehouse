@@ -34,10 +34,6 @@ function AdminLayout({ children }) {
             <HomeIcon />
             <span>Home</span>
           </NavLink>
-          {/* <NavLink to={ADMIN_ROUTES.REPORTS} className={({ isActive }) => isActive ? styles.activeLink : styles.navLink}>
-            <AssessmentIcon />
-            <span>Relatórios</span>
-          </NavLink> */}
         </nav>
         <button onClick={handleLogout} className={`${styles.navLink} ${styles.logoutButton}`}>
           <ExitToAppIcon />
