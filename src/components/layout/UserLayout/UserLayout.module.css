@@ -1,0 +1,87 @@
+/* Este ficheiro pode ter estilos idênticos ou muito similares ao AdminLayout.module.css,
+   mas é mantido separado para permitir customizações futuras específicas para o utilizador. */
+
+.layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f3f4f6; /* Fundo cinza claro para a área de conteúdo */
+}
+
+.sidebar {
+  width: 260px;
+  background-color: #111827; /* Fundo azul-escuro/carvão */
+  color: #9ca3af;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.5rem;
+  flex-shrink: 0;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 2.5rem;
+  text-align: center;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #374151;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.link, .activeLink {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #d1d5db;
+  font-weight: 500;
+  transition: background-color 0.2s, color 0.2s;
+  border-left: 3px solid transparent; /* Borda para o estado ativo */
+}
+
+.link:hover {
+  background-color: #374151;
+  color: #fff;
+}
+
+.activeLink {
+  background-color: rgba(79, 70, 229, 0.1);
+  color: #fff;
+  border-left: 3px solid #6366f1; /* Borda roxa para indicar o link ativo */
+}
+
+.logoutButton {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  background: none;
+  border: none;
+  color: #9ca3af;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.logoutButton:hover {
+  background-color: rgba(239, 68, 68, 0.1); /* Fundo vermelho subtil */
+  color: #ef4444; /* Texto vermelho */
+}
+
+.content {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 2.5rem;
+}
+

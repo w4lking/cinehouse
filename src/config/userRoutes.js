@@ -2,7 +2,7 @@
 const USER_ROUTES = {
     HOME: '/home',
     PROFILE: '/profile',
-    SETTINGS: '/settings',
+    SETTINGS: '/userSettings',
     ORDER_HISTORY: '/history',
     BROWSE_MOVIES: '/movies',
 }

@@ -9,7 +9,7 @@ import LoginPage from "./screens/Login/index.jsx";
 import Recover from "./screens/Recover/index.jsx";
 import RegisterPage from "./screens/Register/index.jsx";
 import Home from "./screens/Home/index.jsx";
-import UserSettings from "./screens/UserSettings/UserSettings";
+import UserSettings from "./screens/UserSettings/index.jsx";
 import Admin from "./screens/AdminDashboardPage/index.jsx";
 import Relatorio from "./screens/Relatorios/AluguelEVenda/Relatorio";
 import HistPedidos from "./screens/HistPedidos/histPedidos";
@@ -17,7 +17,7 @@ import GerenciarUsuarios from "./screens/adm/GerenciarUsuarios/index.jsx";
 import RelatorioDevolucao from "./screens/Relatorios/Devolucoes/Relatorio";
 import CriarUsuario from "./screens/adm/CriarUsuario/index.jsx";
 import GerenciarFilme from "./screens/adm/GerenciarFilme/index.jsx";
-import RecuperarSenha from "./screens/RecuperarSenha/RecuperarSenha.jsx"
+import ResetPassword from "./screens/RecuperarSenha/index.jsx"
 
 import './App.css';
 
@@ -29,6 +29,7 @@ const App = () => {
         <Route path={PUBLIC_ROUTES.LOGIN} element={<LoginPage />} />
         <Route path={PUBLIC_ROUTES.REGISTER} element={<RegisterPage />} />
         <Route path={PUBLIC_ROUTES.RECOVER} element={<Recover />} />
+        <Route path={PUBLIC_ROUTES.RECOVER_PASSWORD} element={<ResetPassword />} />
         {/* ... */}
         
         {/* Rotas Administrativas - AGORA USANDO AS CONSTANTES */}
@@ -42,7 +43,6 @@ const App = () => {
         <Route path={USER_ROUTES.HOME} element={<Home />} />
         <Route path={USER_ROUTES.SETTINGS} element={<UserSettings />} />
         <Route path={USER_ROUTES.ORDER_HISTORY} element={<HistPedidos />} />
-        <Route path={USER_ROUTES.RECOVER_PASSWORD} element={<RecuperarSenha />} />
       </Routes>
     </Router>
   );

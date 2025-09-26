@@ -1,14 +1,15 @@
+
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import styles from "./RecoverPass.module.css";
 import { useRecover } from "../../components/hooks/Recover/useRecover.js";
 
-// Importa os componentes do Material-UI
 import { Button } from "@mui/material";
 
 import Alert from "../../components/common/Alert/index.jsx";
 import InputField from "../../components/common/Inputs/InputField/Index.jsx";
 import AuthLayout from "../../components/layout/AuthLayout/index.jsx";
+
+import styles from "./RecoverPass.module.css";
 
 
 function RecoverPassPage() {
