@@ -1,3 +1,4 @@
+
 .formWrapper {
   padding: 2rem;
   color: white;
@@ -21,12 +22,12 @@
   padding: 14px !important;
   font-weight: 600 !important;
   text-transform: none !important;
-  background-color: #300000 !important; /* Cor da Netflix */
+  background-color: #3176f4 !important; /* Cor da Netflix */
   margin-bottom: 1rem !important;
 }
 
 .submitButton:hover {
-  background-color: #580101 !important; /* Cor da Netflix */
+  background-color: var(--primary-color-hover) !important; /* Cor da Netflix */
 }
 
 .footerNote p {

@@ -1,12 +1,15 @@
+
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import styles from "./Register.module.css";
 import { useRegister } from "../../components/hooks/Register/useRegister.js";
 
 import { Button } from "@mui/material";
 import AuthLayout from "../../components/layout/AuthLayout/index.jsx";
 import InputField from "../../components/common/Inputs/InputField/Index.jsx"; 
 import Alert from "../../components/common/Alert/index.jsx"; 
+
+import styles from "./Register.module.css";
+
 function RegisterPage() {
   const {
     username, setUsername,
@@ -27,7 +30,7 @@ function RegisterPage() {
   return (
     <AuthLayout>
       <div className={styles.formWrapper}>
-        <img className={styles.logo} src="./src/assets/images/CineHouseLogo.png" alt="CineHouse Logo" />
+        <img className={styles.logo} src="./src/assets/logos/CinehouseNewLogo_2.png" alt="CineHouse Logo" />
         
         {/* 2. Mostra o alerta de erro ou de sucesso */}
         {error && <Alert type="error" message={error} onClose={() => setError("")} />}

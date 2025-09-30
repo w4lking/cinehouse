@@ -1,72 +1,60 @@
 .formWrapper {
-  /* ... estilos do container ... */
   padding: 2rem;
-  color: white;
+  color: var(--text-light);
   text-align: center;
 }
 
 .logo {
-  width: 100px;
-  margin-bottom: 2rem;
+  width: 100px; /* Um pouco maior para a nova logo */
+  margin-bottom: 2.5rem;
 }
 
 .actions {
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
-
 
 .forgotPasswordLink {
   font-size: 0.9rem;
-  color: #fff;
-  font-weight: bold;
+  color: var(--text-medium);
+  font-weight: 500;
   text-decoration: none;
-  font-family: 'Montserrat', sans-serif;
 }
 .forgotPasswordLink:hover {
   text-decoration: underline;
-  color: #494949;
+  color: var(--text-light);
 }
 
+/* O botão agora usa a cor primária da nossa paleta */
 .submitButton {
   padding: 14px !important;
   font-weight: 600 !important;
   text-transform: none !important;
-  background-color: #300000 !important; /* Cor da Netflix */
-  margin-bottom: 1rem !important;
+  background-color: #3176f4 !important;
+  margin-bottom: 1.5rem !important;
+  border-radius: 6px !important;
 }
 
 .submitButton:hover {
-  background-color: #580101 !important; /* Cor da Netflix */
+  background-color: var(--primary-color-hover) !important;
 }
 
 .footerNote {
-  color: #aaa;
+  color: var(--text-medium);
 }
 
 .footerNote p {
-  color: #fff;
-  font-weight: 300;
-  text-decoration: none;
-  font-family: 'Montserrat', sans-serif;
+  color: var(--text-medium);
+  font-weight: 400;
 }
 
 .footerNote a {
-  color: #fff;
+  color: var(--text-light);
   text-decoration: none;
-  font-weight: 500;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .footerNote a:hover {
-  color: #494949;
-  font-weight: 500;
-  font-family: 'Montserrat', sans-serif;
   text-decoration: underline;
-  font-weight: bold;
 }
-
-
-

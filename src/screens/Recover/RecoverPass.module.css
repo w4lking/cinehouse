@@ -33,13 +33,13 @@
   padding: 14px !important;
   font-weight: 600 !important;
   text-transform: none !important;
-  background-color: #300000  !important;
+  background-color: #3176f4 !important;
   margin-top: 1rem !important;
   margin-bottom: 1rem !important;
 }
 
 .submitButton:hover {
-  background-color: #580101 !important; /* Cor da Netflix */
+  background-color: var(--primary-color-hover) !important; /* Cor da Netflix */
 }
 
 

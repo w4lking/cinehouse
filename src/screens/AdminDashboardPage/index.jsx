@@ -1,9 +1,9 @@
 
 import AdminLayout from '../../components/layout/AdminLayout';
 import ActionCard from '../../components/layout/admin/ActionCard/index.jsx';
-import { ADMIN_ROUTES } from '../../config/adminRoutes.js'; // 1. Importa as rotas
 
-// Ícones
+import { ADMIN_ROUTES } from '../../config/adminRoutes.js'; 
+
 import GroupIcon from '@mui/icons-material/Group';
 import AssessmentIcon from '@mui/icons-material/Assessment';
 import TheatersIcon from '@mui/icons-material/Theaters';
@@ -12,6 +12,7 @@ import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import AssignmentReturnIcon from '@mui/icons-material/AssignmentReturn';
 import SettingsIcon from '@mui/icons-material/Settings';
+import HistoryIcon from '@mui/icons-material/History';
 
 import styles from './AdminDashboardPage.module.css';
 
@@ -26,6 +27,7 @@ const reportActions = [
 ];
 const movieActions = [
   { label: 'Acessar Gestão', path: ADMIN_ROUTES.MANAGE_MOVIES, icon: <SettingsIcon /> },
+  { label: 'Histórico de Pedidos', path: ADMIN_ROUTES.ORDER_HISTORY, icon: <HistoryIcon /> },
 ];
 
 function AdminDashboardPage() {
