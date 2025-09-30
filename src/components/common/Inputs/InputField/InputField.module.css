@@ -4,12 +4,10 @@
 
 .textField :global(.MuiFilledInput-root) {
   background-color: rgba(70, 70, 70, 0.9) !important;
-  border-radius: 6px;
 }
 
 .textField :global(.MuiInputBase-input) {
   color: #ffffff;
-  border-radius: 6px;
 }
 
 .textField :global(.MuiInputLabel-root) {

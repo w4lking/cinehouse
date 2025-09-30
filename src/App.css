@@ -21,5 +21,18 @@ body p{
     font-family: 'Montserrat', sans-serif; 
 }
 
+:root {
+  --primary-color: #2962FF;
+  --primary-color-hover: #0039CB;
+
+  --background-dark: #121212;
+  --background-light: #1E1E1E;
+  
+  --text-light: #FFFFFF;
+  --text-medium: #A0A0A0;
+  --text-dark: #121212;
+}
+
+
 
 

@@ -3,7 +3,6 @@ import styles from './NavBar.module.css';
 function NavBar({ searchTerm, onSearchChange, selectedGenre, onGenreChange, genres }) {
   return (
     <header className={styles.mainHeader}>
-      <h1 className={styles.logo}><img src="/src/assets/images/CineHouseLogo.png" alt="CineHouse Logo" /></h1>
       <nav className={styles.navLinks}>
         <input
           type="text"

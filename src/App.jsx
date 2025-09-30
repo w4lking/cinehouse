@@ -12,12 +12,12 @@ import Home from "./screens/Home/index.jsx";
 import UserSettings from "./screens/UserSettings/index.jsx";
 import Admin from "./screens/AdminDashboardPage/index.jsx";
 import Relatorio from "./screens/Relatorios/AluguelEVenda/Relatorio";
-import HistPedidos from "./screens/HistPedidos/histPedidos";
+import OrderHistory from "./screens/adm/OrderHistory/index.jsx";
 import GerenciarUsuarios from "./screens/adm/GerenciarUsuarios/index.jsx";
 import RelatorioDevolucao from "./screens/Relatorios/Devolucoes/Relatorio";
 import CriarUsuario from "./screens/adm/CriarUsuario/index.jsx";
 import GerenciarFilme from "./screens/adm/GerenciarFilme/index.jsx";
-import ResetPassword from "./screens/RecuperarSenha/index.jsx"
+import ResetPassword from "./screens/ResetPassword/index.jsx"
 
 import './App.css';
 
@@ -39,10 +39,10 @@ const App = () => {
         <Route path={ADMIN_ROUTES.MANAGE_MOVIES} element={<GerenciarFilme />} />
         <Route path={ADMIN_ROUTES.REPORTS_SALES} element={<Relatorio />} />
         <Route path={ADMIN_ROUTES.REPORTS_RETURNS} element={<RelatorioDevolucao />} />
+        <Route path={ADMIN_ROUTES.ORDER_HISTORY} element={<OrderHistory />} />
         {/* Rotas do Usuário */}
         <Route path={USER_ROUTES.HOME} element={<Home />} />
         <Route path={USER_ROUTES.SETTINGS} element={<UserSettings />} />
-        <Route path={USER_ROUTES.ORDER_HISTORY} element={<HistPedidos />} />
       </Routes>
     </Router>
   );

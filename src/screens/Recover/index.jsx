@@ -29,10 +29,10 @@ function RecoverPassPage() {
   return (
     <AuthLayout>
       <div className={styles.formWrapper}>
-        <img className={styles.logo} src="./src/assets/images/CineHouseLogo.png" alt="CineHouse Logo" />
+        <img className={styles.logo} src="./src/assets/logos/CinehouseNewLogo_2.png" alt="CineHouse Logo" />
         <h1 className={styles.title}>Recuperar Conta</h1>
         <p className={styles.subtitle}>
-          Digite seu e-mail abaixo e enviaremos instruções para redefinir sua senha.
+          Digite seu e-mail abaixo e enviaremos um email com as instruções para redefinição de sua senha.
         </p>
 
         {message && <Alert type={isError ? 'error' : 'success'} message={message} />}

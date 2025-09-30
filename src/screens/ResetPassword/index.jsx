@@ -30,7 +30,7 @@ function ResetPassword() {
   return (
     <AuthLayout>
       <div className={styles.formWrapper}>
-        <img className={styles.logo} src="/src/assets/images/CineHouseLogo.png" alt="CineHouse Logo" />
+        <img className={styles.logo} src="./src/assets/logos/CinehouseNewLogo_2.png" alt="CineHouse Logo" />
         <h2 className={styles.title}>Redefinir Senha</h2>
 
         <p className={styles.instructions}>

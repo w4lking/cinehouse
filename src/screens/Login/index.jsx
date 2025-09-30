@@ -1,3 +1,4 @@
+
 import { useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
@@ -19,7 +20,7 @@ function LoginPage() {
     return (
         <AuthLayout>
             <div className={styles.formWrapper}>
-                <img className={styles.logo} src="./src/assets/images/CineHouseLogo.png" alt="CineHouse Logo" />
+                <img className={styles.logo} src="./src/assets/logos/CinehouseNewLogo_2.png" alt="CineHouse Logo" />
                 
                 {/* 2. Adicione esta linha para renderizar o alerta */}
                 {error && <Alert type="error" message={error} />}

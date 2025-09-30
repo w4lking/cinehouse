@@ -1,5 +1,5 @@
-
-import { useMovies } from '../../components/hooks/useMoves';
+import { useState } from 'react';
+import { useMovies } from '../../components/hooks/useMovies';
 import { useModal } from '../../components/hooks/useModal';
 import { useAuth } from '../../components/hooks/useAuth';
 
@@ -10,7 +10,7 @@ import MovieModal from '../../components/features/MovieModal/index.jsx';
 
 import styles from './Home.module.css';
 
-function Home() {
+function HomePage() {
   const {
     filteredFilmes,
     searchTerm,
@@ -27,18 +27,23 @@ function Home() {
 
   const { isModalOpen, selectedMovie, handleOpenModal, handleCloseModal } = useModal();
   const { userProfile, handleLogout } = useAuth();
+  
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <div className={styles.appLayout}>
       <NavBar
         searchTerm={searchTerm}
-        onSearchChange={(e) => setSearchTerm(e.target.value)}
+        onSearchChange={(e) => setSearchTerm(e.target.value)} 
         selectedGenre={selectedGenre}
         onGenreChange={(e) => setSelectedGenre(e.target.value)}
         genres={genres}
+        onMenuToggle={() => setIsMenuOpen(!isMenuOpen)}
       />
       <div className={styles.mainContainer}>
         <SideBar
+          isOpen={isMenuOpen}
+          onClose={() => setIsMenuOpen(false)}
           userProfile={userProfile}
           onLogout={handleLogout}
           selectedYear={selectedYear}
@@ -58,5 +63,5 @@ function Home() {
   );
 }
 
-export default Home;
+export default HomePage;
 
